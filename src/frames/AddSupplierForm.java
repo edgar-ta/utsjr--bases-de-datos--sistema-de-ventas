@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package pantallas;
+package frames;
 
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
@@ -13,12 +13,12 @@ import java.awt.event.MouseEvent;
  *
  * @author Edgar
  */
-public class AddCategoryForm extends javax.swing.JFrame {
+public class AddSupplierForm extends javax.swing.JFrame {
 
     /**
      * Creates new form AddClientForm
      */
-    public AddCategoryForm() {
+    public AddSupplierForm() {
         initComponents();
         
         goBackLabel.addMouseListener(new MouseAdapter() {
@@ -26,7 +26,7 @@ public class AddCategoryForm extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 MenuFrame menu = new MenuFrame();
                 menu.setVisible(true);
-                AddCategoryForm.this.setVisible(false);
+                AddSupplierForm.this.setVisible(false);
             }
         });
     }
@@ -57,19 +57,25 @@ public class AddCategoryForm extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jTextField9 = new javax.swing.JTextField();
+        jTextField10 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-categoria-64.png"))); // NOI18N
-        jLabel2.setText("Categoría #");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-proveedor-64.png"))); // NOI18N
+        jLabel2.setText("Proveedor #");
         jLabel2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel2);
         jLabel2.setBounds(30, 20, 230, 64);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 102, 102));
 
         goBackLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         goBackLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-back-16.png"))); // NOI18N
@@ -94,17 +100,17 @@ public class AddCategoryForm extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 400, 50);
 
-        jLabel3.setText("Nombre");
+        jLabel3.setText("RFC");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(40, 100, 50, 16);
+        jLabel3.setBounds(270, 100, 100, 16);
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(40, 120, 150, 22);
+        jTextField1.setBounds(270, 120, 100, 22);
         getContentPane().add(jTextField2);
-        jTextField2.setBounds(40, 170, 330, 70);
+        jTextField2.setBounds(40, 220, 220, 22);
 
-        jLabel4.setText("Descripción");
+        jLabel4.setText("Nombre");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(40, 150, 100, 16);
+        jLabel4.setBounds(40, 100, 100, 16);
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 0, 20, 0));
 
@@ -157,6 +163,24 @@ public class AddCategoryForm extends javax.swing.JFrame {
         getContentPane().add(jPanel4);
         jPanel4.setBounds(80, 260, 240, 20);
 
+        jLabel17.setText("Dirección");
+        getContentPane().add(jLabel17);
+        jLabel17.setBounds(40, 200, 100, 16);
+        getContentPane().add(jTextField9);
+        jTextField9.setBounds(40, 170, 100, 22);
+        getContentPane().add(jTextField10);
+        jTextField10.setBounds(160, 170, 100, 22);
+
+        jLabel18.setText("Celular");
+        getContentPane().add(jLabel18);
+        jLabel18.setBounds(160, 150, 100, 16);
+
+        jLabel19.setText("Teléfono");
+        getContentPane().add(jLabel19);
+        jLabel19.setBounds(40, 150, 100, 16);
+        getContentPane().add(jTextField3);
+        jTextField3.setBounds(40, 120, 220, 22);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -181,21 +205,23 @@ public class AddCategoryForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddCategoryForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddSupplierForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddCategoryForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddSupplierForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddCategoryForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddSupplierForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddCategoryForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddSupplierForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddCategoryForm().setVisible(true);
+                new AddSupplierForm().setVisible(true);
             }
         });
     }
@@ -210,6 +236,9 @@ public class AddCategoryForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -217,7 +246,10 @@ public class AddCategoryForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 
 }

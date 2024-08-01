@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package pantallas;
+package frames;
 
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
@@ -13,12 +13,12 @@ import java.awt.event.MouseEvent;
  *
  * @author Edgar
  */
-public class AddSaleForm extends javax.swing.JFrame {
+public class AddCategoryForm extends javax.swing.JFrame {
 
     /**
      * Creates new form AddClientForm
      */
-    public AddSaleForm() {
+    public AddCategoryForm() {
         initComponents();
         
         goBackLabel.addMouseListener(new MouseAdapter() {
@@ -26,7 +26,7 @@ public class AddSaleForm extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 MenuFrame menu = new MenuFrame();
                 menu.setVisible(true);
-                AddSaleForm.this.setVisible(false);
+                AddCategoryForm.this.setVisible(false);
             }
         });
     }
@@ -46,7 +46,7 @@ public class AddSaleForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -57,31 +57,19 @@ public class AddSaleForm extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-venta-64.png"))); // NOI18N
-        jLabel2.setText("Ventas");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-categoria-64.png"))); // NOI18N
+        jLabel2.setText("Categoría #");
         jLabel2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 20, 140, 64);
+        jLabel2.setBounds(30, 20, 230, 64);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 51));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 0));
 
         goBackLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         goBackLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-back-16.png"))); // NOI18N
@@ -106,18 +94,17 @@ public class AddSaleForm extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 400, 50);
 
-        jLabel3.setText("Total");
+        jLabel3.setText("Nombre");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(260, 440, 50, 16);
+        jLabel3.setBounds(40, 100, 50, 16);
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(310, 440, 70, 22);
+        jTextField1.setBounds(40, 120, 150, 22);
         getContentPane().add(jTextField2);
-        jTextField2.setBounds(100, 440, 70, 22);
+        jTextField2.setBounds(40, 170, 330, 70);
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-producto-16.png"))); // NOI18N
-        jLabel10.setText("Producto");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(210, 110, 100, 16);
+        jLabel4.setText("Descripción");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(40, 150, 100, 16);
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 0, 20, 0));
 
@@ -147,7 +134,7 @@ public class AddSaleForm extends javax.swing.JFrame {
         jPanel3.add(jButton4);
 
         getContentPane().add(jPanel3);
-        jPanel3.setBounds(80, 540, 240, 40);
+        jPanel3.setBounds(80, 280, 240, 40);
 
         jPanel4.setLayout(new java.awt.GridLayout(1, 0, 20, 0));
 
@@ -168,84 +155,7 @@ public class AddSaleForm extends javax.swing.JFrame {
         jPanel4.add(jLabel16);
 
         getContentPane().add(jPanel4);
-        jPanel4.setBounds(80, 520, 240, 20);
-
-        jPanel5.setBackground(new java.awt.Color(153, 153, 153));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel5);
-        jPanel5.setBounds(30, 170, 160, 150);
-
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(210, 170, 170, 150);
-
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-cliente-16.png"))); // NOI18N
-        jLabel17.setText("Cliente");
-        getContentPane().add(jLabel17);
-        jLabel17.setBounds(30, 110, 100, 16);
-
-        jLabel5.setText("Subtotal");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(40, 440, 50, 16);
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(100, 470, 70, 22);
-
-        jLabel6.setText("IVA");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(40, 470, 50, 16);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(30, 340, 350, 70);
-
-        jButton5.setBackground(new java.awt.Color(0, 102, 102));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-search-16.png"))); // NOI18N
-        getContentPane().add(jButton5);
-        jButton5.setBounds(170, 140, 20, 23);
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(30, 140, 130, 22);
-        getContentPane().add(jTextField6);
-        jTextField6.setBounds(210, 140, 140, 22);
-
-        jButton6.setBackground(new java.awt.Color(0, 102, 102));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-search-16.png"))); // NOI18N
-        getContentPane().add(jButton6);
-        jButton6.setBounds(360, 140, 20, 23);
+        jPanel4.setBounds(80, 260, 240, 20);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -271,13 +181,13 @@ public class AddSaleForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddSaleForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCategoryForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddSaleForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCategoryForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddSaleForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCategoryForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddSaleForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCategoryForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -285,7 +195,7 @@ public class AddSaleForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddSaleForm().setVisible(true);
+                new AddCategoryForm().setVisible(true);
             }
         });
     }
@@ -296,30 +206,18 @@ public class AddSaleForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package pantallas;
+package frames;
 
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
@@ -13,12 +13,12 @@ import java.awt.event.MouseEvent;
  *
  * @author Edgar
  */
-public class AddUserForm extends javax.swing.JFrame {
+public class AddProductForm extends javax.swing.JFrame {
 
     /**
      * Creates new form AddClientForm
      */
-    public AddUserForm() {
+    public AddProductForm() {
         initComponents();
         
         goBackLabel.addMouseListener(new MouseAdapter() {
@@ -26,7 +26,7 @@ public class AddUserForm extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 MenuFrame menu = new MenuFrame();
                 menu.setVisible(true);
-                AddUserForm.this.setVisible(false);
+                AddProductForm.this.setVisible(false);
             }
         });
     }
@@ -47,6 +47,8 @@ public class AddUserForm extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -58,6 +60,13 @@ public class AddUserForm extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jTextField9 = new javax.swing.JTextField();
+        jTextField10 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel19 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,13 +74,13 @@ public class AddUserForm extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-usuario-64.png"))); // NOI18N
-        jLabel2.setText("Usuario #");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-producto-64.png"))); // NOI18N
+        jLabel2.setText("Producto #");
         jLabel2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 20, 200, 64);
+        jLabel2.setBounds(30, 20, 230, 64);
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 0));
 
         goBackLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         goBackLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-back-16.png"))); // NOI18N
@@ -96,17 +105,27 @@ public class AddUserForm extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 400, 50);
 
-        jLabel3.setText("Nombre Completo");
+        jLabel3.setText("Código");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(40, 100, 330, 16);
+        jLabel3.setBounds(40, 100, 100, 16);
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(40, 120, 330, 22);
+        jTextField1.setBounds(40, 120, 100, 22);
         getContentPane().add(jTextField2);
-        jTextField2.setBounds(40, 180, 160, 22);
+        jTextField2.setBounds(150, 120, 220, 22);
 
-        jLabel4.setText("Tipo");
+        jLabel4.setText("Nombre");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(210, 160, 160, 16);
+        jLabel4.setBounds(150, 100, 100, 16);
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-proveedor-16.png"))); // NOI18N
+        jLabel12.setText("Proveedor");
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(210, 330, 154, 16);
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-categoria-16.png"))); // NOI18N
+        jLabel11.setText("Categoría");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(40, 330, 154, 16);
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 0, 20, 0));
 
@@ -136,7 +155,7 @@ public class AddUserForm extends javax.swing.JFrame {
         jPanel3.add(jButton4);
 
         getContentPane().add(jPanel3);
-        jPanel3.setBounds(80, 260, 240, 40);
+        jPanel3.setBounds(80, 420, 240, 40);
 
         jPanel4.setLayout(new java.awt.GridLayout(1, 0, 20, 0));
 
@@ -157,15 +176,38 @@ public class AddUserForm extends javax.swing.JFrame {
         jPanel4.add(jLabel16);
 
         getContentPane().add(jPanel4);
-        jPanel4.setBounds(80, 240, 240, 20);
+        jPanel4.setBounds(80, 400, 240, 20);
 
-        jLabel17.setText("Contraseña");
+        jLabel17.setText("Descripción");
         getContentPane().add(jLabel17);
-        jLabel17.setBounds(40, 160, 100, 16);
+        jLabel17.setBounds(40, 200, 100, 16);
+        getContentPane().add(jTextField9);
+        jTextField9.setBounds(40, 170, 100, 22);
+        getContentPane().add(jTextField10);
+        jTextField10.setBounds(150, 170, 100, 22);
+
+        jLabel18.setText("Precio");
+        getContentPane().add(jLabel18);
+        jLabel18.setBounds(150, 150, 100, 16);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(40, 220, 330, 86);
+
+        jLabel19.setText("Stock");
+        getContentPane().add(jLabel19);
+        jLabel19.setBounds(40, 150, 100, 16);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(40, 350, 160, 22);
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jComboBox2);
-        jComboBox2.setBounds(212, 180, 150, 22);
+        jComboBox2.setBounds(210, 350, 160, 22);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -191,13 +233,13 @@ public class AddUserForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddUserForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddProductForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddUserForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddProductForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddUserForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddProductForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddUserForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddProductForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -205,7 +247,7 @@ public class AddUserForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddUserForm().setVisible(true);
+                new AddProductForm().setVisible(true);
             }
         });
     }
@@ -216,20 +258,29 @@ public class AddUserForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 
 }
