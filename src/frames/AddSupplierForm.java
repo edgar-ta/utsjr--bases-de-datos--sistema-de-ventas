@@ -68,12 +68,12 @@ public class AddSupplierForm extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-proveedor-64.png"))); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Inter 28pt ExtraBold", 0, 36)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-supplier.png"))); // NOI18N
         jLabel2.setText("Proveedor #");
         jLabel2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 20, 230, 64);
+        jLabel2.setBounds(40, 12, 310, 60);
 
         jPanel1.setBackground(new java.awt.Color(255, 102, 102));
 

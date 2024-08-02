@@ -73,12 +73,12 @@ public class AddProductForm extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-producto-64.png"))); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Inter 28pt ExtraBold", 0, 36)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-product.png"))); // NOI18N
         jLabel2.setText("Producto #");
         jLabel2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 20, 230, 64);
+        jLabel2.setBounds(40, 20, 320, 70);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 0));
 

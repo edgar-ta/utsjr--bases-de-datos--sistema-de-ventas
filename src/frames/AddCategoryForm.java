@@ -40,6 +40,7 @@ public class AddCategoryForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         goBackLabel = new javax.swing.JLabel();
@@ -62,14 +63,21 @@ public class AddCategoryForm extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-categoria-64.png"))); // NOI18N
-        jLabel2.setText("Categoría #");
+        jLabel5.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-category.png"))); // NOI18N
+        jLabel5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(20, 10, 360, 60);
+
+        jLabel2.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel2.setText("Crear Categoría");
         jLabel2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 20, 230, 64);
+        jLabel2.setBounds(20, 60, 360, 60);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 0));
+        jPanel1.setBackground(new java.awt.Color(250, 204, 21));
 
         goBackLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         goBackLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-back-16.png"))); // NOI18N
@@ -213,6 +221,7 @@ public class AddCategoryForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

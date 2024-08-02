@@ -117,17 +117,6 @@ public class AddClientForm extends javax.swing.JFrame {
         nameTextField = new javax.swing.JTextField();
         rfcTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        streetTextField = new javax.swing.JTextField();
-        houseNumberTextField = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        neighborhoodTextField = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        countyTextField = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        stateComboBox = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         cellphoneNumberTextField = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -141,19 +130,32 @@ public class AddClientForm extends javax.swing.JFrame {
         saveButtonLabel = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         resetButtonLabel = new javax.swing.JLabel();
+        countyTextField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        streetTextField = new javax.swing.JTextField();
+        houseNumberTextField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        neighborhoodTextField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        stateComboBox = new javax.swing.JComboBox<>();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(45, 0), new java.awt.Dimension(45, 0), new java.awt.Dimension(45, 32767));
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(null);
 
-        headerLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        headerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-cliente-64.png"))); // NOI18N
-        headerLabel.setText("Nuevo Cliente");
+        headerLabel.setFont(new java.awt.Font("Inter 24pt ExtraBold", 1, 36)); // NOI18N
+        headerLabel.setForeground(new java.awt.Color(15, 23, 42));
+        headerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-client.png"))); // NOI18N
+        headerLabel.setText(" Nuevo Cliente");
         headerLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(headerLabel);
-        headerLabel.setBounds(30, 20, 260, 64);
+        headerLabel.setBounds(30, 20, 340, 70);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(249, 115, 22));
 
         goBackLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         goBackLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-back-16.png"))); // NOI18N
@@ -166,14 +168,14 @@ public class AddClientForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(goBackLabel)
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addContainerGap(385, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(goBackLabel)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -181,96 +183,21 @@ public class AddClientForm extends javax.swing.JFrame {
 
         jLabel3.setText("Nombre Completo");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(40, 100, 330, 16);
+        jLabel3.setBounds(40, 100, 120, 16);
 
         nameTextField.setName("Nombre completo"); // NOI18N
         getContentPane().add(nameTextField);
-        nameTextField.setBounds(40, 120, 330, 22);
+        nameTextField.setBounds(50, 120, 130, 22);
         getContentPane().add(rfcTextField);
-        rfcTextField.setBounds(40, 180, 100, 22);
+        rfcTextField.setBounds(200, 120, 100, 22);
 
         jLabel4.setText("RFC");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(40, 160, 100, 16);
-
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-
-        jLabel5.setText("Calle");
-
-        jLabel6.setText("Núm.");
-
-        jLabel7.setText("Colonia");
-
-        jLabel8.setText("Municipio");
-
-        jLabel9.setText("Estado");
-
-        stateComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aguascalientes", "Baja California", "Baja California Sur", "Colima", "Durango", "Guerrero", "Hidalgo", "Jalisco", "Morelos", "Nayarit", "Oaxaca", "Puebla", "Quintana Roo", "Querétaro", "San Luis Potosí", "Tamaulipas", "Veracruz", "Zacatecas" }));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(countyTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(stateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(streetTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(houseNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(neighborhoodTextField)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(20, 20, 20))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(neighborhoodTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(houseNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(4, 4, 4)
-                        .addComponent(streetTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel7)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(4, 4, 4)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(countyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(stateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel9))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 250, 380, 120);
+        jLabel4.setBounds(200, 100, 100, 16);
 
         jLabel10.setText("Dirección");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(40, 230, 100, 16);
+        jLabel10.setBounds(300, 80, 100, 16);
         getContentPane().add(cellphoneNumberTextField);
         cellphoneNumberTextField.setBounds(210, 410, 154, 22);
 
@@ -280,7 +207,7 @@ public class AddClientForm extends javax.swing.JFrame {
 
         jLabel11.setText("Teléfono");
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(40, 390, 154, 16);
+        jLabel11.setBounds(60, 360, 154, 16);
         getContentPane().add(phoneNumberTextField);
         phoneNumberTextField.setBounds(40, 410, 160, 22);
 
@@ -341,6 +268,62 @@ public class AddClientForm extends javax.swing.JFrame {
 
         getContentPane().add(jPanel4);
         jPanel4.setBounds(80, 450, 240, 20);
+
+        countyTextField.setPreferredSize(new java.awt.Dimension(64, 30));
+        getContentPane().add(countyTextField);
+        countyTextField.setBounds(40, 250, 160, 30);
+
+        jLabel8.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
+        jLabel8.setText("Municipio");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(40, 230, 154, 17);
+
+        jLabel5.setText("Calle");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(60, 140, 124, 16);
+        getContentPane().add(streetTextField);
+        streetTextField.setBounds(60, 160, 124, 22);
+        getContentPane().add(houseNumberTextField);
+        houseNumberTextField.setBounds(190, 160, 30, 22);
+
+        jLabel6.setText("Núm.");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(190, 140, 30, 16);
+
+        jLabel7.setText("Colonia");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(220, 140, 154, 16);
+        getContentPane().add(neighborhoodTextField);
+        neighborhoodTextField.setBounds(220, 160, 154, 22);
+
+        jLabel9.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
+        jLabel9.setText("Estado");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(220, 230, 154, 16);
+
+        stateComboBox.setFont(new java.awt.Font("Open Sans Medium", 0, 15)); // NOI18N
+        stateComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aguascalientes", "Baja California", "Baja California Sur", "Colima", "Durango", "Guerrero", "Hidalgo", "Jalisco", "Morelos", "Nayarit", "Oaxaca", "Puebla", "Quintana Roo", "Querétaro", "San Luis Potosí", "Tamaulipas", "Veracruz", "Zacatecas" }));
+        stateComboBox.setPreferredSize(new java.awt.Dimension(130, 30));
+        getContentPane().add(stateComboBox);
+        stateComboBox.setBounds(220, 250, 154, 30);
+        getContentPane().add(filler1);
+        filler1.setBounds(0, 0, 45, 530);
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 160, 400, 50);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -539,6 +522,7 @@ public class AddClientForm extends javax.swing.JFrame {
     private javax.swing.JTextField cellphoneNumberTextField;
     private javax.swing.JTextField countyTextField;
     private javax.swing.JButton deleteButton;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel goBackLabel;
     private javax.swing.JLabel headerLabel;
     private javax.swing.JTextField houseNumberTextField;

@@ -74,12 +74,12 @@ public class AddSaleForm extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-venta-64.png"))); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Inter 28pt ExtraBold", 0, 36)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-sale.png"))); // NOI18N
         jLabel2.setText("Ventas");
         jLabel2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 20, 140, 64);
+        jLabel2.setBounds(30, 30, 340, 64);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 51));
 

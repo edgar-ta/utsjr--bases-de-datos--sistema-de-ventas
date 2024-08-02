@@ -41,6 +41,7 @@ public class AddUserForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         goBackLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -64,12 +65,17 @@ public class AddUserForm extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-usuario-64.png"))); // NOI18N
-        jLabel2.setText("Usuario #");
+        jLabel2.setFont(new java.awt.Font("Inter 28pt ExtraBold", 0, 36)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-user.png"))); // NOI18N
         jLabel2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 20, 200, 64);
+        jLabel2.setBounds(40, 6, 64, 64);
+
+        jLabel5.setFont(new java.awt.Font("Inter 28pt ExtraBold", 0, 36)); // NOI18N
+        jLabel5.setText("Usuario #");
+        jLabel5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(40, 60, 310, 60);
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 255));
 
@@ -90,7 +96,7 @@ public class AddUserForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(goBackLabel)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -225,6 +231,7 @@ public class AddUserForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

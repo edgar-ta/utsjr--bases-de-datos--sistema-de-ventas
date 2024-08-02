@@ -38,10 +38,9 @@ public class MenuFrame extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
-        jPanel1.setLayout(new java.awt.GridLayout(2, 3));
 
+        clientButton.setBackground(new java.awt.Color(254, 215, 170));
         clientButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        clientButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-cliente-64.png"))); // NOI18N
         clientButton.setToolTipText("Cliente");
         clientButton.setBorderPainted(false);
         clientButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -51,27 +50,55 @@ public class MenuFrame extends javax.swing.JFrame {
                 clientButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(clientButton);
 
-        productButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-producto-64.png"))); // NOI18N
-        jPanel1.add(productButton);
+        productButton.setBackground(new java.awt.Color(224, 242, 254));
 
-        supplierButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-proveedor-64.png"))); // NOI18N
         supplierButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         supplierButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jPanel1.add(supplierButton);
 
-        categoryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-categoria-64.png"))); // NOI18N
-        jPanel1.add(categoryButton);
+        categoryButton.setBackground(new java.awt.Color(254, 240, 138));
+        categoryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoryButtonActionPerformed(evt);
+            }
+        });
 
-        userButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-usuario-64.png"))); // NOI18N
-        jPanel1.add(userButton);
-
-        salesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/img-venta-64.png"))); // NOI18N
-        jPanel1.add(salesButton);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(clientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(productButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(supplierButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(categoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(userButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(salesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(clientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(productButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(supplierButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(categoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(salesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40))
+        );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(10, 10, 400, 260);
+        jPanel1.setBounds(10, 10, 400, 300);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -79,6 +106,10 @@ public class MenuFrame extends javax.swing.JFrame {
     private void clientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_clientButtonActionPerformed
+
+    private void categoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoryButtonActionPerformed
 
     /**
      * @param args the command line arguments
