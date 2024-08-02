@@ -4,6 +4,8 @@
  */
 package frames;
 
+import javax.swing.JButton;
+
 /**
  *
  * @author Edgar
@@ -25,24 +27,120 @@ public class MenuFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
         jPanel1 = new javax.swing.JPanel();
+        filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
+        jPanel4 = new javax.swing.JPanel();
+        filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
+        jLabel1 = new javax.swing.JLabel();
+        filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
+        jLabel8 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
+        jPanel2 = new javax.swing.JPanel();
+        categoryButton = new javax.swing.JButton();
         clientButton = new javax.swing.JButton();
         productButton = new javax.swing.JButton();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
+        jPanel3 = new javax.swing.JPanel();
+        saleButton = new javax.swing.JButton();
         supplierButton = new javax.swing.JButton();
-        categoryButton = new javax.swing.JButton();
         userButton = new javax.swing.JButton();
-        salesButton = new javax.swing.JButton();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Menú de inicio");
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setBackground(utils.ProjectColors.WHITE.getColor());
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        jPanel1.add(filler11, gridBagConstraints);
 
-        clientButton.setBackground(new java.awt.Color(254, 215, 170));
+        jPanel4.setBackground(utils.ProjectColors.WHITE.getColor());
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel4.add(filler9, gridBagConstraints);
+
+        jLabel1.setBackground(new java.awt.Color(248, 250, 252));
+        jLabel1.setFont(new java.awt.Font("Inter 28pt ExtraBold", 0, 36)); // NOI18N
+        jLabel1.setForeground(utils.ProjectColors.BLACK.getColor());
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("¡Bienvenido de vuelta!");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        jPanel4.add(jLabel1, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
+        jPanel4.add(filler10, gridBagConstraints);
+
+        jLabel8.setFont(new java.awt.Font("Open Sans Medium", 0, 15)); // NOI18N
+        jLabel8.setForeground(utils.ProjectColors.BLACK.getColor());
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Selecciona una de las siguientes categorías para empezar a explorar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel4.add(jLabel8, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel4.add(jSeparator1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        jPanel1.add(jPanel4, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        jPanel1.add(filler8, gridBagConstraints);
+
+        jPanel2.setBackground(utils.ProjectColors.WHITE.getColor());
+        jPanel2.setLayout(new java.awt.GridBagLayout());
+
+        categoryButton.setBackground(utils.ProjectColors.WHITE.getColor());
+        categoryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-category.png"))); // NOI18N
+        categoryButton.setToolTipText("Categoría");
+        categoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        categoryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoryButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 61;
+        gridBagConstraints.ipady = 123;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel2.add(categoryButton, gridBagConstraints);
+
+        clientButton.setBackground(utils.ProjectColors.WHITE.getColor());
         clientButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        clientButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-client.png"))); // NOI18N
         clientButton.setToolTipText("Cliente");
-        clientButton.setBorderPainted(false);
+        clientButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         clientButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         clientButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         clientButton.addActionListener(new java.awt.event.ActionListener() {
@@ -50,66 +148,173 @@ public class MenuFrame extends javax.swing.JFrame {
                 clientButtonActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 61;
+        gridBagConstraints.ipady = 123;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel2.add(clientButton, gridBagConstraints);
 
-        productButton.setBackground(new java.awt.Color(224, 242, 254));
+        productButton.setBackground(utils.ProjectColors.WHITE.getColor());
+        productButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-product.png"))); // NOI18N
+        productButton.setToolTipText("Producto");
+        productButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 61;
+        gridBagConstraints.ipady = 123;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel2.add(productButton, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel2.add(filler3, gridBagConstraints);
 
+        jLabel2.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
+        jLabel2.setForeground(utils.ProjectColors.BLACK.getColor());
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Categoría");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel2.add(jLabel2, gridBagConstraints);
+
+        jLabel3.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
+        jLabel3.setForeground(utils.ProjectColors.BLACK.getColor());
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Cliente");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel2.add(jLabel3, gridBagConstraints);
+
+        jLabel4.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
+        jLabel4.setForeground(utils.ProjectColors.BLACK.getColor());
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Producto");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel2.add(jLabel4, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
+        jPanel2.add(filler2, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel1.add(jPanel2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        jPanel1.add(filler4, gridBagConstraints);
+
+        jPanel3.setBackground(utils.ProjectColors.WHITE.getColor());
+        jPanel3.setLayout(new java.awt.GridBagLayout());
+
+        saleButton.setBackground(utils.ProjectColors.WHITE.getColor());
+        saleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-sale.png"))); // NOI18N
+        saleButton.setToolTipText("Venta");
+        saleButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 61;
+        gridBagConstraints.ipady = 123;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel3.add(saleButton, gridBagConstraints);
+
+        supplierButton.setBackground(utils.ProjectColors.WHITE.getColor());
+        supplierButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-supplier.png"))); // NOI18N
+        supplierButton.setToolTipText("Proveedor");
+        supplierButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         supplierButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         supplierButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 61;
+        gridBagConstraints.ipady = 123;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel3.add(supplierButton, gridBagConstraints);
 
-        categoryButton.setBackground(new java.awt.Color(254, 240, 138));
-        categoryButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryButtonActionPerformed(evt);
-            }
-        });
+        userButton.setBackground(utils.ProjectColors.WHITE.getColor());
+        userButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-user.png"))); // NOI18N
+        userButton.setToolTipText("Usuario");
+        userButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 61;
+        gridBagConstraints.ipady = 123;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel3.add(userButton, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
+        jPanel3.add(filler6, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(clientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(productButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(supplierButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(categoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(userButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(salesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(clientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(productButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(supplierButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(categoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(userButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(salesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40))
-        );
+        jLabel5.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
+        jLabel5.setForeground(utils.ProjectColors.BLACK.getColor());
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Venta");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel3.add(jLabel5, gridBagConstraints);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(10, 10, 400, 300);
+        jLabel6.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
+        jLabel6.setForeground(utils.ProjectColors.BLACK.getColor());
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Proveedor");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel3.add(jLabel6, gridBagConstraints);
+
+        jLabel7.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
+        jLabel7.setForeground(utils.ProjectColors.BLACK.getColor());
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Usuario");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel3.add(jLabel7, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
+        jPanel3.add(filler7, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel1.add(jPanel3, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        jPanel1.add(filler5, gridBagConstraints);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void clientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clientButtonActionPerformed
-
     private void categoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_categoryButtonActionPerformed
+
+    private void clientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clientButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,13 +352,62 @@ public class MenuFrame extends javax.swing.JFrame {
         });
     }
 
+    public JButton getCategoryButton() {
+        return categoryButton;
+    }
+
+    public JButton getClientButton() {
+        return clientButton;
+    }
+
+    public JButton getProductButton() {
+        return productButton;
+    }
+
+    public JButton getSaleButton() {
+        return saleButton;
+    }
+
+    public JButton getSupplierButton() {
+        return supplierButton;
+    }
+
+    public JButton getUserButton() {
+        return userButton;
+    }
+    
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton categoryButton;
-    public javax.swing.JButton clientButton;
+    private javax.swing.JButton categoryButton;
+    private javax.swing.JButton clientButton;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler10;
+    private javax.swing.Box.Filler filler11;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
+    private javax.swing.Box.Filler filler5;
+    private javax.swing.Box.Filler filler6;
+    private javax.swing.Box.Filler filler7;
+    private javax.swing.Box.Filler filler8;
+    private javax.swing.Box.Filler filler9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    public javax.swing.JButton productButton;
-    public javax.swing.JButton salesButton;
-    public javax.swing.JButton supplierButton;
-    public javax.swing.JButton userButton;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton productButton;
+    private javax.swing.JButton saleButton;
+    private javax.swing.JButton supplierButton;
+    private javax.swing.JButton userButton;
     // End of variables declaration//GEN-END:variables
 }
