@@ -25,57 +25,80 @@ public class ActionsPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel4 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         resetButtonLabel = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         resetButton = new javax.swing.JButton();
-        duplicateButton = new javax.swing.JButton();
 
-        jPanel4.setLayout(new java.awt.GridLayout(1, 0, 20, 0));
+        setBackground(new java.awt.Color(248, 250, 252));
+        setMinimumSize(new java.awt.Dimension(400, 100));
+        setLayout(new java.awt.GridBagLayout());
 
+        jLabel13.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Guardar");
         jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel4.add(jLabel13);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        add(jLabel13, gridBagConstraints);
 
+        jLabel14.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("Eliminar");
         jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel4.add(jLabel14);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        add(jLabel14, gridBagConstraints);
 
-        resetButtonLabel.setText("Restablecer");
+        resetButtonLabel.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
+        resetButtonLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        resetButtonLabel.setText("Resetear");
         resetButtonLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel4.add(resetButtonLabel);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        add(resetButtonLabel, gridBagConstraints);
 
-        jLabel16.setText("Duplicar");
-        jLabel16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel4.add(jLabel16);
-
-        jPanel3.setLayout(new java.awt.GridLayout(1, 0, 20, 0));
-
-        jButton1.setBackground(new java.awt.Color(204, 204, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-save-32.png"))); // NOI18N
+        jButton1.setBackground(new java.awt.Color(207, 250, 254));
         jButton1.setToolTipText("Guardar");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setMinimumSize(new java.awt.Dimension(72, 50));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        add(jButton1, gridBagConstraints);
 
-        deleteButton.setBackground(new java.awt.Color(255, 204, 204));
-        deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-delete-32.png"))); // NOI18N
+        deleteButton.setBackground(new java.awt.Color(254, 226, 226));
         deleteButton.setToolTipText("Eliminar");
         deleteButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel3.add(deleteButton);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        add(deleteButton, gridBagConstraints);
 
         resetButton.setBackground(new java.awt.Color(204, 255, 204));
-        resetButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-undo-32.png"))); // NOI18N
         resetButton.setToolTipText("Restablecer");
         resetButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         resetButton.addActionListener(new java.awt.event.ActionListener() {
@@ -83,32 +106,12 @@ public class ActionsPanel extends javax.swing.JPanel {
                 resetButtonActionPerformed(evt);
             }
         });
-        jPanel3.add(resetButton);
-
-        duplicateButton.setBackground(new java.awt.Color(255, 255, 204));
-        duplicateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-duplicate-32.png"))); // NOI18N
-        duplicateButton.setToolTipText("Duplicar");
-        duplicateButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel3.add(duplicateButton);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        add(resetButton, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -122,13 +125,9 @@ public class ActionsPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
-    private javax.swing.JButton duplicateButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JButton resetButton;
     private javax.swing.JLabel resetButtonLabel;
     // End of variables declaration//GEN-END:variables
