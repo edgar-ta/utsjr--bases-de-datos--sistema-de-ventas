@@ -8,7 +8,7 @@ package records;
  *
  * @author Edgar
  */
-public class ProductoRecord extends DataRecord {
+public class ProductRecord extends DataRecord {
     int id;
     int stock;
     int precio;

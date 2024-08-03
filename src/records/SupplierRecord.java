@@ -8,7 +8,7 @@ package records;
  *
  * @author Edgar
  */
-public class ProveedorRecord extends DataRecord {
+public class SupplierRecord extends DataRecord {
     int id;
     String nombre;
     String direccion;

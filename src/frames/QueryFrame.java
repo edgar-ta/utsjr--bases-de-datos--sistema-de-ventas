@@ -155,7 +155,7 @@ public class QueryFrame extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-proveedor-16.png"))); // NOI18N
         jLabel4.setText("Proveedor");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(50, 380, 74, 16);
+        jLabel4.setBounds(50, 380, 54, 16);
 
         jTextField1.setText("jTextField1");
         getContentPane().add(jTextField1);
@@ -164,7 +164,7 @@ public class QueryFrame extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-search-16.png"))); // NOI18N
         getContentPane().add(jButton1);
-        jButton1.setBounds(255, 380, 30, 23);
+        jButton1.setBounds(255, 380, 30, 7);
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -229,7 +229,7 @@ public class QueryFrame extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-categoria-16.png"))); // NOI18N
         jLabel8.setText("Categoría");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(60, 670, 71, 16);
+        jLabel8.setBounds(60, 670, 51, 16);
 
         jTextField2.setText("jTextField1");
         getContentPane().add(jTextField2);
@@ -238,7 +238,7 @@ public class QueryFrame extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(0, 102, 102));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon-search-16.png"))); // NOI18N
         getContentPane().add(jButton2);
-        jButton2.setBounds(260, 670, 30, 23);
+        jButton2.setBounds(260, 670, 30, 7);
 
         jTable7.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -312,6 +312,11 @@ public class QueryFrame extends javax.swing.JFrame {
         jMenu3.add(jMenuItem3);
 
         jMenuItem4.setText("Cliente menor compra");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem4);
 
         jMenuItem9.setText("Lista de clientes");
@@ -398,6 +403,43 @@ public class QueryFrame extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    /**
+     * public class Querier<K>
+     *  protected Optional<Field> orderBy
+     *  protected Optional<Integer> limitBy
+     *  protected Optional<Pair<Field, String>> search;
+     * 
+     * public class QueryFrame<K>
+     *  public <K> QueryFrame()
+     *  
+     *  protected Querier<K> querier;
+     * 
+     * 
+     * public class Schema
+     *  public LinkedList<Field> getFields()
+     * 
+     * A Schema should be tied to a Card that can render it
+     * 
+     * public class Entity<K extends Schema>
+     * public class Card<K extends Schema>
+     *  public Card(Entity<K> entity)
+     * 
+     * 
+     * OrderBy
+     * LimitBy
+     * FindBy
+     * 
+     */
+    
+    /**
+     * 
+     * @param evt 
+     */
+    
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments

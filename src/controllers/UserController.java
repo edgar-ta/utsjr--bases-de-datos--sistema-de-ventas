@@ -43,5 +43,4 @@ public class UserController {
             return Optional.of(record);
         }
     }
-    
 }
