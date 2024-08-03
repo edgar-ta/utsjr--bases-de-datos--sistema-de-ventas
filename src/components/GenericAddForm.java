@@ -4,18 +4,69 @@
  */
 package components;
 
+import java.util.LinkedList;
+import utils.EntityControlData;
+
 /**
  *
  * @author Edgar
  */
 public class GenericAddForm extends javax.swing.JFrame {
-
+    protected final EntityControlData data;
+    
     /**
      * Creates new form NewJFrame
      */
     public GenericAddForm() {
-        initComponents();
+        this(EntityControlData.PRODUCT);
     }
+    
+    public GenericAddForm(EntityControlData data) {
+        this.data = data;
+        
+        initComponents();
+        
+        setTitle("Formulario de " + data.getInternalName());
+    }
+    
+    /**
+     * enum EntityControlData
+     *  icon
+     *  color
+     *  name
+     *  
+     *  USER(new Icon(), new Color(), "Usuario")
+     *  ;
+     * 
+     * public <K extends Entity> GenericAddForm(EntityControlData data, EntityAddPanel<K> panel)
+     * 
+     * new GenericAddForm(EntityControlData.USER, new UserAddPanel(userEntity));
+     * ^^^^^
+     * I think I like this concept, even if it doesn't really tie together
+     * the control data and the associated form
+     * 
+     * EntityControlData
+     * 
+     * class UserEntity
+     * class UserAddPanel implements EntityAddPanel<UserEntity>
+     * 
+     * EntityAddPanel<K>
+     *  EntityAddPanel(Optional<K> value)
+     *  
+     *  protected K buildEntity() 
+     *  
+     *  public void delete()
+     *  public void clear()
+     *  public void save()
+     * 
+     * Panel to add to the scroll pane
+     *  should be able to delete
+     *  clear
+     *  save
+     * Optional element that that pane can process
+     * 
+     */
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,11 +79,7 @@ public class GenericAddForm extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel4 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jSeparator1 = new javax.swing.JSeparator();
+        entityHeader1 = new EntityHeader(this.data);
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
         jPanel2 = new javax.swing.JPanel();
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
@@ -58,43 +105,7 @@ public class GenericAddForm extends javax.swing.JFrame {
 
         jPanel4.setBackground(utils.ProjectColors.WHITE.getColor());
         jPanel4.setLayout(new java.awt.GridBagLayout());
-
-        jPanel1.setBackground(utils.ProjectColors.WHITE.getColor());
-        jPanel1.setMinimumSize(new java.awt.Dimension(400, 140));
-        jPanel1.setPreferredSize(new java.awt.Dimension(400, 150));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-product.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Inter 28pt ExtraBold", 0, 36)); // NOI18N
-        jLabel2.setForeground(utils.ProjectColors.BLACK.getColor());
-        jLabel2.setText("Producto");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
-
-        jPanel5.setBackground(new java.awt.Color(14, 165, 233));
-        jPanel5.setPreferredSize(new java.awt.Dimension(400, 30));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 50));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 340, -1));
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        jPanel4.add(jPanel1, gridBagConstraints);
+        jPanel4.add(entityHeader1, new java.awt.GridBagConstraints());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         jPanel4.add(filler3, gridBagConstraints);
@@ -257,6 +268,7 @@ public class GenericAddForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private components.EntityHeader entityHeader1;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
@@ -267,17 +279,12 @@ public class GenericAddForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
