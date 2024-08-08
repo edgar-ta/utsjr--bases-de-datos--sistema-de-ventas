@@ -310,6 +310,9 @@ public class MenuFrame extends javax.swing.JFrame {
 
     private void categoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryButtonActionPerformed
         // TODO add your handling code here:
+        
+        // should call the creation of a new Generic Query Frame
+        // that's configured to show the category entity information
     }//GEN-LAST:event_categoryButtonActionPerformed
 
     private void clientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientButtonActionPerformed

@@ -8,7 +8,7 @@ package records;
  *
  * @author Edgar
  */
-public class CategoryRecord extends DataRecord {
+public class CategoryRecord extends Record {
     int id;
     String nombre;
     String descripcion;

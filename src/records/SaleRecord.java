@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author Edgar
  */
-public class SaleRecord extends DataRecord {
+public class SaleRecord extends Record {
     int id;
     int cliente;
     int folio;

@@ -54,10 +54,11 @@ public class EntityHeader extends javax.swing.JPanel {
         iconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-product.png"))); // NOI18N
         add(iconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
+        nameLabel.setBackground(utils.ProjectColors.WHITE.getColor());
         nameLabel.setFont(new java.awt.Font("Inter 28pt ExtraBold", 0, 36)); // NOI18N
         nameLabel.setForeground(utils.ProjectColors.BLACK.getColor());
         nameLabel.setText("Producto");
-        add(nameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        add(nameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 340, -1));
 
         banner.setBackground(new java.awt.Color(14, 165, 233));
         banner.setPreferredSize(new java.awt.Dimension(400, 30));

@@ -8,11 +8,21 @@ package records;
  *
  * @author Edgar
  */
-public class UserRecord extends DataRecord {
+public class UserRecord extends Record {
     int id;
     String nombre;
     String contrasenia;
     String tipo;
+
+    public UserRecord() {
+    }
+
+    public UserRecord(int id, String nombre, String contrasenia, String tipo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.contrasenia = contrasenia;
+        this.tipo = tipo;
+    }
 
     public int getId() {
         return id;

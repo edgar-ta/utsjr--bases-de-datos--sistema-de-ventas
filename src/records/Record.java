@@ -8,6 +8,6 @@ package records;
  *
  * @author Edgar
  */
-public class DataRecord {
+public class Record {
     
 }
