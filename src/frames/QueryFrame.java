@@ -4,7 +4,7 @@
  */
 package frames;
 
-import components.SearchField;
+import component.SearchField;
 
 /**
  *

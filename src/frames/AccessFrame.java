@@ -4,14 +4,14 @@
  */
 package frames;
 
-import utils.ConnectionManager;
-import utils.SmartQuery;
-import controllers.UserController;
+import util.ConnectionManager;
+import util.SmartQuery;
+import controller.UserController;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import records.UserRecord;
+import record.UserRecord;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
@@ -20,7 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import utils.Security;
+import util.Security;
 
 /**
  *
@@ -73,7 +73,7 @@ public class AccessFrame extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(400, 409));
         setResizable(false);
 
-        jPanel1.setBackground(utils.ProjectColors.WHITE.getColor());
+        jPanel1.setBackground(util.ProjectColors.WHITE.getColor());
         jPanel1.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -127,7 +127,7 @@ public class AccessFrame extends javax.swing.JFrame {
         gridBagConstraints.weightx = 1.0;
         jPanel1.add(jLabel2, gridBagConstraints);
 
-        jPanel3.setBackground(utils.ProjectColors.WHITE.getColor());
+        jPanel3.setBackground(util.ProjectColors.WHITE.getColor());
         jPanel3.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -208,7 +208,7 @@ public class AccessFrame extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         jPanel2.add(filler17, gridBagConstraints);
 
-        jButton2.setBackground(utils.ProjectColors.WHITE.getColor()
+        jButton2.setBackground(util.ProjectColors.WHITE.getColor()
         );
         jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/40-exit.png"))); // NOI18N
@@ -226,7 +226,7 @@ public class AccessFrame extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         jPanel2.add(jButton2, gridBagConstraints);
 
-        loginButton.setBackground(utils.ProjectColors.WHITE.getColor()
+        loginButton.setBackground(util.ProjectColors.WHITE.getColor()
         );
         loginButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/40-login.png"))); // NOI18N

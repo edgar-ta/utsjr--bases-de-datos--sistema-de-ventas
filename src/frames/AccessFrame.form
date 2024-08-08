@@ -31,7 +31,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="utils.ProjectColors.WHITE.getColor()" type="code"/>
+          <Connection code="util.ProjectColors.WHITE.getColor()" type="code"/>
         </Property>
       </Properties>
       <Constraints>
@@ -242,7 +242,7 @@
         <Container class="javax.swing.JPanel" name="jPanel3">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="utils.ProjectColors.WHITE.getColor()" type="code"/>
+              <Connection code="util.ProjectColors.WHITE.getColor()" type="code"/>
             </Property>
           </Properties>
           <Constraints>
@@ -386,7 +386,7 @@
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="utils.ProjectColors.WHITE.getColor()&#xd;&#xa;" type="code"/>
+                  <Connection code="util.ProjectColors.WHITE.getColor()&#xd;&#xa;" type="code"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI Semibold" size="12" style="0"/>
@@ -410,7 +410,7 @@
             <Component class="javax.swing.JButton" name="loginButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="utils.ProjectColors.WHITE.getColor()&#xd;&#xa;" type="code"/>
+                  <Connection code="util.ProjectColors.WHITE.getColor()&#xd;&#xa;" type="code"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI Semibold" size="12" style="0"/>

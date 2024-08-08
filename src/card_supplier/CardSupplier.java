@@ -14,10 +14,10 @@ import java.sql.PreparedStatement;
 import java.util.Vector;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import utils.Pair;
-import utils.SmartConnection;
-import records.Record;
-import utils.EntityField;
+import util.Pair;
+import util.SmartConnection;
+import record.Record;
+import util.EntityField;
 
 
 

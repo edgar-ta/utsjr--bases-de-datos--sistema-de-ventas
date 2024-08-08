@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.Optional;
 import javax.swing.JPanel;
-import records.UserRecord;
-import utils.EntityField;
+import record.UserRecord;
+import util.EntityField;
 
 /**
  *

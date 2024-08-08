@@ -4,7 +4,7 @@
  */
 package frames;
 
-import controllers.ClientController;
+import controller.ClientController;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
 import java.awt.event.MouseAdapter;
@@ -13,11 +13,11 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import records.ClientRecord;
+import record.ClientRecord;
 import java.sql.SQLException;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
-import utils.UpdateResult;
+import util.UpdateResult;
 
 /**
  *
