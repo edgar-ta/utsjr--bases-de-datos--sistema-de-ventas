@@ -4,8 +4,11 @@
  */
 package card;
 
+import component.GenericAddForm;
 import component.GenericQueryFrame;
+import form.UserForm;
 import java.util.Optional;
+import javax.swing.JFrame;
 import record.UserRecord;
 import util.EntityControlData;
 
@@ -81,7 +84,7 @@ public class UserCard extends Card<UserRecord> {
         if (currentRecord.isPresent()) {
             nameLabel.setText(record.get().getNombre());
             idLabel.setText("#" + String.valueOf(record.get().getId()));
-            typeLabel.setText(record.get().getTipo());
+            typeLabel.setText(record.get().getTipo().getValue().getPrettyName());
         }
     }
 
@@ -95,6 +98,10 @@ public class UserCard extends Card<UserRecord> {
 
     @Override
     public void seeMore() {
-        System.out.println("card.UserCard.seeMore()");
+        UserForm form = new UserForm();
+        form.setCurrentRecord(currentRecord);
+        GenericAddForm addForm = new GenericAddForm(EntityControlData.USER, form);
+        addForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        addForm.setVisible(true);
     }
 }

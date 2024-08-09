@@ -54,6 +54,7 @@ public abstract class Card<RecordType extends Record> extends JPanel {
             }
         });
         
+        
         addAtCoordinates(contentPane, 1, 1, 3, 1.0f, true);
         addAtCoordinates(button, 1, 3, 1, 1.0f, true);
     }

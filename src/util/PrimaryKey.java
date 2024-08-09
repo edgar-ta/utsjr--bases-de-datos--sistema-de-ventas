@@ -4,6 +4,8 @@
  */
 package util;
 
+import java.util.Optional;
+
 /**
  * This class represents a primary key value in one of the
  * entities that the system can handle; it is intended to store both
@@ -12,20 +14,13 @@ package util;
  * 
  * @author Edgar
  */
-public class PrimaryKey {
-    protected String representation;
-    protected Integer id;
-
-    public String getRepresentation() {
-        return representation;
+public class PrimaryKey extends DisplayableValue<Integer> {
+    public PrimaryKey(Integer internalValue, Optional<String> defaultPrettyName) {
+        super(internalValue, defaultPrettyName);
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public PrimaryKey(String representation, Integer id) {
-        this.representation = representation;
-        this.id = id;
+    
+    @Override
+    public String getSpareName() {
+        return String.valueOf(internalValue);
     }
 }

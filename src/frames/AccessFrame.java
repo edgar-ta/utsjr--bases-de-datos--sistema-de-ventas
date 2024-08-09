@@ -368,9 +368,9 @@ public class AccessFrame extends javax.swing.JFrame {
                 MenuFrame menuFrame = new MenuFrame();
 
                 switch (user.getTipo()) {
-                    case "Administrador" -> {
+                    case ADMINISTRATOR -> {
                     }
-                    case "Cajero" -> {
+                    case CASHIER -> {
                         menuFrame.getCategoryButton().setVisible(false);
                         menuFrame.getClientButton().setVisible(false);
                         menuFrame.getProductButton().setVisible(false);

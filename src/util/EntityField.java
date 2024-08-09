@@ -12,13 +12,10 @@ import java.util.Optional;
  *
  * @author Edgar
  */
-public class EntityField {
-    protected String internalName;
-    protected Optional<String> defaultPrettyName;
+public class EntityField extends DisplayableString {
 
-    public EntityField(String internalName, Optional<String> prettyName) {
-        this.internalName = internalName;
-        this.defaultPrettyName = prettyName;
+    public EntityField(String internalValue, Optional<String> prettyName) {
+        super(internalValue, prettyName);
     }
 
     public EntityField(String internalName) {
@@ -31,43 +28,13 @@ public class EntityField {
         if (!(other instanceof EntityField)) return false;
         EntityField field = (EntityField) other;
         return 
-                this.internalName == field.getInternalName() &&
+                this.internalValue.equals(field.getInternalValue()) &&
                 this.defaultPrettyName == field.getDefaultPrettyName()
                 ;
     }
     
     public static LinkedList<EntityField> of(String ...values) {
-        return new LinkedList<EntityField>(Arrays.asList(values).stream().map((String value) -> new EntityField(value)).toList());
-    }
-    
-    public static String snakeCaseToText(String text) {
-        String[] components = text.trim().split("_");
-        String result = "";
-        for (String component : components) {
-            if (component.length() > 0) {
-                result += component;
-            }
-        }
-        return result;
-    }
-    
-    public static String capitalize(String word) {
-        return word.substring(0, 1).toUpperCase() + word.substring(1);
-    }
-    
-    public String getPrettyName() {
-        if (defaultPrettyName.isPresent()) {
-            return defaultPrettyName.get();
-        }
-        return capitalize(snakeCaseToText(internalName));
-    }
-
-    public String getInternalName() {
-        return internalName;
-    }
-
-    public Optional<String> getDefaultPrettyName() {
-        return defaultPrettyName;
+        return new LinkedList<>(Arrays.asList(values).stream().map((String value) -> new EntityField(value)).toList());
     }
     
     @Override

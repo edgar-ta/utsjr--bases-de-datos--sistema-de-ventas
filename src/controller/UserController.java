@@ -9,6 +9,8 @@ import util.SmartQuery;
 import record.UserRecord;
 import java.sql.SQLException;
 import java.util.Optional;
+import java.sql.ResultSet;
+
 
 /**
  *
@@ -25,6 +27,24 @@ public class UserController {
         }
     }
     
+    public static UserRecord buildUser(ResultSet query) throws SQLException {
+        UserRecord record = new UserRecord();
+
+        record.setId(query.getInt("id"));
+        record.setNombre(query.getString("nombre"));
+        record.setContrasenia(query.getString("contrasenia"));
+
+        String recordedType = query.getString("tipo");
+        Optional<UserRecord.UserType> type = UserRecord.UserType.findUserType(recordedType);
+        if (type.isEmpty()) {
+            throw new IllegalArgumentException("The user's type is unrecognized: " + recordedType);
+        }
+
+        record.setTipo(type.get());
+        
+        return record;
+    }
+    
     public static Optional<UserRecord> getUserByName(String name) throws SQLException, ClassNotFoundException, Exception {
         try (SmartQuery query = ConnectionManager
                 .create("SELECT * FROM usuario WHERE usuario.nombre = ?")
@@ -32,15 +52,7 @@ public class UserController {
                 .query()
                 ) {
             if (!query.isPopulated()) return Optional.empty();
-            
-            UserRecord record = new UserRecord();
-            
-            record.setId(query.getInt("id"));
-            record.setNombre(query.getString("nombre"));
-            record.setContrasenia(query.getString("contrasenia"));
-            record.setTipo(query.getString("tipo"));
-            
-            return Optional.of(record);
+            return Optional.of(UserController.buildUser(query.getResultSet()));
         }
     }
 }

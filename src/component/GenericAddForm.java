@@ -4,8 +4,13 @@
  */
 package component;
 
-import java.util.LinkedList;
+import form.Form;
+import form.UserForm;
+import javax.swing.JOptionPane;
 import util.EntityControlData;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,20 +18,23 @@ import util.EntityControlData;
  */
 public class GenericAddForm extends javax.swing.JFrame {
     protected final EntityControlData data;
+    protected final Form form;
     
     /**
      * Creates new form NewJFrame
      */
     public GenericAddForm() {
-        this(EntityControlData.PRODUCT);
+        this(EntityControlData.USER, new UserForm());
     }
     
-    public GenericAddForm(EntityControlData data) {
+    public GenericAddForm(EntityControlData data, Form form) {
         this.data = data;
+        this.form = form;
         
         initComponents();
         
         setTitle("Formulario de " + data.getExternalName());
+        contentScrollPane.setViewportView(form);
     }
     
     /**
@@ -68,6 +76,16 @@ public class GenericAddForm extends javax.swing.JFrame {
      */
     
 
+    protected int confirmAction(String action) {
+        return JOptionPane.showConfirmDialog(
+                this, 
+                "¿Estás seguro de que deseas " + action + " este registro?", 
+                "Confirmar acción", 
+                JOptionPane.YES_NO_CANCEL_OPTION, 
+                JOptionPane.QUESTION_MESSAGE
+        );
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,13 +101,13 @@ public class GenericAddForm extends javax.swing.JFrame {
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
         jPanel2 = new javax.swing.JPanel();
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
-        jScrollPane1 = new javax.swing.JScrollPane();
+        contentScrollPane = new javax.swing.JScrollPane();
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
+        undoButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -117,13 +135,14 @@ public class GenericAddForm extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         jPanel2.add(filler6, gridBagConstraints);
 
-        jScrollPane1.setBackground(new java.awt.Color(248, 250, 252));
+        contentScrollPane.setBackground(util.ProjectColors.WHITE.getColor());
+        contentScrollPane.setBorder(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel2.add(jScrollPane1, gridBagConstraints);
+        jPanel2.add(contentScrollPane, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 0;
         jPanel2.add(filler7, gridBagConstraints);
@@ -140,12 +159,12 @@ public class GenericAddForm extends javax.swing.JFrame {
         jPanel3.setBackground(util.ProjectColors.WHITE.getColor());
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setBackground(new java.awt.Color(248, 250, 252));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/40-save.png"))); // NOI18N
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.setBackground(new java.awt.Color(248, 250, 252));
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/40-save.png"))); // NOI18N
+        saveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -153,27 +172,32 @@ public class GenericAddForm extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel3.add(jButton1, gridBagConstraints);
+        jPanel3.add(saveButton, gridBagConstraints);
 
-        jButton2.setBackground(new java.awt.Color(248, 250, 252));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/40-delete.png"))); // NOI18N
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteButton.setBackground(new java.awt.Color(248, 250, 252));
+        deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/40-delete.png"))); // NOI18N
+        deleteButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel3.add(jButton2, gridBagConstraints);
+        jPanel3.add(deleteButton, gridBagConstraints);
 
-        jButton3.setBackground(new java.awt.Color(248, 250, 252));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/40-undo.png"))); // NOI18N
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        undoButton.setBackground(new java.awt.Color(248, 250, 252));
+        undoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/40-undo.png"))); // NOI18N
+        undoButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        undoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                undoButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel3.add(jButton3, gridBagConstraints);
+        jPanel3.add(undoButton, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
         jLabel3.setForeground(util.ProjectColors.BLACK.getColor());
@@ -227,9 +251,36 @@ public class GenericAddForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String action;
+        if (form.getCurrentRecord().isPresent()) {
+            action = "actualizar";
+        } else {
+            action = "guardar";
+        }
+        
+        int response = confirmAction(action);
+        if (response == JOptionPane.YES_OPTION) {
+            try {
+                if (form.getCurrentRecord().isPresent()) {
+                    form.update();
+                } else {
+                    form.insert();
+                }   
+            } catch (SQLException e) {
+                
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(GenericAddForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(GenericAddForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
+        this.form.setCurrentRecord(this.form.getCurrentRecord());
+    }//GEN-LAST:event_undoButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,6 +319,8 @@ public class GenericAddForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane contentScrollPane;
+    private javax.swing.JButton deleteButton;
     private component.EntityHeader entityHeader1;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
@@ -276,15 +329,13 @@ public class GenericAddForm extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler5;
     private javax.swing.Box.Filler filler6;
     private javax.swing.Box.Filler filler7;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JButton undoButton;
     // End of variables declaration//GEN-END:variables
 }

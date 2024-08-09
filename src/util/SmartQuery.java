@@ -56,4 +56,8 @@ public class SmartQuery implements AutoCloseable {
     public void close() throws Exception {
         connectionManager.close();
     }
+
+    public ResultSet getResultSet() {
+        return resultSet;
+    }
 }

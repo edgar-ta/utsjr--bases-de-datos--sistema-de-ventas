@@ -4,7 +4,17 @@
  */
 package frames;
 
+import card_supplier.CardSupplier;
+import card_supplier.UserCardSupplier;
+import component.GenericQueryFrame;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import util.EntityControlData;
+import util.EntityField;
 
 /**
  *
@@ -252,6 +262,11 @@ public class MenuFrame extends javax.swing.JFrame {
         userButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-user.png"))); // NOI18N
         userButton.setToolTipText("Usuario");
         userButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        userButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -319,6 +334,29 @@ public class MenuFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_clientButtonActionPerformed
 
+    private void userButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userButtonActionPerformed
+        showEntityQueryFrame(EntityControlData.USER, () -> new UserCardSupplier(EntityField.of("id", "nombre", "tipo")));
+    }//GEN-LAST:event_userButtonActionPerformed
+
+    @FunctionalInterface
+    public interface SQLErrorProneSupplier<K> {
+        public K call() throws SQLException, ClassNotFoundException, Exception;
+    }
+    
+    protected void showEntityQueryFrame(EntityControlData entityControlData, SQLErrorProneSupplier<CardSupplier> supplierFunction) {
+        try {
+            GenericQueryFrame frame = new GenericQueryFrame(entityControlData, supplierFunction.call());
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuFrame.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Un error interno de la aplicación impide que se puedan visualizar los regisros de los usuarios", "Error interno", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            Logger.getLogger(MenuFrame.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Algo salió mal con la base de datos y no se pueden visualizar los registros de los usuarios", "Error de base de datos", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -382,8 +420,8 @@ public class MenuFrame extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton categoryButton;
-    private javax.swing.JButton clientButton;
+    public javax.swing.JButton categoryButton;
+    public javax.swing.JButton clientButton;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler10;
     private javax.swing.Box.Filler filler11;
@@ -408,9 +446,9 @@ public class MenuFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton productButton;
-    private javax.swing.JButton saleButton;
-    private javax.swing.JButton supplierButton;
-    private javax.swing.JButton userButton;
+    public javax.swing.JButton productButton;
+    public javax.swing.JButton saleButton;
+    public javax.swing.JButton supplierButton;
+    public javax.swing.JButton userButton;
     // End of variables declaration//GEN-END:variables
 }

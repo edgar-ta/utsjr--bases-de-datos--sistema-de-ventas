@@ -5,6 +5,7 @@
 package card_supplier;
 
 import card.UserCard;
+import controller.UserController;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -29,12 +30,7 @@ public class UserCardSupplier extends CardSupplier<UserRecord, UserCard> {
 
     @Override
     protected UserRecord buildRecord(ResultSet resultSet) throws SQLException {
-        return new UserRecord(
-                resultSet.getInt("id"), 
-                resultSet.getString("nombre"), 
-                resultSet.getString("contrasenia"), 
-                resultSet.getString("tipo")
-        );
+        return UserController.buildUser(resultSet);
     }
 
     @Override

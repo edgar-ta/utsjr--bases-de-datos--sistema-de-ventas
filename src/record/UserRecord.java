@@ -4,24 +4,57 @@
  */
 package record;
 
+import java.util.Optional;
+import util.DisplayableString;
+
 /**
  *
  * @author Edgar
  */
-public class UserRecord extends Record {
+public class UserRecord extends record.Record {
+    public enum UserType {
+        ADMINISTRATOR(new DisplayableString("Administrador", Optional.of("Admin."))),
+        CASHIER(new DisplayableString("Cajero"))
+        ;
+        
+        protected final DisplayableString value;
+        
+        UserType(DisplayableString value) {
+            this.value = value;
+        }
+
+        public DisplayableString getValue() {
+            return value;
+        }
+        
+        public static Optional<UserType> findUserType(String internalValue) {
+            for (UserType type : UserType.values()) {
+                if (type.getValue().getInternalValue().equals(internalValue)) {
+                    return Optional.of(type);
+                }
+            }
+            return Optional.empty();
+        }
+        
+        @Override
+        public String toString() {
+            return value.getPrettyName();
+        }
+    };
+    
     int id;
     String nombre;
     String contrasenia;
-    String tipo;
+    UserType tipo;
 
-    public UserRecord() {
-    }
-
-    public UserRecord(int id, String nombre, String contrasenia, String tipo) {
+    public UserRecord(int id, String nombre, String contrasenia, UserType tipo) {
         this.id = id;
         this.nombre = nombre;
         this.contrasenia = contrasenia;
         this.tipo = tipo;
+    }
+
+    public UserRecord() {
     }
 
     public int getId() {
@@ -48,11 +81,11 @@ public class UserRecord extends Record {
         this.contrasenia = contrasenia;
     }
 
-    public String getTipo() {
+    public UserType getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(UserType tipo) {
         this.tipo = tipo;
     }
 }

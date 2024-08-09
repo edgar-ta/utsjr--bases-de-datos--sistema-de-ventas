@@ -3,3 +3,4 @@ test/
 nbproject/
 *.zip
 
+/dist/
