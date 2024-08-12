@@ -69,6 +69,11 @@ public class LabeledPasswordField extends javax.swing.JPanel {
     public JPasswordField getPasswordField() {
         return passwordField;
     }
+    
+    public String getText() {
+        char[] characters = passwordField.getPassword();
+        return new String(characters);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

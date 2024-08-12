@@ -9,6 +9,7 @@ import form.UserForm;
 import javax.swing.JOptionPane;
 import util.EntityControlData;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,55 +36,26 @@ public class GenericAddForm extends javax.swing.JFrame {
         
         setTitle("Formulario de " + data.getExternalName());
         contentScrollPane.setViewportView(form);
-    }
-    
-    /**
-     * enum EntityControlData
-     *  icon
-     *  color
-     *  name
-     *  
-     *  USER(new Icon(), new Color(), "Usuario")
-     *  ;
-     * 
-     * public <K extends Entity> GenericAddForm(EntityControlData data, EntityAddPanel<K> panel)
-     * 
-     * new GenericAddForm(EntityControlData.USER, new UserAddPanel(userEntity));
-     * ^^^^^
-     * I think I like this concept, even if it doesn't really tie together
-     * the control data and the associated form
-     * 
-     * EntityControlData
-     * 
-     * class UserEntity
-     * class UserAddPanel implements EntityAddPanel<UserEntity>
-     * 
-     * EntityAddPanel<K>
-     *  EntityAddPanel(Optional<K> value)
-     *  
-     *  protected K buildEntity() 
-     *  
-     *  public void delete()
-     *  public void clear()
-     *  public void save()
-     * 
-     * Panel to add to the scroll pane
-     *  should be able to delete
-     *  clear
-     *  save
-     * Optional element that that pane can process
-     * 
-     */
-    
-
-    protected int confirmAction(String action) {
-        return JOptionPane.showConfirmDialog(
-                this, 
-                "¿Estás seguro de que deseas " + action + " este registro?", 
-                "Confirmar acción", 
-                JOptionPane.YES_NO_CANCEL_OPTION, 
-                JOptionPane.QUESTION_MESSAGE
-        );
+        
+        if (form.getCurrentRecord().isEmpty()) {
+            deleteButton.setEnabled(false);
+        } else {
+            saveButtonLabel.setText("Actualizar");
+        }
+        
+        undoButton.setEnabled(false);
+        
+        form.addEditionListener(() -> {
+            undoButton.setEnabled(form.isRecordDifferent());
+        });
+        
+        form.setDeletionListener(() -> {
+            this.dispose();
+        });
+        
+        form.setRecordChangeListener(() -> {
+            undoButton.setEnabled(false);
+        });
     }
     
     /**
@@ -108,7 +80,7 @@ public class GenericAddForm extends javax.swing.JFrame {
         saveButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         undoButton = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        saveButtonLabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
@@ -177,6 +149,11 @@ public class GenericAddForm extends javax.swing.JFrame {
         deleteButton.setBackground(new java.awt.Color(248, 250, 252));
         deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/40-delete.png"))); // NOI18N
         deleteButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -199,16 +176,16 @@ public class GenericAddForm extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel3.add(undoButton, gridBagConstraints);
 
-        jLabel3.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
-        jLabel3.setForeground(util.ProjectColors.BLACK.getColor());
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Guardar");
+        saveButtonLabel.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
+        saveButtonLabel.setForeground(util.ProjectColors.BLACK.getColor());
+        saveButtonLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        saveButtonLabel.setText("Guardar");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
-        jPanel3.add(jLabel3, gridBagConstraints);
+        jPanel3.add(saveButtonLabel, gridBagConstraints);
 
         jLabel4.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
         jLabel4.setForeground(util.ProjectColors.BLACK.getColor());
@@ -252,35 +229,34 @@ public class GenericAddForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        // TODO add your handling code here:
-        String action;
-        if (form.getCurrentRecord().isPresent()) {
-            action = "actualizar";
-        } else {
-            action = "guardar";
-        }
-        
-        int response = confirmAction(action);
-        if (response == JOptionPane.YES_OPTION) {
-            try {
-                if (form.getCurrentRecord().isPresent()) {
-                    form.update();
-                } else {
-                    form.insert();
-                }   
-            } catch (SQLException e) {
-                
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(GenericAddForm.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(GenericAddForm.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            if (form.getCurrentRecord().isPresent()) {
+                form.update();
+            } else {
+                form.insert();
             }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GenericAddForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(GenericAddForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
         this.form.setCurrentRecord(this.form.getCurrentRecord());
     }//GEN-LAST:event_undoButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+            try {
+                form.delete();
+            } catch (SQLException e) {
+                // 
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(GenericAddForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(GenericAddForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -329,13 +305,13 @@ public class GenericAddForm extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler5;
     private javax.swing.Box.Filler filler6;
     private javax.swing.Box.Filler filler7;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JButton saveButton;
+    private javax.swing.JLabel saveButtonLabel;
     private javax.swing.JButton undoButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -174,7 +174,7 @@
       <Properties>
         <Property name="labelText" type="java.lang.String" value="Tipo"/>
         <Property name="model" type="javax.swing.DefaultComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new DefaultComboBoxModel&lt;record.UserRecord.UserType&gt;(record.UserRecord.UserType.values())" type="code"/>
+          <Connection code="new DefaultComboBoxModel&lt;record.UserRecord.UserType&gt;((record.UserRecord.UserType[]) record.UserRecord.UserType.getValidUserTypes())" type="code"/>
         </Property>
         <Property name="selectedIndex" type="int" value="-1"/>
       </Properties>

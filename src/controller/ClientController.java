@@ -19,7 +19,7 @@ import util.UpdateResult;
  *
  * @author Edgar
  */
-public class ClientController {
+public class ClientController extends Controller {
     public static ClientRecord buildRecord(SmartQuery query) throws SQLException {
         ClientRecord record = new ClientRecord();
 
@@ -90,18 +90,11 @@ public class ClientController {
     }
     
     public static UpdateResult insertClient(ClientRecord clientRecord) throws SQLException, ClassNotFoundException, Exception {
-        try ( 
-                SmartConnection connection = new SmartConnection()
-        ) {
+        try (SmartConnection connection = new SmartConnection()) {
             UpdateChain updateChain = ClientController
                     .insertClient(connection, clientRecord)
                     .run();
             UpdateResult result = updateChain.getResult();
-            if (result == UpdateResult.SUCCESS) {
-                connection.getRawConnection().commit();
-            } else if (result == UpdateResult.FAILURE) {
-                connection.getRawConnection().rollback();
-            }
             
             return result;
         }

@@ -4,6 +4,7 @@
  */
 package record;
 
+import java.util.LinkedList;
 import java.util.Optional;
 import util.DisplayableString;
 
@@ -12,9 +13,22 @@ import util.DisplayableString;
  * @author Edgar
  */
 public class UserRecord extends record.Record {
+    /**
+     * This enum represents a valid type of user; it
+     * is defined to ensure both the internal representation
+     * (i. e., what's stored in the database) and the
+     * external representation (i. e., the way what's stored
+     * in the database is shown here in the app) are consistent
+     * throughout the whole system.
+     * 
+     * The class is just a wrapper around a DisplayableString object (called "value") that
+     * contains the valid user types there exists in the database and their
+     * corresponding string representations
+     */
     public enum UserType {
-        ADMINISTRATOR(new DisplayableString("Administrador", Optional.of("Admin."))),
-        CASHIER(new DisplayableString("Cajero"))
+            ADMINISTRATOR(new DisplayableString("Administrador", Optional.of("Admin."))),
+            CASHIER(new DisplayableString("Cajero")),
+            NONE(new DisplayableString(""))
         ;
         
         protected final DisplayableString value;
@@ -39,6 +53,26 @@ public class UserRecord extends record.Record {
         @Override
         public String toString() {
             return value.getPrettyName();
+        }
+        
+        public static boolean isValidUserType(UserType userType) {
+            return userType != UserType.NONE;
+        }
+        
+        public static UserType[] getValidUserTypes() {
+            int numberOfValidUserTypes = UserType.values().length - 1;
+            int i = 0;
+
+            UserType[] userTypes = new UserType[numberOfValidUserTypes];
+            while (i < numberOfValidUserTypes) {
+                UserType currentUserType = UserType.values()[i];
+                if (!UserType.isValidUserType(currentUserType)) continue;
+                
+                userTypes[i] = currentUserType;
+                i++;
+            }
+            
+            return userTypes;
         }
     };
     

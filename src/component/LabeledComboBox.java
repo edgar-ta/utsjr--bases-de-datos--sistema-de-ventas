@@ -32,7 +32,7 @@ public class LabeledComboBox<ItemType> extends javax.swing.JPanel {
     }
 
     public String getLabelText() {
-        return labelText;
+        return labelElement.getText();
     }
 
     public void setLabelText(String labelText) {
@@ -41,7 +41,7 @@ public class LabeledComboBox<ItemType> extends javax.swing.JPanel {
     }
 
     public DefaultComboBoxModel<ItemType> getModel() {
-        return model;
+        return (DefaultComboBoxModel<ItemType>) comboBox.getModel();
     }
 
     public void setModel(DefaultComboBoxModel<ItemType> model) {
@@ -50,7 +50,7 @@ public class LabeledComboBox<ItemType> extends javax.swing.JPanel {
     }
 
     public int getSelectedIndex() {
-        return selectedIndex;
+        return comboBox.getSelectedIndex();
     }
 
     public void setSelectedIndex(int selectedIndex) {

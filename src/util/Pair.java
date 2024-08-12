@@ -11,12 +11,15 @@ package util;
  * @param <Second>
  */
 public class Pair<First, Second> {
-    private final First first;
-    private final Second second;
+    private First first;
+    private Second second;
 
     public Pair(First first, Second second) {
         this.first = first;
         this.second = second;
+    }
+
+    public Pair() {
     }
 
     public First getFirst() {
@@ -37,4 +40,14 @@ public class Pair<First, Second> {
                 this.second == pair.getSecond()
                 ;
     }
+
+    public void setFirst(First first) {
+        this.first = first;
+    }
+
+    public void setSecond(Second second) {
+        this.second = second;
+    }
+    
+    
 }

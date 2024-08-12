@@ -4,10 +4,24 @@
  */
 package form;
 
+import controller.UserController;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Optional;
 import record.UserRecord;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import util.UpdateResult;
+import util.input_verifier.BaseInputVerifier;
+import util.input_verifier.LengthVerifier;
+import util.input_verifier.NotEmptyVerifier;
+import util.input_verifier.NotUnselectedVerifier;
+import util.input_verifier.VerifiableField;
+import util.input_verifier.VerifiableFieldChain;
 
 
 /**
@@ -15,6 +29,7 @@ import javax.swing.DefaultComboBoxModel;
  * @author Edgar
  */
 public class UserForm extends Form<UserRecord> {
+    Runnable recordChangeListener = () -> {};
     
     public UserForm() {
         super();
@@ -86,7 +101,7 @@ public class UserForm extends Form<UserRecord> {
         add(labeledPasswordField, gridBagConstraints);
 
         labeledTypeComboBox.setLabelText("Tipo");
-        labeledTypeComboBox.setModel(new DefaultComboBoxModel<record.UserRecord.UserType>(record.UserRecord.UserType.values()));
+        labeledTypeComboBox.setModel(new DefaultComboBoxModel<record.UserRecord.UserType>((record.UserRecord.UserType[]) record.UserRecord.UserType.getValidUserTypes()));
         labeledTypeComboBox.setSelectedIndex(-1);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -95,24 +110,10 @@ public class UserForm extends Form<UserRecord> {
         gridBagConstraints.weightx = 1.0;
         add(labeledTypeComboBox, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
-
-    @Override
-    public void delete() throws SQLException, ClassNotFoundException, Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void insert() throws SQLException, ClassNotFoundException, Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void update() throws SQLException, ClassNotFoundException, Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
     
     @Override
-    public void setCurrentRecord(Optional<UserRecord> currentRecord) {
+    public void setInterfaceForCurrentRecord(Optional<UserRecord> currentRecord) {
         this.currentRecord = currentRecord;
         labeledNameField.getTextField().setText(currentRecord.map((UserRecord record) -> record.getNombre()).orElse(""));
         labeledPasswordField.getPasswordField().setText(currentRecord.map((UserRecord record) -> record.getContrasenia()).orElse(""));
@@ -131,4 +132,95 @@ public class UserForm extends Form<UserRecord> {
     protected component.LabeledPasswordField labeledPasswordField;
     protected component.LabeledComboBox<record.UserRecord.UserType> labeledTypeComboBox;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public LinkedList<JTextField> getTextFields() {
+        return new LinkedList<>(Arrays.asList(
+                labeledNameField.getTextField(), 
+                labeledPasswordField.getPasswordField())
+        );
+    }
+
+    @Override
+    public LinkedList<JComboBox> getComboBoxes() {
+        return new LinkedList<>(Arrays.asList(labeledTypeComboBox.getComboBox()));
+    }
+
+    @Override
+    public UserRecord buildRecord() {
+        UserRecord record = new UserRecord();
+        if (currentRecord.isPresent()) {
+            record.setId(currentRecord.get().getId());
+        } else {
+            record.setId(-1);
+        }
+        
+        record.setNombre(labeledNameField.getTextField().getText());
+        record.setContrasenia(labeledPasswordField.getText());
+        
+        UserRecord.UserType userType;
+        int selectedIndex = labeledTypeComboBox.getSelectedIndex();
+        
+        if (selectedIndex == -1) {
+            userType = UserRecord.UserType.NONE;
+        } else {
+            userType = (UserRecord.UserType) labeledTypeComboBox.getComboBox().getSelectedItem();
+        }
+        
+        record.setTipo(userType);
+        
+        return record;
+    }
+
+    
+    @Override
+    public boolean isInputDifferentFromRecord() {
+        UserRecord record = getCurrentRecord().get();
+        if (!record.getNombre().equals(labeledNameField.getTextField().getText())) return true;
+        if (!record.getContrasenia().equals(labeledPasswordField.getText())) return true;
+        if (record.getTipo() != (UserRecord.UserType) labeledTypeComboBox.getComboBox().getSelectedItem()) return true;
+        return false;
+    }
+    
+    
+    @Override
+    public Integer getRecordId(UserRecord record) {
+        return record.getId();
+    }
+
+    @Override
+    public boolean recordExists(Integer id) throws SQLException, ClassNotFoundException, Exception {
+        return UserController.userExists(id);
+    }
+
+    @Override
+    public UpdateResult deleteRecord(Integer id) throws SQLException, ClassNotFoundException, Exception {
+        return UserController.deleteUser(id);
+    }
+
+    @Override
+    public UpdateResult insertRecord(UserRecord record) throws SQLException, ClassNotFoundException, Exception {
+        return UserController.insertUser(record);
+    }
+
+    @Override
+    public UpdateResult updateRecord(UserRecord record) throws SQLException, ClassNotFoundException, Exception {
+        return UserController.updateUser(record);
+    }
+
+    @Override
+    public VerifiableFieldChain getVerifiableFieldChain() {
+        return VerifiableFieldChain.of(
+                new VerifiableField<JTextField>("nombre", labeledNameField.getTextField())
+                        .add(new NotEmptyVerifier())
+                        .add(new LengthVerifier(4, 20))
+                ,
+                new VerifiableField<JTextField>("contraseña", labeledPasswordField.getPasswordField())
+                        .add(new NotEmptyVerifier())
+                        .add(new LengthVerifier(8, 20))
+                ,
+                new VerifiableField<JComboBox<UserRecord.UserType>>("tipo", labeledTypeComboBox.getComboBox())
+                    .add(new NotUnselectedVerifier())
+        );
+    }
 }

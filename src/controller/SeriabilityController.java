@@ -22,7 +22,7 @@ import util.UpdateResult;
  * 
  * @author Edgar
  */
-public class SeriabilityController {
+public class SeriabilityController extends Controller {
     public static enum ValidTable {
         CATEGORY("categoria"),
         PRODUCT("producto"),

@@ -4,14 +4,20 @@
  */
 package util.input_verifier;
 
-import java.util.Optional;
-import javax.swing.InputVerifier;
-import javax.swing.JComponent;
+import util.Pair;
 
 /**
  *
  * @author Edgar
  */
-public abstract class AwareVerifier extends InputVerifier {
-    public abstract Optional<String> getInvalidMessage(JComponent input);
+public class ValidationResult extends Pair<String, Boolean> {
+
+    public ValidationResult(String first, Boolean second) {
+        super(first, second);
+    }
+
+    public ValidationResult() {
+    }
+
+    
 }
