@@ -4,6 +4,8 @@
  */
 package card;
 
+import component.GenericAddFrame;
+import form.Form;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -18,8 +20,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.border.Border;
 import record.Record;
+import util.EntityHeaderData;
 
 /**
  *
@@ -36,6 +40,10 @@ public abstract class Card<RecordType extends Record> extends JPanel {
     protected JPanel contentPane;
     
     public Card() {
+        this(Optional.empty());
+    }
+    
+    public Card(Optional<RecordType> currentRecord) {
         super(new GridBagLayout());
         
         setupMargins();
@@ -54,9 +62,12 @@ public abstract class Card<RecordType extends Record> extends JPanel {
             }
         });
         
-        
         addAtCoordinates(contentPane, 1, 1, 3, 1.0f, true);
         addAtCoordinates(button, 1, 3, 1, 1.0f, true);
+        
+        initializeComponents();
+        
+        setCurrentRecord(currentRecord);
     }
     
     @Override
@@ -68,7 +79,19 @@ public abstract class Card<RecordType extends Record> extends JPanel {
         }
     }
     
-    public abstract void seeMore();
+    public abstract void initializeComponents();
+    
+    public void seeMore() {
+        launchAddForm(getForm(currentRecord), getEntityHeaderData());
+    }
+    
+    public static <RecordType extends Record>  void launchAddForm(Form<RecordType> form, EntityHeaderData data) {
+        GenericAddFrame addForm = new GenericAddFrame(data, form);
+        addForm.setVisible(true);
+    }
+    
+    public abstract Form getForm(Optional<RecordType> currentRecord);
+    public abstract EntityHeaderData getEntityHeaderData();
     
     @Override
     public void setBackground(Color color) {
@@ -136,9 +159,15 @@ public abstract class Card<RecordType extends Record> extends JPanel {
         this.addImpl(component, gridBagConstraints, -1);
     }
     
+    public void setCurrentRecord(Optional<RecordType> currentRecord) {
+        this.currentRecord = currentRecord;
+        updateInterfaceForCurrentRecord();
+    }
+    
     /**
      * Updates the UI depending on the provided record value
-     * @param record 
      */
-    public abstract void setCurrentRecord(Optional<RecordType> record);
+    public abstract void updateInterfaceForCurrentRecord();
+    
+    
 }

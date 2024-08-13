@@ -4,6 +4,7 @@
  */
 package form;
 
+import controller.Controller;
 import controller.UserController;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -30,11 +31,13 @@ import util.input_verifier.VerifiableFieldChain;
  */
 public class UserForm extends Form<UserRecord> {
     Runnable recordChangeListener = () -> {};
-    
+
     public UserForm() {
         super();
-        initComponents();
-        setCurrentRecord(Optional.empty());
+    }
+
+    public UserForm(Optional<UserRecord> currentRecord) {
+        super(currentRecord);
     }
 
     /**
@@ -190,22 +193,22 @@ public class UserForm extends Form<UserRecord> {
 
     @Override
     public boolean recordExists(Integer id) throws SQLException, ClassNotFoundException, Exception {
-        return UserController.userExists(id);
+        return Controller.USER_CONTROLLER.exists(id);
     }
 
     @Override
     public UpdateResult deleteRecord(Integer id) throws SQLException, ClassNotFoundException, Exception {
-        return UserController.deleteUser(id);
+        return Controller.USER_CONTROLLER.delete(id);
     }
 
     @Override
     public UpdateResult insertRecord(UserRecord record) throws SQLException, ClassNotFoundException, Exception {
-        return UserController.insertUser(record);
+        return Controller.USER_CONTROLLER.insert(record);
     }
 
     @Override
     public UpdateResult updateRecord(UserRecord record) throws SQLException, ClassNotFoundException, Exception {
-        return UserController.updateUser(record);
+        return Controller.USER_CONTROLLER.update(record);
     }
 
     @Override
@@ -222,5 +225,10 @@ public class UserForm extends Form<UserRecord> {
                 new VerifiableField<JComboBox<UserRecord.UserType>>("tipo", labeledTypeComboBox.getComboBox())
                     .add(new NotUnselectedVerifier())
         );
+    }
+
+    @Override
+    protected void initializeComponents() {
+        initComponents();
     }
 }

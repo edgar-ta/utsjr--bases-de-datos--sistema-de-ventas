@@ -5,15 +5,20 @@
 package frames;
 
 import card_supplier.CardSupplier;
+import card_supplier.SupplierCardSupplier;
 import card_supplier.UserCardSupplier;
 import component.GenericQueryFrame;
+import form.Form;
+import form.SupplierForm;
+import form.UserForm;
 import java.sql.SQLException;
+import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import util.EntityControlData;
+import util.EntityHeaderData;
 import util.EntityField;
 
 /**
@@ -248,6 +253,11 @@ public class MenuFrame extends javax.swing.JFrame {
         supplierButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         supplierButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         supplierButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        supplierButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supplierButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -335,17 +345,38 @@ public class MenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_clientButtonActionPerformed
 
     private void userButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userButtonActionPerformed
-        showEntityQueryFrame(EntityControlData.USER, () -> new UserCardSupplier(EntityField.of("id", "nombre", "tipo")));
+        showEntityQueryFrame(
+                EntityHeaderData.USER, 
+                () -> new UserCardSupplier(EntityField.of("id", "nombre", "tipo")),
+                () -> new UserForm()
+        );
     }//GEN-LAST:event_userButtonActionPerformed
+
+    private void supplierButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplierButtonActionPerformed
+        // TODO add your handling code here:
+        showEntityQueryFrame(
+                EntityHeaderData.SUPPLIER, 
+                () -> new SupplierCardSupplier(EntityField.of("id", "nombre", "rfc")),
+                () -> new SupplierForm()
+        );
+    }//GEN-LAST:event_supplierButtonActionPerformed
 
     @FunctionalInterface
     public interface SQLErrorProneSupplier<K> {
         public K call() throws SQLException, ClassNotFoundException, Exception;
     }
     
-    protected void showEntityQueryFrame(EntityControlData entityControlData, SQLErrorProneSupplier<CardSupplier> supplierFunction) {
+    protected void showEntityQueryFrame(
+            EntityHeaderData entityControlData, 
+            SQLErrorProneSupplier<CardSupplier> supplierFunction,
+            Supplier<Form> formSupplier
+    ) {
         try {
-            GenericQueryFrame frame = new GenericQueryFrame(entityControlData, supplierFunction.call());
+            GenericQueryFrame frame = new GenericQueryFrame(
+                    entityControlData, 
+                    supplierFunction.call(),
+                    formSupplier
+            );
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setVisible(true);
         } catch (SQLException ex) {

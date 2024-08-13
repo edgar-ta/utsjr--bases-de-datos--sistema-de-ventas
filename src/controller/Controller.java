@@ -5,15 +5,22 @@
 package controller;
 
 import java.sql.SQLException;
+import java.sql.ResultSet;
 import util.SmartConnection;
 import util.UpdateChain;
 import util.UpdateResult;
+import record.Record;
+import util.ConnectionManager;
+import util.DatabaseEntity;
+import util.EntityHeaderData;
+import util.SmartQuery;
 
 /**
  *
  * @author Edgar
  */
-public class Controller {
+public abstract class Controller<RecordType extends Record> {
+    
     @FunctionalInterface
     public interface InsertEntityBiFunction {
         public UpdateChain call(UpdateChain chain, Integer id) throws SQLException;
@@ -44,14 +51,15 @@ public class Controller {
      * @throws ClassNotFoundException
      * @throws Exception 
      */
-    public static UpdateChain insertEntity(
+    public UpdateChain insertEntity(
             String statement,
-            SeriabilityController.ValidTable table,
             InsertEntityBiFunction callback,
             SmartConnection connection
     ) throws SQLException, ClassNotFoundException, Exception {
         
-        int nextId = SeriabilityController
+        DatabaseEntity table = getDatabaseEntity();
+        
+        int nextId = Controller.SERIABILITY_CONTROLLER
                 .getNexIdOfTable(table)
                 .get();
         
@@ -59,7 +67,7 @@ public class Controller {
             UpdateChain chain = UpdateChain
                     .of(connection, statement);
             callback.call(chain, nextId);
-            chain.chain(SeriabilityController.increaseNextIdOfTable(connection, table));
+            chain.chain(Controller.SERIABILITY_CONTROLLER.increaseNextIdOfTable(connection, table));
             return chain;
             
         } catch (SQLException e) {
@@ -67,7 +75,7 @@ public class Controller {
         }
     }
     
-    public static UpdateResult runChain(
+    public UpdateResult runChain(
             RunChainFunction callback
     ) throws SQLException, ClassNotFoundException, Exception {
         try (SmartConnection connection = new SmartConnection()) {
@@ -75,7 +83,7 @@ public class Controller {
         }
     }
     
-    public static UpdateChain createChain(String statement, CreateChainConsumer callback, SmartConnection connection) throws SQLException, ClassNotFoundException, Exception {
+    public UpdateChain createChain(String statement, CreateChainConsumer callback, SmartConnection connection) throws SQLException, ClassNotFoundException, Exception {
         try {
             UpdateChain chain = UpdateChain.of(connection, statement);
             callback.call(chain);
@@ -84,4 +92,57 @@ public class Controller {
             throw e;
         }
     }
+    
+    public abstract DatabaseEntity getDatabaseEntity();
+    
+    
+    
+    public boolean exists(Integer id) throws SQLException, ClassNotFoundException, Exception {
+        String internalName = getDatabaseEntity().getEntityName().getInternalValue();
+        
+        try (SmartQuery query = ConnectionManager
+                .create("SELECT " + internalName + ".id FROM " + internalName + " WHERE " + internalName + ".id = ?")
+                .setInteger(1, id)
+                .query()
+                ) {
+            return query.isPopulated();
+        }
+    }
+    
+    
+    
+    public UpdateResult delete(Integer id) throws SQLException, ClassNotFoundException, Exception {
+        return runChain((SmartConnection connection) -> this.delete(connection, id));
+    }
+    public UpdateChain delete(SmartConnection connection, Integer id) throws SQLException, ClassNotFoundException, Exception {
+        String internalName = getDatabaseEntity().getEntityName().getInternalValue();
+        return createChain(
+                "DELETE FROM " + internalName + " WHERE " + internalName + ".id = ?", 
+                (UpdateChain chain) -> chain.setInteger(1, id), 
+                connection
+        );
+    }
+    
+    
+    
+    public UpdateResult update(RecordType record) throws SQLException, ClassNotFoundException, Exception {
+        return runChain((SmartConnection connection) -> this.update(connection, record));
+    }
+    public abstract UpdateChain update(SmartConnection connection, RecordType record) throws SQLException, ClassNotFoundException, Exception;
+    
+    
+    
+    public UpdateResult insert(RecordType record) throws SQLException, ClassNotFoundException, Exception {
+        return runChain((SmartConnection connection) -> this.insert(connection, record));
+    }
+    public abstract UpdateChain insert(SmartConnection connection, RecordType record) throws SQLException, ClassNotFoundException, Exception;
+    
+    public abstract RecordType deserializeRecord(ResultSet query) throws SQLException;
+    
+    
+    
+    public static final UserController USER_CONTROLLER = new UserController();
+    public static final SupplierController SUPPLIER_CONTROLLER = new SupplierController();
+    
+    public static final SeriabilityController SERIABILITY_CONTROLLER = new SeriabilityController();
 }

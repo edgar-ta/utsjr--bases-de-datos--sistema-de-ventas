@@ -7,39 +7,40 @@ package component;
 import form.Form;
 import form.UserForm;
 import javax.swing.JOptionPane;
-import util.EntityControlData;
+import util.EntityHeaderData;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Edgar
  */
-public class GenericAddForm extends javax.swing.JFrame {
-    protected final EntityControlData data;
+public class GenericAddFrame extends javax.swing.JFrame {
+    protected final EntityHeaderData data;
     protected final Form form;
     
     /**
      * Creates new form NewJFrame
      */
-    public GenericAddForm() {
-        this(EntityControlData.USER, new UserForm());
+    public GenericAddFrame() {
+        this(EntityHeaderData.USER, new UserForm());
     }
     
-    public GenericAddForm(EntityControlData data, Form form) {
+    public GenericAddFrame(EntityHeaderData data, Form form) {
         this.data = data;
         this.form = form;
         
         initComponents();
         
-        setTitle("Formulario de " + data.getExternalName());
+        setTitle("Formulario de " + data.getEntityName());
         contentScrollPane.setViewportView(form);
         
-        if (form.getCurrentRecord().isEmpty()) {
+        if (form.getModality() == Form.FormModality.MULTIPLE_EDITION) {
             deleteButton.setEnabled(false);
-        } else {
+        } else if (form.getModality() == Form.FormModality.SINGLE_EDITION) {
             saveButtonLabel.setText("Actualizar");
         }
         
@@ -56,6 +57,8 @@ public class GenericAddForm extends javax.swing.JFrame {
         form.setRecordChangeListener(() -> {
             undoButton.setEnabled(false);
         });
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
     /**
@@ -69,7 +72,7 @@ public class GenericAddForm extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel4 = new javax.swing.JPanel();
-        entityHeader1 = new EntityHeader(this.data);
+        entityHeader = new EntityHeader(data);
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
         jPanel2 = new javax.swing.JPanel();
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
@@ -95,7 +98,10 @@ public class GenericAddForm extends javax.swing.JFrame {
 
         jPanel4.setBackground(util.ProjectColors.WHITE.getColor());
         jPanel4.setLayout(new java.awt.GridBagLayout());
-        jPanel4.add(entityHeader1, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel4.add(entityHeader, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         jPanel4.add(filler3, gridBagConstraints);
@@ -109,6 +115,7 @@ public class GenericAddForm extends javax.swing.JFrame {
 
         contentScrollPane.setBackground(util.ProjectColors.WHITE.getColor());
         contentScrollPane.setBorder(null);
+        contentScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -230,15 +237,17 @@ public class GenericAddForm extends javax.swing.JFrame {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         try {
-            if (form.getCurrentRecord().isPresent()) {
-                form.update();
-            } else {
+            if (form.getModality() == Form.FormModality.MULTIPLE_EDITION) {
                 form.insert();
+            } else if (form.getModality() == Form.FormModality.SINGLE_EDITION) {
+                form.update();
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(GenericAddFrame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GenericAddForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GenericAddFrame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(GenericAddForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GenericAddFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -249,12 +258,12 @@ public class GenericAddForm extends javax.swing.JFrame {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
             try {
                 form.delete();
-            } catch (SQLException e) {
-                // 
+            } catch (SQLException ex) {
+                Logger.getLogger(GenericAddFrame.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(GenericAddForm.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GenericAddFrame.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
-                Logger.getLogger(GenericAddForm.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GenericAddFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
@@ -275,21 +284,23 @@ public class GenericAddForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GenericAddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GenericAddFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GenericAddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GenericAddFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GenericAddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GenericAddFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GenericAddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GenericAddFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GenericAddForm().setVisible(true);
+                new GenericAddFrame().setVisible(true);
             }
         });
     }
@@ -297,7 +308,7 @@ public class GenericAddForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane contentScrollPane;
     private javax.swing.JButton deleteButton;
-    private component.EntityHeader entityHeader1;
+    private component.EntityHeader entityHeader;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;

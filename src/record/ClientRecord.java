@@ -8,7 +8,7 @@ package record;
  *
  * @author Edgar
  */
-public class ClientRecord {
+public class ClientRecord extends Record {
     int id;
     String nombre;
     String rfc;

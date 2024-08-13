@@ -7,6 +7,8 @@ package component;
 import card.Card;
 import card_supplier.CardSupplier;
 import card_supplier.UserCardSupplier;
+import form.Form;
+import form.UserForm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -29,10 +31,12 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import java.util.Vector;
+import java.util.function.Supplier;
 import record.Record;
-import util.EntityControlData;
+import util.EntityHeaderData;
 import util.EntityField;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JPanel;
 import util.Pair;
 
 /**
@@ -43,8 +47,8 @@ import util.Pair;
  * <code>
  * GenericQueryFrame queryFrame = new GenericQueryFrame(
  * <br>
- *  utils.EntityControlData.USER,
- * <br>
+  utils.EntityHeaderData.USER,
+ <br>
  *  new UserCardSupplier()
  * <br>
  * );
@@ -56,7 +60,8 @@ import util.Pair;
  */
 public class GenericQueryFrame extends javax.swing.JFrame {
     protected CardSupplier cardSupplier;
-    protected EntityControlData entityControlData;
+    protected EntityHeaderData entityHeaderData;
+    protected Supplier<Form> formSupplier;
     
     
     /**
@@ -64,17 +69,20 @@ public class GenericQueryFrame extends javax.swing.JFrame {
      */
     public GenericQueryFrame() throws ClassNotFoundException, SQLException {
         this(
-                EntityControlData.USER, 
-                new UserCardSupplier(EntityField.of("id", "nombre", "tipo"))
+                EntityHeaderData.USER, 
+                new UserCardSupplier(EntityField.of("id", "nombre", "tipo")),
+                () -> new UserForm()
         );
     }
     
     public GenericQueryFrame(
-            EntityControlData entityControlData, 
-            CardSupplier cardSupplier
+            EntityHeaderData entityControlData, 
+            CardSupplier cardSupplier,
+            Supplier<Form> formSupplier
     ) throws SQLException {
         this.cardSupplier = cardSupplier;
-        this.entityControlData = entityControlData;
+        this.entityHeaderData = entityControlData;
+        this.formSupplier = formSupplier;
         
         initComponents();
         loadCards(true);
@@ -163,6 +171,10 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         );
     }
     
+    protected void populatePanelWithCards(JPanel cardContainer) {
+        
+    }
+    
     protected void loadCards(boolean resetPane) {
         try {
             CardContainer cardContainer = (CardContainer) cardsScrollPane.getViewport().getView();
@@ -204,7 +216,7 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
-        entityHeader1 = new component.EntityHeader(entityControlData);
+        entityHeader1 = new component.EntityHeader(entityHeaderData);
         jPanel2 = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
@@ -223,12 +235,18 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
         cardsScrollPane = new javax.swing.JScrollPane();
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
+        jPanel5 = new javax.swing.JPanel();
+        filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
+        filler12 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
+        addRecordButton = new javax.swing.JButton();
+        reloadButton = new javax.swing.JButton();
+        filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
         jMenuBar1 = new javax.swing.JMenuBar();
         orderByMenu = new javax.swing.JMenu();
         queryLimitMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Consultar " + entityControlData.getExternalName());
+        setTitle("Consultar " + entityHeaderData.getEntityName());
         setResizable(false);
 
         jPanel1.setBackground(util.ProjectColors.WHITE.getColor());
@@ -357,6 +375,7 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         jPanel4.add(filler6, gridBagConstraints);
 
         cardsScrollPane.setBorder(null);
+        cardsScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         cardsScrollPane.setPreferredSize(new java.awt.Dimension(340, 400));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -373,6 +392,57 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         jPanel1.add(filler7, gridBagConstraints);
+
+        jPanel5.setBackground(util.ProjectColors.WHITE.getColor()
+        );
+        jPanel5.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel5.add(filler11, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        jPanel5.add(filler12, gridBagConstraints);
+
+        addRecordButton.setBackground(util.ProjectColors.WHITE.getColor());
+        addRecordButton.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
+        addRecordButton.setForeground(util.ProjectColors.BLACK.getColor()
+        );
+        addRecordButton.setText("Insertar registro");
+        addRecordButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addRecordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addRecordButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        jPanel5.add(addRecordButton, gridBagConstraints);
+
+        reloadButton.setBackground(util.ProjectColors.WHITE.getColor());
+        reloadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/20-autorenew.png"))); // NOI18N
+        reloadButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reloadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reloadButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        jPanel5.add(reloadButton, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel1.add(jPanel5, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        jPanel1.add(filler8, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -401,6 +471,14 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         // do some validation
         cardSupplier.setSearch(Optional.of(new Pair((EntityField) searchComboBox.getSelectedItem(), searchForTextField.getText())));
     }//GEN-LAST:event_searchForTextFieldActionPerformed
+
+    private void addRecordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRecordButtonActionPerformed
+        Card.launchAddForm(formSupplier.get(), entityHeaderData);
+    }//GEN-LAST:event_addRecordButtonActionPerformed
+
+    private void reloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reloadButtonActionPerformed
+        loadCards(true);
+    }//GEN-LAST:event_reloadButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -444,16 +522,20 @@ public class GenericQueryFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addRecordButton;
     private javax.swing.JScrollPane cardsScrollPane;
     private component.EntityHeader entityHeader1;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler10;
+    private javax.swing.Box.Filler filler11;
+    private javax.swing.Box.Filler filler12;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
     private javax.swing.Box.Filler filler5;
     private javax.swing.Box.Filler filler6;
     private javax.swing.Box.Filler filler7;
+    private javax.swing.Box.Filler filler8;
     private javax.swing.Box.Filler filler9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -462,8 +544,10 @@ public class GenericQueryFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JMenu orderByMenu;
     private javax.swing.JMenu queryLimitMenu;
+    private javax.swing.JButton reloadButton;
     private javax.swing.JButton removeSearchButton;
     private javax.swing.JComboBox<EntityField> searchComboBox;
     private javax.swing.JTextField searchForTextField;

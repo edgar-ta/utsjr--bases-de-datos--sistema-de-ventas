@@ -4,9 +4,12 @@
  */
 package controller;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
+import record.Record;
 import util.ConnectionManager;
+import util.DatabaseEntity;
 import util.SmartConnection;
 import util.SmartQuery;
 import util.SmartUpdate;
@@ -22,29 +25,9 @@ import util.UpdateResult;
  * 
  * @author Edgar
  */
-public class SeriabilityController extends Controller {
-    public static enum ValidTable {
-        CATEGORY("categoria"),
-        PRODUCT("producto"),
-        SUPPLIER("proveedor"),
-        CLIENT("cliente"),
-        SALE("venta"), 
-        USER("usuario"),
-        CODE("folio");
-        
-        public String internalName;
-        
-        ValidTable(String internalName) {
-            this.internalName = internalName;
-        }
-        
-        public String getInternalName() {
-            return internalName;
-        }
-    };
-    
-    public static Optional<Integer> getNexIdOfTable(ValidTable table) throws SQLException, ClassNotFoundException, Exception {
-        String internalName = table.getInternalName();
+public class SeriabilityController extends Controller {    
+    public Optional<Integer> getNexIdOfTable(DatabaseEntity table) throws SQLException, ClassNotFoundException, Exception {
+        String internalName = table.getEntityName().getInternalValue();
         
         try (SmartQuery query = ConnectionManager
                 .create("SELECT seriabilidad.cima FROM seriabilidad WHERE seriabilidad.nombre = ?")
@@ -58,16 +41,39 @@ public class SeriabilityController extends Controller {
         }
     }
     
-    public static UpdateChain increaseNextIdOfTable(SmartConnection connection, ValidTable table) throws SQLException {
+    public UpdateChain increaseNextIdOfTable(SmartConnection connection, DatabaseEntity table) throws SQLException {
         return UpdateChain
                 .of(connection, "UPDATE seriabilidad SET seriabilidad.cima = seriabilidad.cima + 1 WHERE seriabilidad.nombre = ?")
-                .setString(1, table.getInternalName())
+                .setString(1, table.getEntityName().getInternalValue())
                 ;
     }
     
-    public static UpdateResult increaseNextIdOfTable(ValidTable table) throws SQLException, ClassNotFoundException, Exception {
+    public UpdateResult increaseNextIdOfTable(DatabaseEntity table) throws SQLException, ClassNotFoundException, Exception {
         try (SmartConnection connection = new SmartConnection()) {
             return increaseNextIdOfTable(connection, table).run().getResult();
         }
+    }
+
+    
+    
+    
+    @Override
+    public DatabaseEntity getDatabaseEntity() {
+        return DatabaseEntity.SERIABILITY;
+    }
+
+    @Override
+    public UpdateChain update(SmartConnection connection, Record record) throws SQLException, ClassNotFoundException, Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public UpdateChain insert(SmartConnection connection, Record record) throws SQLException, ClassNotFoundException, Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Record deserializeRecord(ResultSet query) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

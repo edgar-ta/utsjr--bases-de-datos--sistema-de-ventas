@@ -29,13 +29,29 @@ import util.input_verifier.VerifiableFieldChain;
  * @param <RecordType>
  */
 public abstract class Form<RecordType extends Record> extends JPanel {
+    public enum FormModality {
+        SINGLE_EDITION,
+        MULTIPLE_EDITION,
+        NONE
+        ;
+    };
+    
     protected Optional<RecordType> currentRecord;
     protected Runnable deletionListener = () -> {};
     protected Runnable recordChangeListener = () -> {};
+    protected FormModality modality = FormModality.NONE;
     
     public Form() {
-        super();
+        this(Optional.empty());
     }
+    
+    public Form(Optional<RecordType> currentRecord) {
+        super();
+        initializeComponents();
+        setCurrentRecord(currentRecord);
+    }
+    
+    protected abstract void initializeComponents();
     
     /**
      * Adds listeners to the text fields and combo boxes
@@ -82,6 +98,14 @@ public abstract class Form<RecordType extends Record> extends JPanel {
     }
 
     public void setCurrentRecord(Optional<RecordType> currentRecord) {
+        if (modality == FormModality.NONE) {
+            if (currentRecord.isEmpty()) {
+                modality = FormModality.MULTIPLE_EDITION;
+            } else {
+                modality = FormModality.SINGLE_EDITION;
+            }
+        }
+        
         if (this.currentRecord != currentRecord) {
             this.currentRecord = currentRecord;
             recordChangeListener.run();
@@ -136,7 +160,13 @@ public abstract class Form<RecordType extends Record> extends JPanel {
         
         if (result == UpdateResult.SUCCESS) {
             showSuccessfulActionMessage("insertó", "insertado");
-            setCurrentRecord(Optional.of(record));
+            
+            if (modality == FormModality.MULTIPLE_EDITION) {
+                setCurrentRecord(Optional.empty());
+            } else if (modality == FormModality.SINGLE_EDITION) {
+                setCurrentRecord(Optional.of(record));
+            }
+            
         } else if (result == UpdateResult.FAILURE) {
             showFailedActionMessage("insertar");
         }
@@ -282,4 +312,8 @@ public abstract class Form<RecordType extends Record> extends JPanel {
     public abstract UpdateResult deleteRecord(Integer id) throws SQLException, ClassNotFoundException, Exception;
     public abstract UpdateResult insertRecord(RecordType record) throws SQLException, ClassNotFoundException, Exception;
     public abstract UpdateResult updateRecord(RecordType record) throws SQLException, ClassNotFoundException, Exception;
+
+    public FormModality getModality() {
+        return modality;
+    }
 }

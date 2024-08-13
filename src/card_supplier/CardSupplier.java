@@ -46,14 +46,6 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
     protected int cardBatchLimit;
     protected Optional<StateChangeListener> stateChangeListener;
     
-    @FunctionalInterface
-    public interface StateChangeListener {
-        public void call(
-                Optional<Integer> queryLimit, 
-                Optional<EntityField> orderBy,
-                Optional<Pair<EntityField, String>> search
-        );
-    }
     
     /**
      * This field can only accurately say
@@ -63,7 +55,16 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
     protected boolean isEmpty;
     
     protected SmartConnection smartConnection;
-    protected Optional<ResultSet> resultSet = Optional.empty();
+    protected Optional<ResultSet> query = Optional.empty();
+    
+    @FunctionalInterface
+    public interface StateChangeListener {
+        public void call(
+                Optional<Integer> queryLimit, 
+                Optional<EntityField> orderBy,
+                Optional<Pair<EntityField, String>> search
+        );
+    }
 
     public CardSupplier(
             LinkedList<EntityField> fields, 
@@ -149,11 +150,11 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
     
     public Optional<LinkedList<CardType>> getNextCardBatch() throws SQLException {
         LinkedList<CardType> cards = new LinkedList();
-        if (resultSet.isEmpty()) {
+        if (query.isEmpty()) {
             PreparedStatement preparedStatement = buildPreparedStatement();
-            resultSet = Optional.of(preparedStatement.executeQuery());
+            query = Optional.of(preparedStatement.executeQuery());
         }
-        ResultSet rawResults = resultSet.get();
+        ResultSet rawResults = query.get();
         
         if (!rawResults.next()) { 
             isEmpty = true;
@@ -213,7 +214,7 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
     }
     
     public void onStateChange() {
-        this.resultSet = Optional.empty();
+        this.query = Optional.empty();
         this.isEmpty = false;
         if (this.stateChangeListener.isPresent()) {
             this.stateChangeListener.get().call(queryLimit, orderBy, search);
@@ -226,5 +227,10 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
 
     public void setStateChangeListener(Optional<StateChangeListener> stateChangeListener) {
         this.stateChangeListener = stateChangeListener;
+    }
+    
+    public void resetQuery() {
+        query = Optional.empty();
+        // possibly, call a state change
     }
 }

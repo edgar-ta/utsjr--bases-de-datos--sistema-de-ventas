@@ -5,6 +5,7 @@
 package card_supplier;
 
 import card.UserCard;
+import controller.Controller;
 import controller.UserController;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,13 +31,11 @@ public class UserCardSupplier extends CardSupplier<UserRecord, UserCard> {
 
     @Override
     protected UserRecord buildRecord(ResultSet resultSet) throws SQLException {
-        return UserController.buildUser(resultSet);
+        return Controller.USER_CONTROLLER.deserializeRecord(resultSet);
     }
 
     @Override
     protected UserCard renderRecord(UserRecord record) {
-        UserCard card = new UserCard();
-        card.setCurrentRecord(Optional.of(record));
-        return card;
+        return new UserCard(Optional.of(record));
     }
 }

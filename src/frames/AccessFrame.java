@@ -4,6 +4,7 @@
  */
 package frames;
 
+import controller.Controller;
 import util.ConnectionManager;
 import util.SmartQuery;
 import controller.UserController;
@@ -294,7 +295,7 @@ public class AccessFrame extends javax.swing.JFrame {
             return;
         }
         try {
-            if (UserController.userExists(name)) {
+            if (Controller.USER_CONTROLLER.existsByName(name)) {
                 nameTextField.setEditable(false);
                 passwordField.setEnabled(true);
                 passwordField.requestFocus();
@@ -357,7 +358,7 @@ public class AccessFrame extends javax.swing.JFrame {
         }
 
         try {
-            UserRecord user = UserController.getUserByName(getUsername()).get();
+            UserRecord user = Controller.USER_CONTROLLER.getByName(getUsername()).get();
             Optional<String> savedCipheredPassword = Security.encrypt(user.getContrasenia());
             if (savedCipheredPassword.isEmpty()) {
                 System.out.println("The user's password as stored in the database contains invalid characters");

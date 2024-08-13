@@ -15,6 +15,10 @@ public class DisplayableString extends DisplayableValue<String> {
         super(internalValue, defaultPrettyName);
     }
     
+    public DisplayableString(String internalValue, String defaultPrettyName) {
+        this(internalValue, Optional.of(defaultPrettyName));
+    }
+    
     public DisplayableString(String internalName) {
         this(internalName, Optional.empty());
     }

@@ -5,29 +5,29 @@
 package component;
 
 import javax.swing.ImageIcon;
-import util.EntityControlData;
+import util.EntityHeaderData;
 
 /**
  *
  * @author Edgar
  */
 public class EntityHeader extends javax.swing.JPanel {
-    protected final EntityControlData data;
+    protected final EntityHeaderData data;
     
     
     /**
      * Creates new form EntityHeader
      */
     public EntityHeader() {
-        this(EntityControlData.CATEGORY);
+        this(EntityHeaderData.CATEGORY);
     }
     
-    public EntityHeader(EntityControlData data) {
+    public EntityHeader(EntityHeaderData data) {
         this.data = data;
         
         initComponents();
         
-        nameLabel.setText(data.getExternalName());
+        nameLabel.setText(data.getEntityName());
         iconLabel.setIcon(new ImageIcon(getClass().getResource("/images/" + data.getIconName())));
         banner.setBackground(data.getColor());
     }
