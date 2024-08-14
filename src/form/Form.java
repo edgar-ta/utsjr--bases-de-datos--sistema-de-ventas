@@ -43,17 +43,20 @@ public abstract class Form<RecordType extends Record> extends JPanel {
     protected Runnable recordChangeListener = () -> {};
     protected FormModality modality = FormModality.NONE;
     
-    public Form() {
+    public Form() throws SQLException, ClassNotFoundException, Exception {
         this(Optional.empty());
     }
     
-    public Form(Optional<RecordType> currentRecord) {
+    public Form(Optional<RecordType> currentRecord) throws SQLException, ClassNotFoundException, Exception {
         super();
+        
+        this.currentRecord = currentRecord;
+        
         initializeComponents();
         setCurrentRecord(currentRecord);
     }
     
-    protected abstract void initializeComponents();
+    protected abstract void initializeComponents() throws SQLException, ClassNotFoundException, Exception;
     
     /**
      * Adds listeners to the text fields and combo boxes

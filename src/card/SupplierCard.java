@@ -4,27 +4,26 @@
  */
 package card;
 
+import component.GenericAddFrame;
 import form.Form;
 import form.SupplierForm;
 import java.util.Optional;
 import record.SupplierRecord;
 import util.EntityHeaderData;
+import util.functional.DatabaseErrorProneFunction;
 
 /**
  *
  * @author Edgar
  */
 public class SupplierCard extends Card<SupplierRecord> {
-    
-    public SupplierCard(Optional<SupplierRecord> currentRecord) {
-        super(currentRecord);
-    }
-    
-    /**
-     * Creates new form SupplierCard
-     */
+
     public SupplierCard() {
-        this(Optional.empty());
+        super();
+    }
+
+    public SupplierCard(Optional<SupplierRecord> currentRecord, DatabaseErrorProneFunction<Optional<SupplierRecord>, GenericAddFrame> addFrameFunction) {
+        super(currentRecord, addFrameFunction);
     }
 
     /**
@@ -103,17 +102,7 @@ public class SupplierCard extends Card<SupplierRecord> {
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public EntityHeaderData getEntityHeaderData() {
-        return EntityHeaderData.SUPPLIER;
-    }
-
-    @Override
     public void initializeComponents() {
         initComponents();
-    }
-
-    @Override
-    public Form getForm(Optional<SupplierRecord> currentRecord) {
-        return new SupplierForm(currentRecord);
     }
 }

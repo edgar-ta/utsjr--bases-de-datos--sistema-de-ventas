@@ -4,6 +4,7 @@
  */
 package util;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -15,6 +16,11 @@ import java.util.Optional;
  * @author Edgar
  */
 public class PrimaryKey extends DisplayableValue<Integer> {
+
+    public PrimaryKey(Integer internalValue, String defaultPrettyName) {
+        super(internalValue, defaultPrettyName);
+    } 
+    
     public PrimaryKey(Integer internalValue, Optional<String> defaultPrettyName) {
         super(internalValue, defaultPrettyName);
     }
@@ -22,5 +28,18 @@ public class PrimaryKey extends DisplayableValue<Integer> {
     @Override
     public String getSpareName() {
         return String.valueOf(internalValue);
+    }
+    
+    @Override
+    public String toString() {
+        return getPrettyName();
+    }
+    
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) return true;
+        if (!(other instanceof PrimaryKey)) return false;
+        PrimaryKey key = (PrimaryKey) other;
+        return Objects.equals(this.internalValue, key.getInternalValue());
     }
 }

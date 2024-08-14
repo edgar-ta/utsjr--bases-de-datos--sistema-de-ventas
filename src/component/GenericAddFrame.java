@@ -13,6 +13,8 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import util.functional.DatabaseErrorProneSupplier;
+import record.Record;
 
 /**
  *
@@ -20,18 +22,34 @@ import javax.swing.JFrame;
  */
 public class GenericAddFrame extends javax.swing.JFrame {
     protected final EntityHeaderData data;
-    protected final Form form;
+    protected Form form;
     
     /**
      * Creates new form NewJFrame
      */
-    public GenericAddFrame() {
-        this(EntityHeaderData.USER, new UserForm());
+    public GenericAddFrame() throws SQLException, ClassNotFoundException, Exception {
+        this(EntityHeaderData.USER, () -> new UserForm());
     }
     
-    public GenericAddFrame(EntityHeaderData data, Form form) {
+    public <RecordType extends Record, FormType extends Form<RecordType>> GenericAddFrame(
+            EntityHeaderData data, 
+            DatabaseErrorProneSupplier<FormType> formSupplier
+    ) throws SQLException, ClassNotFoundException, Exception
+    {
         this.data = data;
-        this.form = form;
+        try {
+            this.form = formSupplier.call();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(
+                    this, 
+                    "Un error en la base de datos evitó que se pudiera abrir el editor del registro seleccionado", 
+                    "Editor no abierto", 
+                    JOptionPane.ERROR_MESSAGE
+            );
+            Logger.getLogger(GenericQueryFrame.class.getName()).log(Level.SEVERE, null, ex);
+            dispose();
+            return;
+        }
         
         initComponents();
         
@@ -267,43 +285,6 @@ public class GenericAddFrame extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GenericAddFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GenericAddFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GenericAddFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GenericAddFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GenericAddFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane contentScrollPane;

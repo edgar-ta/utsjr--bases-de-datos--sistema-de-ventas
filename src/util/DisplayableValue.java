@@ -13,6 +13,11 @@ import java.util.Optional;
  */
 public class DisplayableValue<ValueType> extends PrettyPrintable {
     ValueType internalValue;
+
+    public DisplayableValue(ValueType internalValue, String defaultPrettyName) {
+        super(defaultPrettyName);
+        this.internalValue = internalValue;
+    }
     
     public DisplayableValue(ValueType internalValue, Optional<String> defaultPrettyName) {
         super(defaultPrettyName);

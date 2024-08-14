@@ -5,6 +5,7 @@
 package card_supplier;
 
 import card.Card;
+import component.GenericAddFrame;
 import component.GenericQueryFrame;
 import java.util.LinkedList;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import util.Pair;
 import util.SmartConnection;
 import record.Record;
 import util.EntityField;
+import util.functional.DatabaseErrorProneFunction;
 
 
 
@@ -49,7 +51,6 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
     protected int cardBatchLimit;
     protected Optional<ResetListener> resetListener;
     
-    
     /**
      * This field can only accurately say
      * if the supplier is empty; it CAN NOT say
@@ -59,6 +60,8 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
     
     protected SmartConnection smartConnection;
     protected Optional<ResultSet> query = Optional.empty();
+    
+    DatabaseErrorProneFunction<Optional<RecordType>, GenericAddFrame> addFrameFunction;
     
     @FunctionalInterface
     public interface ResetListener {
@@ -74,7 +77,9 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
             Optional<Integer> queryLimit, 
             Optional<EntityField> orderBy, 
             Optional<Pair<EntityField, String>> search,
-            int batchLimit
+            int batchLimit,
+            DatabaseErrorProneFunction<Optional<RecordType>, GenericAddFrame> addFrameFunction
+            
     ) throws ClassNotFoundException, SQLException {
         this.fields = fields;
         this.queryLimit = queryLimit;
@@ -84,19 +89,26 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
         this.isDepleted = false;
         this.smartConnection = new SmartConnection();
         this.resetListener = Optional.empty();
+        this.addFrameFunction = addFrameFunction;
     }
     
     public CardSupplier(
             LinkedList<EntityField> fields, 
             Optional<Integer> queryLimit, 
             Optional<EntityField> orderBy, 
-            Optional<Pair<EntityField, String>> search
+            Optional<Pair<EntityField, String>> search,
+            DatabaseErrorProneFunction<Optional<RecordType>, GenericAddFrame> addFrameFunction
+            
     ) throws ClassNotFoundException, SQLException {
-        this(fields, queryLimit, orderBy, search, 10);
+        this(fields, queryLimit, orderBy, search, 10, addFrameFunction);
     }
     
-    public CardSupplier(LinkedList<EntityField> fields) throws ClassNotFoundException, SQLException {
-        this(fields, Optional.empty(), Optional.empty(), Optional.empty());
+    public CardSupplier(
+            LinkedList<EntityField> fields,
+            DatabaseErrorProneFunction<Optional<RecordType>, GenericAddFrame> addFrameFunction
+            
+    ) throws ClassNotFoundException, SQLException {
+        this(fields, Optional.empty(), Optional.empty(), Optional.empty(), addFrameFunction);
     }
     
     /**

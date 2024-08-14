@@ -4,27 +4,51 @@
  */
 package component;
 
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.Icon;
 
 /**
  *
  * @author Edgar
  */
-public class LabeledTextField extends javax.swing.JPanel {
-    protected String labelText = "";
-    
+public class LabeledText extends javax.swing.JPanel {
+
     /**
-     * Creates new form LabeledTextField
+     * Creates new form LabeledText
      */
-    public LabeledTextField() {
-        this("Label");
+    public LabeledText() {
+        this("Label", "Content", null);
     }
     
-    
-    public LabeledTextField(String labelText) {
+    public LabeledText(String label, String content, Icon icon) {
         initComponents();
-        this.labelElement.setText(labelText);
+        
+        this.labelElement.setText(label);
+        this.contentElement.setText(content);
+        this.labelElement.setIcon(icon);
+    }
+    
+    public Icon getIcon() {
+        return this.labelElement.getIcon();
+    }
+    
+    public void setIcon(Icon icon) {
+        this.labelElement.setIcon(icon);
+    }
+    
+    public String getContent() {
+        return contentElement.getText();
+    }
+    
+    public String getLabel() {
+        return labelElement.getText();
+    }
+    
+    public void setContent(String content) {
+        this.contentElement.setText(content);
+    }
+    
+    public void setLabel(String label) {
+        this.labelElement.setText(label);
     }
 
     /**
@@ -37,14 +61,14 @@ public class LabeledTextField extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        labelElement = new javax.swing.JLabel();
-        textField = new javax.swing.JTextField();
+        labelElement = new typography.TypographyTextRegular();
+        contentElement = new typography.TypographyLabelRegular();
 
-        setBackground(util.ProjectColor.WHITE.getColor());
+        setBackground(util.ProjectColor.WHITE.getColor()
+        );
         setLayout(new java.awt.GridBagLayout());
 
-        labelElement.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
-        labelElement.setText("Etiqueta");
+        labelElement.setText("Label");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -52,33 +76,17 @@ public class LabeledTextField extends javax.swing.JPanel {
         gridBagConstraints.weightx = 1.0;
         add(labelElement, gridBagConstraints);
 
-        textField.setFont(new java.awt.Font("Open Sans Medium", 0, 15)); // NOI18N
+        contentElement.setText("Content");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        add(textField, gridBagConstraints);
+        add(contentElement, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void setLabelText(String labelText) {
-        this.labelText = labelText;
-        this.labelElement.setText(labelText);
-    }
-    
-    public String getLabelText() {
-        return labelText;
-    }
 
-    public JTextField getTextField() {
-        return textField;
-    }
-    
-    public String getText() {
-        return textField.getText();
-    }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel labelElement;
-    private javax.swing.JTextField textField;
+    private typography.TypographyLabelRegular contentElement;
+    private typography.TypographyTextRegular labelElement;
     // End of variables declaration//GEN-END:variables
 }

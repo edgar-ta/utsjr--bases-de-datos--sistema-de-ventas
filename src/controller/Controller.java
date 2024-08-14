@@ -6,6 +6,7 @@ package controller;
 
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.LinkedList;
 import util.SmartConnection;
 import util.UpdateChain;
 import util.UpdateResult;
@@ -13,6 +14,7 @@ import record.Record;
 import util.ConnectionManager;
 import util.DatabaseEntity;
 import util.EntityHeaderData;
+import util.PrimaryKey;
 import util.SmartQuery;
 
 /**
@@ -123,6 +125,39 @@ public abstract class Controller<RecordType extends Record> {
         );
     }
     
+    /**
+     * Gets primary keys that can be used to set the valus of combo boxes in
+     * forms that require interaction with other entities
+     * @param entity
+     * @return 
+     */
+    public static LinkedList<PrimaryKey> getPrimaryKeysForDisplay(DatabaseEntity entity) throws ClassNotFoundException, SQLException, Exception {
+        if (
+                entity == DatabaseEntity.DETAIL || 
+                entity == DatabaseEntity.SALE ||
+                entity == DatabaseEntity.SERIABILITY
+        ) {
+            throw new IllegalArgumentException("There is no agreed upon way to represent the passed entity");
+        }
+        String internalName = entity.getEntityName().getInternalValue();
+        
+        try (SmartQuery query = ConnectionManager
+                .create("SELECT id, nombre FROM " + internalName)
+                .query()
+                ) {
+            LinkedList<PrimaryKey> primaryKeys = new LinkedList<>();
+            while (query.next()) {
+                int internalValue = query.getInt("id");
+                String externalValue = query.getString("nombre");
+                
+                PrimaryKey primaryKey = new PrimaryKey(internalValue, externalValue);
+                primaryKeys.add(primaryKey);
+            }
+            
+            return primaryKeys;
+        }
+    }
+    
     
     
     public UpdateResult update(RecordType record) throws SQLException, ClassNotFoundException, Exception {
@@ -143,6 +178,7 @@ public abstract class Controller<RecordType extends Record> {
     
     public static final UserController USER_CONTROLLER = new UserController();
     public static final SupplierController SUPPLIER_CONTROLLER = new SupplierController();
+    public static final ProductController PRODUCT_CONTROLLER = new ProductController();
     
     public static final SeriabilityController SERIABILITY_CONTROLLER = new SeriabilityController();
 }

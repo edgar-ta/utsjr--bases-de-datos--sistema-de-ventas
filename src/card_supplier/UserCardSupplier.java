@@ -5,6 +5,7 @@
 package card_supplier;
 
 import card.UserCard;
+import component.GenericAddFrame;
 import controller.Controller;
 import controller.UserController;
 import java.sql.ResultSet;
@@ -14,14 +15,15 @@ import java.util.Optional;
 import javax.swing.JPanel;
 import record.UserRecord;
 import util.EntityField;
+import util.functional.DatabaseErrorProneFunction;
 
 /**
  *
  * @author Edgar
  */
 public class UserCardSupplier extends CardSupplier<UserRecord, UserCard> {
-    public UserCardSupplier(LinkedList<EntityField> fields) throws ClassNotFoundException, SQLException {
-        super(fields);
+    public UserCardSupplier(LinkedList<EntityField> fields, DatabaseErrorProneFunction<Optional<UserRecord>, GenericAddFrame> addFrameFunction) throws ClassNotFoundException, SQLException {
+        super(fields, addFrameFunction);
     }
 
     @Override
@@ -36,6 +38,6 @@ public class UserCardSupplier extends CardSupplier<UserRecord, UserCard> {
 
     @Override
     protected UserCard renderRecord(UserRecord record) {
-        return new UserCard(Optional.of(record));
+        return new UserCard(Optional.of(record), addFrameFunction);
     }
 }

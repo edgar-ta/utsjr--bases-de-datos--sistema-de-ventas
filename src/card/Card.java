@@ -6,6 +6,7 @@ package card;
 
 import component.GenericAddFrame;
 import form.Form;
+import form.UserForm;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -18,12 +19,17 @@ import java.awt.GridBagLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.border.Border;
 import record.Record;
 import util.EntityHeaderData;
+import util.functional.DatabaseErrorProneFunction;
+import util.functional.DatabaseErrorProneSupplier;
 
 /**
  *
@@ -33,6 +39,8 @@ import util.EntityHeaderData;
 public abstract class Card<RecordType extends Record> extends JPanel {
     protected Optional<RecordType> currentRecord;
     
+    protected final DatabaseErrorProneFunction<Optional<RecordType>, GenericAddFrame> addFrameFunction;
+    
     public Optional<RecordType> getCurrentRecord() {
         return currentRecord;
     }
@@ -40,11 +48,16 @@ public abstract class Card<RecordType extends Record> extends JPanel {
     protected JPanel contentPane;
     
     public Card() {
-        this(Optional.empty());
+        this(Optional.empty(), null);
     }
     
-    public Card(Optional<RecordType> currentRecord) {
+    public Card(
+            Optional<RecordType> currentRecord, 
+            DatabaseErrorProneFunction<Optional<RecordType>, GenericAddFrame> addFrameFunction
+    ) {
         super(new GridBagLayout());
+        
+        this.addFrameFunction = addFrameFunction;
         
         setupMargins();
         
@@ -65,6 +78,8 @@ public abstract class Card<RecordType extends Record> extends JPanel {
         addAtCoordinates(contentPane, 1, 1, 3, 1.0f, true);
         addAtCoordinates(button, 1, 3, 1, 1.0f, true);
         
+        this.currentRecord = currentRecord;
+        
         initializeComponents();
         
         setCurrentRecord(currentRecord);
@@ -82,16 +97,19 @@ public abstract class Card<RecordType extends Record> extends JPanel {
     public abstract void initializeComponents();
     
     public void seeMore() {
-        launchAddForm(getForm(currentRecord), getEntityHeaderData());
+        launchAddForm(() -> addFrameFunction.call(currentRecord));
     }
     
-    public static <RecordType extends Record>  void launchAddForm(Form<RecordType> form, EntityHeaderData data) {
-        GenericAddFrame addForm = new GenericAddFrame(data, form);
-        addForm.setVisible(true);
+    public static <RecordType extends Record> void launchAddForm(DatabaseErrorProneSupplier<GenericAddFrame> addFrameSupplier) {
+        try {
+            GenericAddFrame frame = addFrameSupplier.call();
+            frame.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Card.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Card.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    public abstract Form getForm(Optional<RecordType> currentRecord);
-    public abstract EntityHeaderData getEntityHeaderData();
     
     @Override
     public void setBackground(Color color) {

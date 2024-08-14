@@ -23,4 +23,9 @@ public abstract class StatementSetChain<K> {
         getPreparedStatement().setInt(index, value);
         return (K) this;
     }
+    
+    public K setDouble(int index, Double value) throws SQLException {
+        getPreparedStatement().setDouble(index, value);
+        return (K) this;
+    }
 }

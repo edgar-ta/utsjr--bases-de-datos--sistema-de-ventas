@@ -12,24 +12,21 @@ import java.util.Optional;
 import javax.swing.JFrame;
 import record.UserRecord;
 import util.EntityHeaderData;
+import util.functional.DatabaseErrorProneFunction;
 
 /**
  *
  * @author Edgar
  */
 public class UserCard extends Card<UserRecord> {
+    public UserCard() {
+        super();
+    }
 
-    /**
-     * Creates new form UserCard
-     */
-    public UserCard(Optional<UserRecord> record) {
-        super(record);
+    public UserCard(Optional<UserRecord> currentRecord, DatabaseErrorProneFunction<Optional<UserRecord>, GenericAddFrame> addFrameFunction) {
+        super(currentRecord, addFrameFunction);
     }
     
-    public UserCard() {
-        this(Optional.empty());
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,17 +75,7 @@ public class UserCard extends Card<UserRecord> {
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public EntityHeaderData getEntityHeaderData() {
-        return EntityHeaderData.USER;
-    }
-
-    @Override
     public void initializeComponents() {
         initComponents();
-    }
-
-    @Override
-    public Form getForm(Optional<UserRecord> currentRecord) {
-        return new UserForm(currentRecord);
     }
 }

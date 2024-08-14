@@ -32,13 +32,11 @@ import util.input_verifier.VerifiableFieldChain;
  * @author Edgar
  */
 public class UserForm extends Form<UserRecord> {
-    Runnable recordChangeListener = () -> {};
-
-    public UserForm() {
+    public UserForm() throws SQLException, ClassNotFoundException, Exception {
         super();
     }
 
-    public UserForm(Optional<UserRecord> currentRecord) {
+    public UserForm(Optional<UserRecord> currentRecord) throws SQLException, ClassNotFoundException, Exception {
         super(currentRecord);
     }
 

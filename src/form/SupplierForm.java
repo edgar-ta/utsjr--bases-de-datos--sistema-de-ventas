@@ -23,11 +23,11 @@ import util.input_verifier.VerifiableFieldChain;
  * @author Edgar
  */
 public class SupplierForm extends Form<SupplierRecord> {
-    public SupplierForm() {
+    public SupplierForm() throws SQLException, ClassNotFoundException, Exception {
         super();
     }
 
-    public SupplierForm(Optional<SupplierRecord> currentRecord) {
+    public SupplierForm(Optional<SupplierRecord> currentRecord) throws SQLException, ClassNotFoundException, Exception {
         super(currentRecord);
     }
 

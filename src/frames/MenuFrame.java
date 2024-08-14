@@ -4,22 +4,35 @@
  */
 package frames;
 
+import card.Card;
 import card_supplier.CardSupplier;
+import card_supplier.ProductCardSupplier;
 import card_supplier.SupplierCardSupplier;
 import card_supplier.UserCardSupplier;
+import component.GenericAddFrame;
 import component.GenericQueryFrame;
 import form.Form;
+import form.ProductForm;
 import form.SupplierForm;
 import form.UserForm;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import record.ProductRecord;
 import util.EntityHeaderData;
 import util.EntityField;
+import util.functional.DatabaseErrorProneSupplier;
+import record.Record;
+import record.SupplierRecord;
+import record.UserRecord;
+import util.functional.DatabaseErrorProneFunction;
+import java.util.Arrays;
 
 /**
  *
@@ -175,6 +188,11 @@ public class MenuFrame extends javax.swing.JFrame {
         productButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-product.png"))); // NOI18N
         productButton.setToolTipText("Producto");
         productButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        productButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -343,10 +361,14 @@ public class MenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_clientButtonActionPerformed
 
     private void userButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userButtonActionPerformed
+        // id, nombre y tipo
         showEntityQueryFrame(
                 EntityHeaderData.USER, 
-                () -> new UserCardSupplier(EntityField.of("id", "nombre", "tipo")),
-                () -> new UserForm()
+                (Optional<UserRecord> value) -> new UserForm(value), 
+                (DatabaseErrorProneSupplier<UserForm> callback) -> 
+                        new GenericAddFrame(EntityHeaderData.USER, callback),
+                (DatabaseErrorProneFunction<Optional<UserRecord>, GenericAddFrame> callback) -> 
+                        new UserCardSupplier(EntityField.of("id", "nombre", "rfc"), callback)
         );
     }//GEN-LAST:event_userButtonActionPerformed
 
@@ -354,28 +376,54 @@ public class MenuFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         showEntityQueryFrame(
                 EntityHeaderData.SUPPLIER, 
-                () -> new SupplierCardSupplier(EntityField.of("id", "nombre", "rfc")),
-                () -> new SupplierForm()
+                (Optional<SupplierRecord> value) -> 
+                        new SupplierForm(value), 
+                (DatabaseErrorProneSupplier<SupplierForm> callback) -> 
+                        new GenericAddFrame(EntityHeaderData.SUPPLIER, callback),
+                (DatabaseErrorProneFunction<Optional<SupplierRecord>, GenericAddFrame> callback) -> 
+                        new SupplierCardSupplier(EntityField.of("id", "nombre", "rfc"), callback)
         );
     }//GEN-LAST:event_supplierButtonActionPerformed
 
-    @FunctionalInterface
-    public interface SQLErrorProneSupplier<K> {
-        public K call() throws SQLException, ClassNotFoundException, Exception;
-    }
+    private void productButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productButtonActionPerformed
+        // new ProductCardSupplier
+        // new ProductForm
+        showEntityQueryFrame(
+                EntityHeaderData.PRODUCT, 
+                (Optional<ProductRecord> value) -> new ProductForm(value), 
+                (DatabaseErrorProneSupplier<ProductForm> callback) -> 
+                        new GenericAddFrame(EntityHeaderData.PRODUCT, callback),
+                (DatabaseErrorProneFunction<Optional<ProductRecord>, GenericAddFrame> callback) -> 
+                        new ProductCardSupplier(new LinkedList<EntityField>(Arrays.asList(
+                                new EntityField("id"),
+                                new EntityField("categoriaId", "Categoría (id)"),
+                                new EntityField("categoriaNombre", "Categoría (nombre)"),
+                                new EntityField("proveedorId", "Proveedor (id)"),
+                                new EntityField("proveedorNombre", "Proveedor (nombre)"),
+                                new EntityField("codigo", "Código"),
+                                new EntityField("precio"),
+                                new EntityField("stock")
+                        )), callback)
+        );
+    }//GEN-LAST:event_productButtonActionPerformed
     
-    protected void showEntityQueryFrame(
-            EntityHeaderData entityControlData, 
-            SQLErrorProneSupplier<CardSupplier> supplierFunction,
-            Supplier<Form> formSupplier
+    protected <
+        RecordType extends Record,
+        CardType extends Card<RecordType>,
+        FormType extends Form<RecordType>
+    > void showEntityQueryFrame(
+            EntityHeaderData entityHeaderData,
+            DatabaseErrorProneFunction<Optional<RecordType>, FormType> formFunction,
+            DatabaseErrorProneFunction<DatabaseErrorProneSupplier<FormType>, GenericAddFrame> addFrameFunctionGenerator,
+            DatabaseErrorProneFunction<DatabaseErrorProneFunction<Optional<RecordType>, GenericAddFrame>, CardSupplier<RecordType, CardType>> cardSupplierFunction
     ) {
         try {
-            GenericQueryFrame frame = new GenericQueryFrame(
-                    entityControlData, 
-                    supplierFunction.call(),
-                    formSupplier
+            GenericQueryFrame<RecordType, CardType, FormType> frame = new GenericQueryFrame(
+                    entityHeaderData,
+                    formFunction,
+                    addFrameFunctionGenerator,
+                    cardSupplierFunction
             );
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(MenuFrame.class.getName()).log(Level.SEVERE, null, ex);

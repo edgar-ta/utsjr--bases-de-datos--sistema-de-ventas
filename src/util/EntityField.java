@@ -22,6 +22,10 @@ public class EntityField extends DisplayableString {
         this(internalName, Optional.empty());
     }
     
+    public EntityField(String internalName, String externalName) {
+        this(internalName, Optional.of(externalName));
+    }
+    
     @Override
     public boolean equals(Object other) {
         if (other == this) return true;

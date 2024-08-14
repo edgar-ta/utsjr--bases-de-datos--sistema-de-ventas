@@ -16,6 +16,10 @@ public abstract class PrettyPrintable {
     public PrettyPrintable(Optional<String> defaultPrettyName) {
         this.defaultPrettyName = defaultPrettyName;
     }
+    
+    public PrettyPrintable(String defaultPrettyName) {
+        this(Optional.of(defaultPrettyName));
+    }
 
     public Optional<String> getDefaultPrettyName() {
         return defaultPrettyName;

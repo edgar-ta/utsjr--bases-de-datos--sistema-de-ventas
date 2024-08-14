@@ -38,6 +38,8 @@ import util.EntityField;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import util.Pair;
+import util.functional.DatabaseErrorProneFunction;
+import util.functional.DatabaseErrorProneSupplier;
 
 /**
  * This class is intended to regularize the interface for adding/editing entities.
@@ -58,31 +60,133 @@ import util.Pair;
  * @author Edgar
  * @see CardSupplier
  */
-public class GenericQueryFrame extends javax.swing.JFrame {
+public class GenericQueryFrame<
+        RecordType extends Record, 
+        CardType extends Card<RecordType>,
+        FormType extends Form<RecordType>
+> extends javax.swing.JFrame {
     protected CardSupplier cardSupplier;
     protected EntityHeaderData entityHeaderData;
-    protected Supplier<Form> formSupplier;
+    
+    protected DatabaseErrorProneSupplier<Form> formSupplier;
+    protected DatabaseErrorProneFunction<Optional<RecordType>, GenericAddFrame> addFrameFunction;
     
     
     /**
      * Creates new form GenericQueryFrame
      */
-    public GenericQueryFrame() throws ClassNotFoundException, SQLException {
+    public GenericQueryFrame() throws SQLException, ClassNotFoundException, Exception {
         this(
-                EntityHeaderData.USER, 
-                new UserCardSupplier(EntityField.of("id", "nombre", "tipo")),
-                () -> new UserForm()
+                EntityHeaderData.USER,
+                (Optional<RecordType> value) -> (FormType) new UserForm(), 
+                (DatabaseErrorProneSupplier<FormType> callback) -> null,
+                (DatabaseErrorProneFunction<Optional<RecordType>, GenericAddFrame> callback) -> null
         );
     }
     
+    
+    
     public GenericQueryFrame(
-            EntityHeaderData entityControlData, 
-            CardSupplier cardSupplier,
-            Supplier<Form> formSupplier
-    ) throws SQLException {
-        this.cardSupplier = cardSupplier;
-        this.entityHeaderData = entityControlData;
-        this.formSupplier = formSupplier;
+            EntityHeaderData entityHeaderData,
+            DatabaseErrorProneFunction<Optional<RecordType>, FormType> formFunction,
+            DatabaseErrorProneFunction<DatabaseErrorProneSupplier<FormType>, GenericAddFrame> addFrameFunctionGenerator,
+            DatabaseErrorProneFunction<DatabaseErrorProneFunction<Optional<RecordType>, GenericAddFrame>, CardSupplier<RecordType, CardType>> cardSupplierFunction
+    ) throws SQLException, ClassNotFoundException, Exception {
+        // f :: Maybe Record -> Form
+
+        // addFrameFunctionGenerator :: (() -> Form) -> GenericAddFrame
+
+        // cardSupplierFunction :: (Maybe Record -> GenericAddFrame) -> CardSupplier
+
+        // addFrameFunction' :: Maybe Record -> GenericAddFrame
+        // addFrameFunction' r = addFrameFunctionGenerator $ () -> f r
+
+        // cardSupplier = cardSupplierFunction addFrameFunction'
+        try {
+            this.addFrameFunction = new DatabaseErrorProneFunction<Optional<RecordType>, GenericAddFrame>() {
+                @Override
+                public GenericAddFrame call(Optional<RecordType> value) throws SQLException, ClassNotFoundException, Exception {
+                    return addFrameFunctionGenerator.call(new DatabaseErrorProneSupplier<FormType>() {
+                        @Override
+                        public FormType call() throws SQLException, ClassNotFoundException, Exception {
+                            return formFunction.call(value);
+                        }
+                    });
+                }
+            };
+            
+            this.cardSupplier = cardSupplierFunction.call(addFrameFunction);
+            
+                    // GenericAddFrame_new :: EntityHeaderData -> (() -> Form)
+                    // CardSupplier_new :: [String] -> (Maybe Record -> GenericAddFrame)
+                    
+                    // Maybe Record -> Form
+                    // (Maybe Record -> Form) -> GenericAddFrame
+                    
+                    // necesito una función que pueda generar formularios a partir de un registro dado, ello
+                    // para que las cartas puedan generar formularios con su registro correspondiente y luego
+                    // crear GenericAddFrames cuando el botón de ver más sea presionado;
+                    // llamemos a esa función f
+                    
+                    // f :: Maybe Record -> Form
+                    
+                    // el formulario de inserción genérico, sin embargo, es un componente sin estado que lo único
+                    // que hace es recibir una función que le dice qué formulario debe recibir; no hace un esfuerzo
+                    // por conocer el registro asociado a ese formulario, de modo que, si se quiere crear un 
+                    // formulario de inserción genérico teniendo formFunction, la solución más obvia es
+                    // crear una lambda con un opcional de registro y pasarle esa lambda al constructor del
+                    // formulario de inserción genérico
+                    
+                    // GenericAddFrame_new :: EntityHeaderData -> (() -> Form)
+                    
+                    // esto es lo que internamente ya hacen las cartas; reciben una función llamada
+                    // form function y le bindean su registro en una lambda para crear un nuevo
+                    // GenericAddFrame
+                    
+                    // frame = GenericAddFrame_new data $ () -> formFunction record
+                    
+                    // sin embargo, este proceso les da un control ligero sobre el tipo de data
+                    // que le pueden pasar al GenericAddFrame, y me gustaría reducir ese control
+                    // por medio de una función que bindee la data y luego tome la lambda
+                    // de la card para generar su GenericAddFrame; esa función podría llamarse
+                    // addFrameFunction
+                    
+                    // addFrameFunction :: (() -> Form) -> GenericAddFrame
+                    // addFrameFunction lambda = GenericAddFrame_new USER_HEADER lambda -- por ejemplo
+                    
+                    // addFrameFunction' :: Maybe Record -> GenericAddFrame
+                    // addFrameFunction' r = GenericAddFrame_new data $ () -> f r
+                    
+                    // CardSupplier_new :: (Maybe Record -> GenericAddFrame) -> CardSupplier
+                    
+                    // cardSupplierFunction :: (Maybe Record -> GenericAddFrame) -> CardSupplier
+                    
+                    // el problema está en que no puedo pasar la addFrameFunction directamente
+                    // a las cards, dado que éstas son creadas por el CardSupplier
+                    
+                    
+                    // f :: Maybe Record -> Form
+                    
+                    // addFrameFunctionGenerator :: (() -> Form) -> GenericAddFrame
+                    
+                    // cardSupplierFunction :: (Maybe Record -> GenericAddFrame) -> CardSupplier
+                    
+                    // addFrameFunction' :: Maybe Record -> GenericAddFrame
+                    // addFrameFunction' r = addFrameFunctionGenerator $ () -> f r
+                    
+                    // cardSupplier = cardSupplierFunction addFrameFunction'
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(
+                    this, 
+                    "Un error en la base de datos seleccionada evitó que se pudiera cargar el panel de consultas seleccionado", 
+                    "Error de base de datos", 
+                    JOptionPane.ERROR_MESSAGE
+            );
+            Logger.getLogger(GenericQueryFrame.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        
+        this.entityHeaderData = entityHeaderData;
         
         initComponents();
         reloadCards();
@@ -103,6 +207,8 @@ public class GenericQueryFrame extends javax.swing.JFrame {
                 reloadCards();
             }
         }));
+        
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
     protected void setupSearchComboBox() {
@@ -508,53 +614,12 @@ public class GenericQueryFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_searchForTextFieldActionPerformed
 
     private void addRecordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRecordButtonActionPerformed
-        Card.launchAddForm(formSupplier.get(), entityHeaderData);
+        Card.launchAddForm(() -> addFrameFunction.call(Optional.empty()));
     }//GEN-LAST:event_addRecordButtonActionPerformed
 
     private void reloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reloadButtonActionPerformed
         cardSupplier.resetQuery();
     }//GEN-LAST:event_reloadButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GenericQueryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GenericQueryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GenericQueryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GenericQueryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new GenericQueryFrame().setVisible(true);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(GenericQueryFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(GenericQueryFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addRecordButton;
