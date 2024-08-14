@@ -6,11 +6,13 @@ package frames;
 
 import card.Card;
 import card_supplier.CardSupplier;
+import card_supplier.CategoryCardSupplier;
 import card_supplier.ProductCardSupplier;
 import card_supplier.SupplierCardSupplier;
 import card_supplier.UserCardSupplier;
 import component.GenericAddFrame;
 import component.GenericQueryFrame;
+import form.CategoryForm;
 import form.Form;
 import form.ProductForm;
 import form.SupplierForm;
@@ -33,6 +35,7 @@ import record.SupplierRecord;
 import record.UserRecord;
 import util.functional.DatabaseErrorProneFunction;
 import java.util.Arrays;
+import record.CategoryRecord;
 
 /**
  *
@@ -350,10 +353,14 @@ public class MenuFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void categoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryButtonActionPerformed
-        // TODO add your handling code here:
-        
-        // should call the creation of a new Generic Query Frame
-        // that's configured to show the category entity information
+        showEntityQueryFrame(
+                EntityHeaderData.CATEGORY, 
+                (Optional<CategoryRecord> value) -> new CategoryForm(value), 
+                (DatabaseErrorProneSupplier<CategoryForm> callback) -> 
+                        new GenericAddFrame(EntityHeaderData.CATEGORY, callback),
+                (DatabaseErrorProneFunction<Optional<CategoryRecord>, GenericAddFrame> callback) -> 
+                        new CategoryCardSupplier(EntityField.of("id", "nombre", "rfc"), callback)
+        );
     }//GEN-LAST:event_categoryButtonActionPerformed
 
     private void clientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientButtonActionPerformed
@@ -386,8 +393,6 @@ public class MenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_supplierButtonActionPerformed
 
     private void productButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productButtonActionPerformed
-        // new ProductCardSupplier
-        // new ProductForm
         showEntityQueryFrame(
                 EntityHeaderData.PRODUCT, 
                 (Optional<ProductRecord> value) -> new ProductForm(value), 

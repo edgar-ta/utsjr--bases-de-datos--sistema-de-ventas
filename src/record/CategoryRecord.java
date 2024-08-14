@@ -11,29 +11,38 @@ package record;
 public class CategoryRecord extends Record {
     int id;
     String nombre;
-    String descripcion;
+    int numeroDeProductos;
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNombre() {
         return nombre;
     }
 
+    public int getNumeroDeProductos() {
+        return numeroDeProductos;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public String getDescripcion() {
-        return descripcion;
+    
+    public void setNumeroDeProductos(int numeroDeProductos) {
+        this.numeroDeProductos = numeroDeProductos;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public CategoryRecord(int id, String nombre, int numeroDeProductos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.numeroDeProductos = numeroDeProductos;
+    }
+
+    public CategoryRecord() {
     }
 }
