@@ -141,12 +141,18 @@ public abstract class Controller<RecordType extends Record> {
         }
         String internalName = entity.getEntityName().getInternalValue();
         
+        System.out.println("SELECT id, nombre FROM " + internalName);
+        
         try (SmartQuery query = ConnectionManager
-                .create("SELECT id, nombre FROM " + internalName)
+                .create("SELECT * FROM " + internalName + " WHERE 1 = 1;")
                 .query()
                 ) {
+            System.out.println("here 1");
+            
             LinkedList<PrimaryKey> primaryKeys = new LinkedList<>();
             while (query.next()) {
+                System.out.println("here 2");
+                
                 int internalValue = query.getInt("id");
                 String externalValue = query.getString("nombre");
                 
@@ -180,6 +186,7 @@ public abstract class Controller<RecordType extends Record> {
     public static final SupplierController SUPPLIER_CONTROLLER = new SupplierController();
     public static final ProductController PRODUCT_CONTROLLER = new ProductController();
     public static final CategoryController CATEGORY_CONTROLLER = new CategoryController();
+    public static final SaleController SALE_CONTROLLER = new SaleController();
     
     public static final SeriabilityController SERIABILITY_CONTROLLER = new SeriabilityController();
 }

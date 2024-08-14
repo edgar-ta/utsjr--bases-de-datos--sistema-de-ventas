@@ -4,7 +4,8 @@
  */
 package record;
 
-import java.util.Date;
+import java.sql.Date;
+import util.PrimaryKey;
 
 /**
  *
@@ -12,13 +13,25 @@ import java.util.Date;
  */
 public class SaleRecord extends Record {
     int id;
-    int cliente;
+    int cantidadDeProducto;
+    
+    PrimaryKey cliente;
+    PrimaryKey producto;
+    
     int folio;
     Date fecha;
-    
-    double total;
-    double subtotal;
-    double iva;
+
+    public SaleRecord(int id, int cantidadDeProducto, PrimaryKey cliente, PrimaryKey producto, int folio, Date fecha) {
+        this.id = id;
+        this.cantidadDeProducto = cantidadDeProducto;
+        this.cliente = cliente;
+        this.producto = producto;
+        this.folio = folio;
+        this.fecha = fecha;
+    }
+
+    public SaleRecord() {
+    }
 
     public int getId() {
         return id;
@@ -28,12 +41,28 @@ public class SaleRecord extends Record {
         this.id = id;
     }
 
-    public int getCliente() {
+    public int getCantidadDeProducto() {
+        return cantidadDeProducto;
+    }
+
+    public void setCantidadDeProducto(int cantidadDeProducto) {
+        this.cantidadDeProducto = cantidadDeProducto;
+    }
+
+    public PrimaryKey getCliente() {
         return cliente;
     }
 
-    public void setCliente(int cliente) {
+    public void setCliente(PrimaryKey cliente) {
         this.cliente = cliente;
+    }
+
+    public PrimaryKey getProducto() {
+        return producto;
+    }
+
+    public void setProducto(PrimaryKey producto) {
+        this.producto = producto;
     }
 
     public int getFolio() {
@@ -51,30 +80,5 @@ public class SaleRecord extends Record {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
-    public double getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
-    }
-
-    public double getIva() {
-        return iva;
-    }
-
-    public void setIva(double iva) {
-        this.iva = iva;
-    }
-    
     
 }

@@ -6,6 +6,7 @@ package util;
 
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.sql.Date;
 
 /**
  *
@@ -26,6 +27,11 @@ public abstract class StatementSetChain<K> {
     
     public K setDouble(int index, Double value) throws SQLException {
         getPreparedStatement().setDouble(index, value);
+        return (K) this;
+    }
+    
+    public K setDate(int index, Date value) throws SQLException {
+        getPreparedStatement().setDate(index, value);
         return (K) this;
     }
 }

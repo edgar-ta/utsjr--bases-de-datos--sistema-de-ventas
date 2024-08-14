@@ -8,6 +8,7 @@ import card.Card;
 import card_supplier.CardSupplier;
 import card_supplier.CategoryCardSupplier;
 import card_supplier.ProductCardSupplier;
+import card_supplier.SaleCardSupplier;
 import card_supplier.SupplierCardSupplier;
 import card_supplier.UserCardSupplier;
 import component.GenericAddFrame;
@@ -15,6 +16,7 @@ import component.GenericQueryFrame;
 import form.CategoryForm;
 import form.Form;
 import form.ProductForm;
+import form.SaleForm;
 import form.SupplierForm;
 import form.UserForm;
 import java.sql.SQLException;
@@ -36,6 +38,7 @@ import record.UserRecord;
 import util.functional.DatabaseErrorProneFunction;
 import java.util.Arrays;
 import record.CategoryRecord;
+import record.SaleRecord;
 
 /**
  *
@@ -255,6 +258,11 @@ public class MenuFrame extends javax.swing.JFrame {
         saleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-sale.png"))); // NOI18N
         saleButton.setToolTipText("Venta");
         saleButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        saleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saleButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -411,6 +419,18 @@ public class MenuFrame extends javax.swing.JFrame {
                         )), callback)
         );
     }//GEN-LAST:event_productButtonActionPerformed
+
+    private void saleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleButtonActionPerformed
+        showEntityQueryFrame(
+                EntityHeaderData.SALE, 
+                (Optional<SaleRecord> value) -> 
+                        new SaleForm(value), 
+                (DatabaseErrorProneSupplier<SaleForm> callback) -> 
+                        new GenericAddFrame(EntityHeaderData.SALE, callback),
+                (DatabaseErrorProneFunction<Optional<SaleRecord>, GenericAddFrame> callback) -> 
+                        new SaleCardSupplier(EntityField.of("id", "nombre", "rfc"), callback)
+        );
+    }//GEN-LAST:event_saleButtonActionPerformed
     
     protected <
         RecordType extends Record,
