@@ -5,6 +5,7 @@
 package card_supplier;
 
 import card.Card;
+import component.GenericQueryFrame;
 import java.util.LinkedList;
 import java.util.Optional;
 import javax.swing.JPanel;
@@ -14,6 +15,8 @@ import java.sql.PreparedStatement;
 import java.util.Vector;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import util.Pair;
 import util.SmartConnection;
 import record.Record;
@@ -44,7 +47,7 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
     protected Optional<Pair<EntityField, String>> search;
     
     protected int cardBatchLimit;
-    protected Optional<StateChangeListener> stateChangeListener;
+    protected Optional<ResetListener> resetListener;
     
     
     /**
@@ -52,13 +55,13 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
      * if the supplier is empty; it CAN NOT say
      * whether it is populated or not
      */
-    protected boolean isEmpty;
+    protected boolean isDepleted;
     
     protected SmartConnection smartConnection;
     protected Optional<ResultSet> query = Optional.empty();
     
     @FunctionalInterface
-    public interface StateChangeListener {
+    public interface ResetListener {
         public void call(
                 Optional<Integer> queryLimit, 
                 Optional<EntityField> orderBy,
@@ -78,9 +81,9 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
         this.orderBy = orderBy;
         this.search = search;
         this.cardBatchLimit = batchLimit;
-        this.isEmpty = false;
+        this.isDepleted = false;
         this.smartConnection = new SmartConnection();
-        this.stateChangeListener = Optional.empty();
+        this.resetListener = Optional.empty();
     }
     
     public CardSupplier(
@@ -129,6 +132,7 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
             queryString += " LIMIT ?";
         }
         
+        
         PreparedStatement statement = smartConnection
                 .getRawConnection()
                 .prepareStatement(queryString);
@@ -150,28 +154,31 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
     
     public Optional<LinkedList<CardType>> getNextCardBatch() throws SQLException {
         LinkedList<CardType> cards = new LinkedList();
+        
         if (query.isEmpty()) {
             PreparedStatement preparedStatement = buildPreparedStatement();
-            query = Optional.of(preparedStatement.executeQuery());
+            query = Optional.of(preparedStatement.executeQuery());    
+        } else if (isDepleted)  {
+            return Optional.empty();
         }
-        ResultSet rawResults = query.get();
         
-        if (!rawResults.next()) { 
-            isEmpty = true;
-            return Optional.empty(); 
-        }
+        ResultSet rawQuery = query.get();
         
         int cardsInBatch = 0;
-        do {
-            RecordType registry = buildRecord(rawResults);
-            CardType card = renderRecord(registry);
+        while (rawQuery.next()) {
+            RecordType record = buildRecord(rawQuery);
+            CardType card = renderRecord(record);
             cards.add(card);
             cardsInBatch++;
-            if (!rawResults.next()) {
-                isEmpty = true;
+            if (cardsInBatch >= cardBatchLimit) {
                 break;
             }
-        } while (cardsInBatch <= cardBatchLimit);
+        }
+        
+        if (cardsInBatch == 0) {
+            isDepleted = true;
+            return Optional.empty();
+        }
         
         return Optional.of(cards);
     }
@@ -196,41 +203,50 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
         if (this.queryLimit == queryLimit) return;
         
         this.queryLimit = queryLimit;
-        this.onStateChange();
+        this.resetQuery();
     }
 
     public void setOrderBy(Optional<EntityField> orderBy) {
         if (this.orderBy == orderBy) return;
         
         this.orderBy = orderBy;
-        this.onStateChange();
+        this.resetQuery();
     }
 
     public void setSearch(Optional<Pair<EntityField, String>> search) {
         if (this.search == search) return;
         
         this.search = search;
-        this.onStateChange();
-    }
-    
-    public void onStateChange() {
-        this.query = Optional.empty();
-        this.isEmpty = false;
-        if (this.stateChangeListener.isPresent()) {
-            this.stateChangeListener.get().call(queryLimit, orderBy, search);
-        }
-    }
-
-    public boolean isEmpty() {
-        return isEmpty;
-    }
-
-    public void setStateChangeListener(Optional<StateChangeListener> stateChangeListener) {
-        this.stateChangeListener = stateChangeListener;
+        this.resetQuery();
     }
     
     public void resetQuery() {
-        query = Optional.empty();
-        // possibly, call a state change
+        try {
+            if (this.query.isPresent()) {
+                this.query.get().close();
+                this.query = Optional.empty();
+                this.smartConnection.close();
+            }
+            
+            this.smartConnection = new SmartConnection();
+            
+            this.isDepleted = false;
+            if (this.resetListener.isPresent()) {
+                this.resetListener.get().call(queryLimit, orderBy, search);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Couldn't reset the query");
+            Logger.getLogger(GenericQueryFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(CardSupplier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public boolean isDepleted() {
+        return isDepleted;
+    }
+
+    public void setResetListener(Optional<ResetListener> resetListener) {
+        this.resetListener = resetListener;
     }
 }

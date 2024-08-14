@@ -89,7 +89,7 @@ public class LabeledPasswordField extends javax.swing.JPanel {
         passwordField = new javax.swing.JPasswordField();
         toggleVisbilityButton = new javax.swing.JButton();
 
-        setBackground(util.ProjectColors.WHITE.getColor());
+        setBackground(util.ProjectColor.WHITE.getColor());
         setLayout(new java.awt.GridBagLayout());
 
         labelElement.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
@@ -109,7 +109,7 @@ public class LabeledPasswordField extends javax.swing.JPanel {
         gridBagConstraints.weightx = 1.0;
         add(passwordField, gridBagConstraints);
 
-        toggleVisbilityButton.setBackground(util.ProjectColors.WHITE.getColor()
+        toggleVisbilityButton.setBackground(util.ProjectColor.WHITE.getColor()
         );
         toggleVisbilityButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/20-visibility.png"))); // NOI18N
         toggleVisbilityButton.setToolTipText("Hacer visible");

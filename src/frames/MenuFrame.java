@@ -49,9 +49,9 @@ public class MenuFrame extends javax.swing.JFrame {
         filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
         jPanel4 = new javax.swing.JPanel();
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
-        jLabel1 = new javax.swing.JLabel();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
-        jLabel8 = new javax.swing.JLabel();
+        headingRegular = new typography.TypographyHeadingRegular();
+        textRegular = new typography.TypographyTextRegular();
         jSeparator1 = new javax.swing.JSeparator();
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
         jPanel2 = new javax.swing.JPanel();
@@ -59,61 +59,59 @@ public class MenuFrame extends javax.swing.JFrame {
         clientButton = new javax.swing.JButton();
         productButton = new javax.swing.JButton();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
+        typographyLabelRegular4 = new typography.TypographyLabelRegular();
+        typographyLabelRegular5 = new typography.TypographyLabelRegular();
+        typographyLabelRegular6 = new typography.TypographyLabelRegular();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
         jPanel3 = new javax.swing.JPanel();
         saleButton = new javax.swing.JButton();
         supplierButton = new javax.swing.JButton();
         userButton = new javax.swing.JButton();
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
+        typographyLabelRegular1 = new typography.TypographyLabelRegular();
+        typographyLabelRegular2 = new typography.TypographyLabelRegular();
+        typographyLabelRegular3 = new typography.TypographyLabelRegular();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menú de inicio");
 
-        jPanel1.setBackground(util.ProjectColors.WHITE.getColor());
+        jPanel1.setBackground(util.ProjectColor.WHITE.getColor());
         jPanel1.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         jPanel1.add(filler11, gridBagConstraints);
 
-        jPanel4.setBackground(util.ProjectColors.WHITE.getColor());
+        jPanel4.setBackground(util.ProjectColor.WHITE.getColor());
         jPanel4.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         jPanel4.add(filler9, gridBagConstraints);
-
-        jLabel1.setBackground(new java.awt.Color(248, 250, 252));
-        jLabel1.setFont(new java.awt.Font("Inter 28pt ExtraBold", 0, 36)); // NOI18N
-        jLabel1.setForeground(util.ProjectColors.BLACK.getColor());
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("¡Bienvenido de vuelta!");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        jPanel4.add(jLabel1, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         jPanel4.add(filler10, gridBagConstraints);
 
-        jLabel8.setFont(new java.awt.Font("Open Sans Medium", 0, 15)); // NOI18N
-        jLabel8.setForeground(util.ProjectColors.BLACK.getColor());
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Selecciona una de las siguientes categorías para empezar a explorar");
+        headingRegular.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        headingRegular.setText("¡Bienvenido de vuelta!");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel4.add(jLabel8, gridBagConstraints);
+        gridBagConstraints.weightx = 1.0;
+        jPanel4.add(headingRegular, gridBagConstraints);
+
+        textRegular.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        textRegular.setText("Selecciona una de las siguientes categorías para empezar a explorar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        jPanel4.add(textRegular, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -128,10 +126,10 @@ public class MenuFrame extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         jPanel1.add(filler8, gridBagConstraints);
 
-        jPanel2.setBackground(util.ProjectColors.WHITE.getColor());
+        jPanel2.setBackground(util.ProjectColor.WHITE.getColor());
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        categoryButton.setBackground(util.ProjectColors.WHITE.getColor());
+        categoryButton.setBackground(util.ProjectColor.WHITE.getColor());
         categoryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-category.png"))); // NOI18N
         categoryButton.setToolTipText("Categoría");
         categoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -151,7 +149,7 @@ public class MenuFrame extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         jPanel2.add(categoryButton, gridBagConstraints);
 
-        clientButton.setBackground(util.ProjectColors.WHITE.getColor());
+        clientButton.setBackground(util.ProjectColor.WHITE.getColor());
         clientButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         clientButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-client.png"))); // NOI18N
         clientButton.setToolTipText("Cliente");
@@ -173,7 +171,7 @@ public class MenuFrame extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         jPanel2.add(clientButton, gridBagConstraints);
 
-        productButton.setBackground(util.ProjectColors.WHITE.getColor());
+        productButton.setBackground(util.ProjectColor.WHITE.getColor());
         productButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-product.png"))); // NOI18N
         productButton.setToolTipText("Producto");
         productButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -190,34 +188,34 @@ public class MenuFrame extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         jPanel2.add(filler3, gridBagConstraints);
-
-        jLabel2.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
-        jLabel2.setForeground(util.ProjectColors.BLACK.getColor());
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Categoría");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel2.add(jLabel2, gridBagConstraints);
-
-        jLabel3.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
-        jLabel3.setForeground(util.ProjectColors.BLACK.getColor());
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Cliente");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel2.add(jLabel3, gridBagConstraints);
-
-        jLabel4.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
-        jLabel4.setForeground(util.ProjectColors.BLACK.getColor());
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Producto");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel2.add(jLabel4, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         jPanel2.add(filler2, gridBagConstraints);
+
+        typographyLabelRegular4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        typographyLabelRegular4.setText("Categoría");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel2.add(typographyLabelRegular4, gridBagConstraints);
+
+        typographyLabelRegular5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        typographyLabelRegular5.setText("Cliente");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel2.add(typographyLabelRegular5, gridBagConstraints);
+
+        typographyLabelRegular6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        typographyLabelRegular6.setText("Producto");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel2.add(typographyLabelRegular6, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -229,10 +227,10 @@ public class MenuFrame extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         jPanel1.add(filler4, gridBagConstraints);
 
-        jPanel3.setBackground(util.ProjectColors.WHITE.getColor());
+        jPanel3.setBackground(util.ProjectColor.WHITE.getColor());
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
-        saleButton.setBackground(util.ProjectColors.WHITE.getColor());
+        saleButton.setBackground(util.ProjectColor.WHITE.getColor());
         saleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-sale.png"))); // NOI18N
         saleButton.setToolTipText("Venta");
         saleButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -247,7 +245,7 @@ public class MenuFrame extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         jPanel3.add(saleButton, gridBagConstraints);
 
-        supplierButton.setBackground(util.ProjectColors.WHITE.getColor());
+        supplierButton.setBackground(util.ProjectColor.WHITE.getColor());
         supplierButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-supplier.png"))); // NOI18N
         supplierButton.setToolTipText("Proveedor");
         supplierButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -268,7 +266,7 @@ public class MenuFrame extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         jPanel3.add(supplierButton, gridBagConstraints);
 
-        userButton.setBackground(util.ProjectColors.WHITE.getColor());
+        userButton.setBackground(util.ProjectColor.WHITE.getColor());
         userButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-user.png"))); // NOI18N
         userButton.setToolTipText("Usuario");
         userButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -289,34 +287,34 @@ public class MenuFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 0;
         jPanel3.add(filler6, gridBagConstraints);
-
-        jLabel5.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
-        jLabel5.setForeground(util.ProjectColors.BLACK.getColor());
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Venta");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel3.add(jLabel5, gridBagConstraints);
-
-        jLabel6.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
-        jLabel6.setForeground(util.ProjectColors.BLACK.getColor());
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Proveedor");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel3.add(jLabel6, gridBagConstraints);
-
-        jLabel7.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
-        jLabel7.setForeground(util.ProjectColors.BLACK.getColor());
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Usuario");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel3.add(jLabel7, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         jPanel3.add(filler7, gridBagConstraints);
+
+        typographyLabelRegular1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        typographyLabelRegular1.setText("Venta");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel3.add(typographyLabelRegular1, gridBagConstraints);
+
+        typographyLabelRegular2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        typographyLabelRegular2.setText("Proveedor");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel3.add(typographyLabelRegular2, gridBagConstraints);
+
+        typographyLabelRegular3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        typographyLabelRegular3.setText("Usuario");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel3.add(typographyLabelRegular3, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -464,14 +462,7 @@ public class MenuFrame extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler7;
     private javax.swing.Box.Filler filler8;
     private javax.swing.Box.Filler filler9;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private typography.TypographyHeadingRegular headingRegular;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -480,6 +471,13 @@ public class MenuFrame extends javax.swing.JFrame {
     public javax.swing.JButton productButton;
     public javax.swing.JButton saleButton;
     public javax.swing.JButton supplierButton;
+    private typography.TypographyTextRegular textRegular;
+    private typography.TypographyLabelRegular typographyLabelRegular1;
+    private typography.TypographyLabelRegular typographyLabelRegular2;
+    private typography.TypographyLabelRegular typographyLabelRegular3;
+    private typography.TypographyLabelRegular typographyLabelRegular4;
+    private typography.TypographyLabelRegular typographyLabelRegular5;
+    private typography.TypographyLabelRegular typographyLabelRegular6;
     public javax.swing.JButton userButton;
     // End of variables declaration//GEN-END:variables
 }

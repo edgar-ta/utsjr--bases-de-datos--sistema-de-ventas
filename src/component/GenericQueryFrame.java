@@ -85,12 +85,12 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         this.formSupplier = formSupplier;
         
         initComponents();
-        loadCards(true);
-        setQueryLimitMenu();
+        reloadCards();
+        setupQueryLimitMenu();
         setupOrderByMenu();
         setupSearchComboBox();
         
-        cardSupplier.setStateChangeListener(Optional.of(new CardSupplier.StateChangeListener() {
+        cardSupplier.setResetListener(Optional.of(new CardSupplier.ResetListener() {
             @Override
             public void call(Optional<Integer> queryLimit, Optional<EntityField> orderBy, Optional<Pair<EntityField, String>> search) {
                 if (search.isPresent()) {
@@ -100,7 +100,7 @@ public class GenericQueryFrame extends javax.swing.JFrame {
                     removeSearchButton.setEnabled(false);
                     searchForTextField.setText("");
                 }
-                loadCards(true);
+                reloadCards();
             }
         }));
     }
@@ -161,7 +161,7 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         );
     }
     
-    protected void setQueryLimitMenu() {
+    protected void setupQueryLimitMenu() {
         setupMenu(
                 queryLimitMenu,
                 6,
@@ -171,34 +171,68 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         );
     }
     
-    protected void populatePanelWithCards(JPanel cardContainer) {
-        
+    protected void addSeparatorToContainer(CardContainer cardContainer) {
+        javax.swing.Box.Filler filler = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
+        cardContainer.addComponent(filler);
     }
     
-    protected void loadCards(boolean resetPane) {
+    protected void removeSeparatorFromContainer(CardContainer cardContainer) {
+        JPanel contentPane = cardContainer.getContentPane();
+        int lastIndex = contentPane.getComponentCount() - 1;
+        contentPane.remove(lastIndex);
+    }
+    
+    protected void populateContainerWithCards(CardContainer cardContainer) throws SQLException {
+        Optional<LinkedList<Card<Record>>> cards;
+        cards = cardSupplier.getNextCardBatch();
+        
+        if (cards.isPresent()) {
+            LinkedList<Card<Record>> cardsList = cards.get();
+            
+            for (int i = 0; i < cardsList.size(); i++) {
+                Card<Record> card = cardsList.get(i);
+                if (i != 0) {
+                    addSeparatorToContainer(cardContainer);
+                }
+                cardContainer.addComponent(card);
+            }
+        }
+        cardContainer.getLoadMoreButton().setEnabled(!cardSupplier.isDepleted());
+    }
+    
+    protected CardContainer createCardContainer() {
+        CardContainer cardContainer = new CardContainer();
+        cardContainer.getLoadMoreButton().addActionListener((ActionEvent e) -> {
+            loadMoreCards();
+        });
+        return cardContainer;
+    }
+    
+    protected void loadMoreCards() {
         try {
             CardContainer cardContainer = (CardContainer) cardsScrollPane.getViewport().getView();
-            if (resetPane) {
-                cardContainer = new CardContainer();
+            if (!cardSupplier.isDepleted()) {
+                addSeparatorToContainer(cardContainer);
             }
+            populateContainerWithCards(cardContainer);
+            cardsScrollPane.repaint();
+            cardContainer.repaint();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Un error en la base de datos evitó que se cargaran más registros", "No se pueden cargar más registros", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(GenericQueryFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    protected void reloadCards() {
+        try {
+            CardContainer cardContainer = createCardContainer();
+            populateContainerWithCards(cardContainer);
+            cardsScrollPane.setViewportView(cardContainer);
             
-            Optional<LinkedList<Card<Record>>> cards = cardSupplier.getNextCardBatch();
-            if (cards.isPresent()) {
-                LinkedList<Card<Record>> cardsList = cards.get();
-                for (int i = 0; i < cardsList.size(); i++) {
-                    Card<Record> card = cardsList.get(i);
-                    if (i != 0) {
-                        javax.swing.Box.Filler filler = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
-                        cardContainer.addComponent(filler);
-                    }
-                    cardContainer.addComponent(card);
-                }
-            }
-            if (resetPane) {
-                cardsScrollPane.setViewportView(cardContainer);
-                cardsScrollPane.repaint();
-            }
-            cardContainer.getLoadMoreButton().setEnabled(!cardSupplier.isEmpty());
+            cardsScrollPane.repaint();
+            
+            cardContainer.revalidate();
+            cardContainer.repaint();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Un error en la base de datos evitó que se cargaran más registros", "No se pueden cargar más registros", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(GenericQueryFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -249,13 +283,13 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         setTitle("Consultar " + entityHeaderData.getEntityName());
         setResizable(false);
 
-        jPanel1.setBackground(util.ProjectColors.WHITE.getColor());
+        jPanel1.setBackground(util.ProjectColor.WHITE.getColor());
         jPanel1.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         jPanel1.add(entityHeader1, gridBagConstraints);
 
-        jPanel2.setBackground(util.ProjectColors.WHITE.getColor()
+        jPanel2.setBackground(util.ProjectColor.WHITE.getColor()
         );
         jPanel2.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -284,7 +318,7 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel1.add(jPanel2, gridBagConstraints);
 
-        jPanel3.setBackground(util.ProjectColors.WHITE.getColor());
+        jPanel3.setBackground(util.ProjectColor.WHITE.getColor());
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
         jLabel2.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
@@ -302,7 +336,7 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         jPanel3.add(filler4, gridBagConstraints);
 
-        searchComboBox.setBackground(util.ProjectColors.WHITE.getColor());
+        searchComboBox.setBackground(util.ProjectColor.WHITE.getColor());
         searchComboBox.setFont(new java.awt.Font("Open Sans Medium", 0, 15)); // NOI18N
         searchComboBox.setModel(new DefaultComboBoxModel<EntityField>(new Vector<EntityField>(cardSupplier.getFields())));
         searchComboBox.setSelectedIndex(-1);
@@ -319,7 +353,7 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         jPanel3.add(searchComboBox, gridBagConstraints);
 
-        searchForTextField.setBackground(util.ProjectColors.WHITE.getColor());
+        searchForTextField.setBackground(util.ProjectColor.WHITE.getColor());
         searchForTextField.setFont(new java.awt.Font("Open Sans Medium", 0, 15)); // NOI18N
         searchForTextField.setEnabled(false);
         searchForTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -334,7 +368,7 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         gridBagConstraints.weightx = 1.0;
         jPanel3.add(searchForTextField, gridBagConstraints);
 
-        removeSearchButton.setBackground(util.ProjectColors.WHITE.getColor());
+        removeSearchButton.setBackground(util.ProjectColor.WHITE.getColor());
         removeSearchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/20-exit.png"))); // NOI18N
         removeSearchButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         removeSearchButton.setEnabled(false);
@@ -358,7 +392,7 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         jPanel1.add(filler10, gridBagConstraints);
 
-        jPanel4.setBackground(util.ProjectColors.WHITE.getColor()
+        jPanel4.setBackground(util.ProjectColor.WHITE.getColor()
         );
         jPanel4.setMinimumSize(new java.awt.Dimension(76, 200));
         jPanel4.setPreferredSize(new java.awt.Dimension(400, 200));
@@ -393,7 +427,7 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         jPanel1.add(filler7, gridBagConstraints);
 
-        jPanel5.setBackground(util.ProjectColors.WHITE.getColor()
+        jPanel5.setBackground(util.ProjectColor.WHITE.getColor()
         );
         jPanel5.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -405,9 +439,9 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         jPanel5.add(filler12, gridBagConstraints);
 
-        addRecordButton.setBackground(util.ProjectColors.WHITE.getColor());
+        addRecordButton.setBackground(util.ProjectColor.WHITE.getColor());
         addRecordButton.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
-        addRecordButton.setForeground(util.ProjectColors.BLACK.getColor()
+        addRecordButton.setForeground(util.ProjectColor.BLACK.getColor()
         );
         addRecordButton.setText("Insertar registro");
         addRecordButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -423,8 +457,9 @@ public class GenericQueryFrame extends javax.swing.JFrame {
         gridBagConstraints.weightx = 1.0;
         jPanel5.add(addRecordButton, gridBagConstraints);
 
-        reloadButton.setBackground(util.ProjectColors.WHITE.getColor());
+        reloadButton.setBackground(util.ProjectColor.WHITE.getColor());
         reloadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/20-autorenew.png"))); // NOI18N
+        reloadButton.setToolTipText("Refrescar registros");
         reloadButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         reloadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -446,11 +481,11 @@ public class GenericQueryFrame extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        orderByMenu.setBackground(util.ProjectColors.WHITE.getColor());
+        orderByMenu.setBackground(util.ProjectColor.WHITE.getColor());
         orderByMenu.setText("Ordenar por");
         jMenuBar1.add(orderByMenu);
 
-        queryLimitMenu.setBackground(util.ProjectColors.WHITE.getColor());
+        queryLimitMenu.setBackground(util.ProjectColor.WHITE.getColor());
         queryLimitMenu.setText("Límite");
         jMenuBar1.add(queryLimitMenu);
 
@@ -477,7 +512,7 @@ public class GenericQueryFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_addRecordButtonActionPerformed
 
     private void reloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reloadButtonActionPerformed
-        loadCards(true);
+        cardSupplier.resetQuery();
     }//GEN-LAST:event_reloadButtonActionPerformed
 
     /**

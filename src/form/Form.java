@@ -19,6 +19,8 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import record.Record;
 import util.UpdateResult;
 import util.input_verifier.VerifiableFieldChain;
@@ -71,11 +73,19 @@ public abstract class Form<RecordType extends Record> extends JPanel {
      */
     public void addEditionListener(Runnable callback) {
         getTextFields().forEach((JTextField field) -> {
-            field.addKeyListener(new KeyAdapter() {
+            field.getDocument().addDocumentListener(new DocumentListener() {
                 @Override
-                public void keyTyped(KeyEvent e) {
+                public void insertUpdate(DocumentEvent e) {
                     callback.run();
                 }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    callback.run();
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {}
             });
         });
         getComboBoxes().forEach((JComboBox comboBox) -> {

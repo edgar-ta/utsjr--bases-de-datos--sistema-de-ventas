@@ -55,7 +55,6 @@ public class AccessFrame extends javax.swing.JFrame {
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
         filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
         filler12 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         filler16 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
@@ -68,13 +67,14 @@ public class AccessFrame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         loginButton = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
+        typographyHeadingRegular1 = new typography.TypographyHeadingRegular();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Acceso");
         setPreferredSize(new java.awt.Dimension(400, 409));
         setResizable(false);
 
-        jPanel1.setBackground(util.ProjectColors.WHITE.getColor());
+        jPanel1.setBackground(util.ProjectColor.WHITE.getColor());
         jPanel1.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -109,16 +109,6 @@ public class AccessFrame extends javax.swing.JFrame {
         gridBagConstraints.gridy = 7;
         jPanel1.add(filler12, gridBagConstraints);
 
-        jLabel1.setFont(new java.awt.Font("Inter 28pt ExtraBold", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(15, 23, 42));
-        jLabel1.setText("Inicia Sesión");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel1.add(jLabel1, gridBagConstraints);
-
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/128-login.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -128,7 +118,7 @@ public class AccessFrame extends javax.swing.JFrame {
         gridBagConstraints.weightx = 1.0;
         jPanel1.add(jLabel2, gridBagConstraints);
 
-        jPanel3.setBackground(util.ProjectColors.WHITE.getColor());
+        jPanel3.setBackground(util.ProjectColor.WHITE.getColor());
         jPanel3.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -209,7 +199,7 @@ public class AccessFrame extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         jPanel2.add(filler17, gridBagConstraints);
 
-        jButton2.setBackground(util.ProjectColors.WHITE.getColor()
+        jButton2.setBackground(util.ProjectColor.WHITE.getColor()
         );
         jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/40-exit.png"))); // NOI18N
@@ -227,7 +217,7 @@ public class AccessFrame extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         jPanel2.add(jButton2, gridBagConstraints);
 
-        loginButton.setBackground(util.ProjectColors.WHITE.getColor()
+        loginButton.setBackground(util.ProjectColor.WHITE.getColor()
         );
         loginButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/40-login.png"))); // NOI18N
@@ -260,6 +250,14 @@ public class AccessFrame extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jPanel4, gridBagConstraints);
+
+        typographyHeadingRegular1.setText("Inicia Sesión");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(typographyHeadingRegular1, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -468,7 +466,6 @@ public class AccessFrame extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler8;
     private javax.swing.Box.Filler filler9;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -479,5 +476,6 @@ public class AccessFrame extends javax.swing.JFrame {
     private javax.swing.JTextField nameTextField;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
+    private typography.TypographyHeadingRegular typographyHeadingRegular1;
     // End of variables declaration//GEN-END:variables
 }

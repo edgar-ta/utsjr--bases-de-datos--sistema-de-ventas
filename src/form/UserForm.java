@@ -16,6 +16,8 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import util.UpdateResult;
 import util.input_verifier.BaseInputVerifier;
 import util.input_verifier.LengthVerifier;
@@ -60,7 +62,7 @@ public class UserForm extends Form<UserRecord> {
         labeledPasswordField = new component.LabeledPasswordField();
         labeledTypeComboBox = new component.LabeledComboBox<>();
 
-        setBackground(util.ProjectColors.WHITE.getColor());
+        setBackground(util.ProjectColor.WHITE.getColor());
         setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

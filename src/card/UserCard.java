@@ -43,11 +43,11 @@ public class UserCard extends Card<UserRecord> {
         typeLabel = new javax.swing.JLabel();
         cardHeader = new component.CardHeader();
 
-        setBackground(util.ProjectColors.WHITE.getColor());
+        setBackground(util.ProjectColor.WHITE.getColor());
         setLayout(new java.awt.GridBagLayout());
 
         typeLabel.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
-        typeLabel.setForeground(util.ProjectColors.BLACK.getColor());
+        typeLabel.setForeground(util.ProjectColor.BLACK.getColor());
         typeLabel.setText("Tipo");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

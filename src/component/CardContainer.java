@@ -48,13 +48,13 @@ public class CardContainer extends javax.swing.JPanel {
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
 
-        setBackground(util.ProjectColors.WHITE.getColor());
+        setBackground(util.ProjectColor.WHITE.getColor());
         setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         add(filler5, gridBagConstraints);
 
-        contentPane.setBackground(util.ProjectColors.WHITE.getColor());
+        contentPane.setBackground(util.ProjectColor.WHITE.getColor());
         contentPane.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -66,15 +66,17 @@ public class CardContainer extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         add(filler3, gridBagConstraints);
 
-        jPanel2.setBackground(util.ProjectColors.WHITE.getColor());
+        jPanel2.setBackground(util.ProjectColor.WHITE.getColor());
         jPanel2.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         jPanel2.add(filler1, gridBagConstraints);
 
-        loadMoreButton.setBackground(util.ProjectColors.WHITE.getColor()
+        loadMoreButton.setBackground(util.ProjectColor.WHITE.getColor()
         );
+        loadMoreButton.setFont(typography.ProjectFont.LABEL_REGULAR.getFont());
+        loadMoreButton.setForeground(util.ProjectColor.BLACK.getColor());
         loadMoreButton.setText("Cargar más");
         loadMoreButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();

@@ -56,7 +56,7 @@ public class SupplierForm extends Form<SupplierRecord> {
         cellphoneTextField = new component.LabeledTextField();
         rfcTextField = new component.LabeledTextField();
 
-        setBackground(util.ProjectColors.WHITE.getColor());
+        setBackground(util.ProjectColor.WHITE.getColor());
         setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

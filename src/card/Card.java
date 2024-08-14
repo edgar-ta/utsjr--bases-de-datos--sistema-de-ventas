@@ -48,7 +48,7 @@ public abstract class Card<RecordType extends Record> extends JPanel {
         
         setupMargins();
         
-        setBackground(util.ProjectColors.WHITE.getColor());
+        setBackground(util.ProjectColor.WHITE.getColor());
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
         
         contentPane = new JPanel(new java.awt.GridBagLayout());

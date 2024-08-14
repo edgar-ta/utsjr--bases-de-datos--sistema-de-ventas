@@ -96,7 +96,7 @@ public class GenericAddFrame extends javax.swing.JFrame {
         setName(""); // NOI18N
         setResizable(false);
 
-        jPanel4.setBackground(util.ProjectColors.WHITE.getColor());
+        jPanel4.setBackground(util.ProjectColor.WHITE.getColor());
         jPanel4.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -106,14 +106,14 @@ public class GenericAddFrame extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         jPanel4.add(filler3, gridBagConstraints);
 
-        jPanel2.setBackground(util.ProjectColors.WHITE.getColor());
+        jPanel2.setBackground(util.ProjectColor.WHITE.getColor());
         jPanel2.setPreferredSize(new java.awt.Dimension(400, 262));
         jPanel2.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 0;
         jPanel2.add(filler6, gridBagConstraints);
 
-        contentScrollPane.setBackground(util.ProjectColors.WHITE.getColor());
+        contentScrollPane.setBackground(util.ProjectColor.WHITE.getColor());
         contentScrollPane.setBorder(null);
         contentScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -135,7 +135,7 @@ public class GenericAddFrame extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         jPanel4.add(filler5, gridBagConstraints);
 
-        jPanel3.setBackground(util.ProjectColors.WHITE.getColor());
+        jPanel3.setBackground(util.ProjectColor.WHITE.getColor());
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
         saveButton.setBackground(new java.awt.Color(248, 250, 252));
@@ -184,7 +184,7 @@ public class GenericAddFrame extends javax.swing.JFrame {
         jPanel3.add(undoButton, gridBagConstraints);
 
         saveButtonLabel.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
-        saveButtonLabel.setForeground(util.ProjectColors.BLACK.getColor());
+        saveButtonLabel.setForeground(util.ProjectColor.BLACK.getColor());
         saveButtonLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         saveButtonLabel.setText("Guardar");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -195,7 +195,7 @@ public class GenericAddFrame extends javax.swing.JFrame {
         jPanel3.add(saveButtonLabel, gridBagConstraints);
 
         jLabel4.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
-        jLabel4.setForeground(util.ProjectColors.BLACK.getColor());
+        jLabel4.setForeground(util.ProjectColor.BLACK.getColor());
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Eliminar");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -206,7 +206,7 @@ public class GenericAddFrame extends javax.swing.JFrame {
         jPanel3.add(jLabel4, gridBagConstraints);
 
         jLabel5.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
-        jLabel5.setForeground(util.ProjectColors.BLACK.getColor());
+        jLabel5.setForeground(util.ProjectColor.BLACK.getColor());
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Deshacer");
         gridBagConstraints = new java.awt.GridBagConstraints();

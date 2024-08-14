@@ -10,13 +10,13 @@ import java.awt.Color;
  *
  * @author Edgar
  */
-public enum ProjectColors {
+public enum ProjectColor {
     WHITE(new Color(248, 250, 252)), 
     BLACK(new Color(30, 41, 59));
     
     private Color color;
 
-    private ProjectColors(Color color) {
+    private ProjectColor(Color color) {
         this.color = color;
     }
 

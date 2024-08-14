@@ -38,12 +38,12 @@ public class SupplierCard extends Card<SupplierRecord> {
         java.awt.GridBagConstraints gridBagConstraints;
 
         cardHeader = new component.CardHeader();
-        addressLabel = new component.StylizedLabel();
-        rfcLabel = new component.StylizedLabel();
-        telephoneNumberLabel = new component.StylizedLabel();
-        cellphoneLabel = new component.StylizedLabel();
+        addressLabel = new typography.TypographyLabelRegular();
+        rfcLabel = new typography.TypographyLabelRegular();
+        telephoneNumberLabel = new typography.TypographyLabelRegular();
+        cellphoneLabel = new typography.TypographyLabelRegular();
 
-        setBackground(util.ProjectColors.WHITE.getColor());
+        setBackground(util.ProjectColor.WHITE.getColor());
         setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -52,6 +52,7 @@ public class SupplierCard extends Card<SupplierRecord> {
         gridBagConstraints.weightx = 1.0;
         add(cardHeader, gridBagConstraints);
 
+        addressLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/12-home.png"))); // NOI18N
         addressLabel.setText("stylizedLabel1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -59,6 +60,7 @@ public class SupplierCard extends Card<SupplierRecord> {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(addressLabel, gridBagConstraints);
 
+        rfcLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/12-barcode.png"))); // NOI18N
         rfcLabel.setText("stylizedLabel1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -66,12 +68,14 @@ public class SupplierCard extends Card<SupplierRecord> {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(rfcLabel, gridBagConstraints);
 
+        telephoneNumberLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/12-call.png"))); // NOI18N
         telephoneNumberLabel.setText("stylizedLabel1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(telephoneNumberLabel, gridBagConstraints);
 
+        cellphoneLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/12-ad-units.png"))); // NOI18N
         cellphoneLabel.setText("stylizedLabel1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -91,11 +95,11 @@ public class SupplierCard extends Card<SupplierRecord> {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private component.StylizedLabel addressLabel;
+    private typography.TypographyLabelRegular addressLabel;
     private component.CardHeader cardHeader;
-    private component.StylizedLabel cellphoneLabel;
-    private component.StylizedLabel rfcLabel;
-    private component.StylizedLabel telephoneNumberLabel;
+    private typography.TypographyLabelRegular cellphoneLabel;
+    private typography.TypographyLabelRegular rfcLabel;
+    private typography.TypographyLabelRegular telephoneNumberLabel;
     // End of variables declaration//GEN-END:variables
 
     @Override

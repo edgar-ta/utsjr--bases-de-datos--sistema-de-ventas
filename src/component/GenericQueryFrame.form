@@ -7,7 +7,7 @@
         <Menu class="javax.swing.JMenu" name="orderByMenu">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="util.ProjectColors.WHITE.getColor()" type="code"/>
+              <Connection code="util.ProjectColor.WHITE.getColor()" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ordenar por"/>
           </Properties>
@@ -15,7 +15,7 @@
         <Menu class="javax.swing.JMenu" name="queryLimitMenu">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="util.ProjectColors.WHITE.getColor()" type="code"/>
+              <Connection code="util.ProjectColor.WHITE.getColor()" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" value="L&#xed;mite"/>
           </Properties>
@@ -53,7 +53,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="util.ProjectColors.WHITE.getColor()" type="code"/>
+          <Connection code="util.ProjectColor.WHITE.getColor()" type="code"/>
         </Property>
       </Properties>
       <Constraints>
@@ -77,7 +77,7 @@
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="util.ProjectColors.WHITE.getColor()&#xd;&#xa;" type="code"/>
+              <Connection code="util.ProjectColor.WHITE.getColor()&#xd;&#xa;" type="code"/>
             </Property>
           </Properties>
           <Constraints>
@@ -148,7 +148,7 @@
         <Container class="javax.swing.JPanel" name="jPanel3">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="util.ProjectColors.WHITE.getColor()" type="code"/>
+              <Connection code="util.ProjectColor.WHITE.getColor()" type="code"/>
             </Property>
           </Properties>
           <Constraints>
@@ -217,7 +217,7 @@
             <Component class="javax.swing.JComboBox" name="searchComboBox">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="util.ProjectColors.WHITE.getColor()" type="code"/>
+                  <Connection code="util.ProjectColor.WHITE.getColor()" type="code"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Open Sans Medium" size="15" style="0"/>
@@ -247,7 +247,7 @@
             <Component class="javax.swing.JTextField" name="searchForTextField">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="util.ProjectColors.WHITE.getColor()" type="code"/>
+                  <Connection code="util.ProjectColor.WHITE.getColor()" type="code"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Open Sans Medium" size="15" style="0"/>
@@ -266,7 +266,7 @@
             <Component class="javax.swing.JButton" name="removeSearchButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="util.ProjectColors.WHITE.getColor()" type="code"/>
+                  <Connection code="util.ProjectColor.WHITE.getColor()" type="code"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/20-exit.png"/>
@@ -332,7 +332,7 @@
         <Container class="javax.swing.JPanel" name="jPanel4">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="util.ProjectColors.WHITE.getColor()&#xd;&#xa;" type="code"/>
+              <Connection code="util.ProjectColor.WHITE.getColor()&#xd;&#xa;" type="code"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[76, 200]"/>
@@ -435,7 +435,7 @@
         <Container class="javax.swing.JPanel" name="jPanel5">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="util.ProjectColors.WHITE.getColor()&#xd;&#xa;" type="code"/>
+              <Connection code="util.ProjectColor.WHITE.getColor()&#xd;&#xa;" type="code"/>
             </Property>
           </Properties>
           <Constraints>
@@ -491,13 +491,13 @@
             <Component class="javax.swing.JButton" name="addRecordButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="util.ProjectColors.WHITE.getColor()" type="code"/>
+                  <Connection code="util.ProjectColor.WHITE.getColor()" type="code"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Open Sans Light" size="12" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="util.ProjectColors.BLACK.getColor()&#xd;&#xa;" type="code"/>
+                  <Connection code="util.ProjectColor.BLACK.getColor()&#xd;&#xa;" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Insertar registro"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -516,11 +516,12 @@
             <Component class="javax.swing.JButton" name="reloadButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="util.ProjectColors.WHITE.getColor()" type="code"/>
+                  <Connection code="util.ProjectColor.WHITE.getColor()" type="code"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/20-autorenew.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Refrescar registros"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>

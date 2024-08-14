@@ -75,7 +75,7 @@ public class LabeledComboBox<ItemType> extends javax.swing.JPanel {
         labelElement = new javax.swing.JLabel();
         comboBox = new javax.swing.JComboBox<>();
 
-        setBackground(util.ProjectColors.WHITE.getColor());
+        setBackground(util.ProjectColor.WHITE.getColor());
         setLayout(new java.awt.GridBagLayout());
 
         labelElement.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
@@ -87,10 +87,10 @@ public class LabeledComboBox<ItemType> extends javax.swing.JPanel {
         gridBagConstraints.weightx = 1.0;
         add(labelElement, gridBagConstraints);
 
-        comboBox.setBackground(util.ProjectColors.WHITE.getColor()
+        comboBox.setBackground(util.ProjectColor.WHITE.getColor()
         );
         comboBox.setFont(new java.awt.Font("Open Sans Medium", 0, 15)); // NOI18N
-        comboBox.setForeground(util.ProjectColors.BLACK.getColor()
+        comboBox.setForeground(util.ProjectColor.BLACK.getColor()
         );
         comboBox.setModel(new DefaultComboBoxModel<ItemType>());
         comboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

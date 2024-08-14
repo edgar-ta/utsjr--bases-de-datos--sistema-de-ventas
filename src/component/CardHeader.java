@@ -52,11 +52,11 @@ public class CardHeader extends javax.swing.JPanel {
         idLabel = new javax.swing.JLabel();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
 
-        setBackground(util.ProjectColors.WHITE.getColor());
+        setBackground(util.ProjectColor.WHITE.getColor());
         setLayout(new java.awt.GridBagLayout());
 
         nameLabel.setFont(new java.awt.Font("Inter 28pt ExtraBold", 0, 18)); // NOI18N
-        nameLabel.setForeground(util.ProjectColors.BLACK.getColor());
+        nameLabel.setForeground(util.ProjectColor.BLACK.getColor());
         nameLabel.setText("Nombre");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

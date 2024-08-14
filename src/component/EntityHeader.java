@@ -46,7 +46,7 @@ public class EntityHeader extends javax.swing.JPanel {
         banner = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
 
-        setBackground(util.ProjectColors.WHITE.getColor());
+        setBackground(util.ProjectColor.WHITE.getColor());
         setMinimumSize(new java.awt.Dimension(400, 150));
         setPreferredSize(new java.awt.Dimension(400, 150));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -54,9 +54,9 @@ public class EntityHeader extends javax.swing.JPanel {
         iconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/64-product.png"))); // NOI18N
         add(iconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
-        nameLabel.setBackground(util.ProjectColors.WHITE.getColor());
+        nameLabel.setBackground(util.ProjectColor.WHITE.getColor());
         nameLabel.setFont(new java.awt.Font("Inter 28pt ExtraBold", 0, 36)); // NOI18N
-        nameLabel.setForeground(util.ProjectColors.BLACK.getColor());
+        nameLabel.setForeground(util.ProjectColor.BLACK.getColor());
         nameLabel.setText("Producto");
         add(nameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 340, -1));
 

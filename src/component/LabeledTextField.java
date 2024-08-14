@@ -40,7 +40,7 @@ public class LabeledTextField extends javax.swing.JPanel {
         labelElement = new javax.swing.JLabel();
         textField = new javax.swing.JTextField();
 
-        setBackground(util.ProjectColors.WHITE.getColor());
+        setBackground(util.ProjectColor.WHITE.getColor());
         setLayout(new java.awt.GridBagLayout());
 
         labelElement.setFont(new java.awt.Font("Open Sans Light", 0, 12)); // NOI18N
