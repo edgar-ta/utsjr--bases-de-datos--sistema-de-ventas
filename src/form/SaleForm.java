@@ -7,6 +7,9 @@ package form;
 import controller.Controller;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Vector;
@@ -17,7 +20,14 @@ import record.ProductRecord;
 import record.SaleRecord;
 import util.DatabaseEntity;
 import util.PrimaryKey;
+import util.TextFormatting;
 import util.UpdateResult;
+import util.input_verifier.ComparisonValueVerifier;
+import util.input_verifier.IsDateVerifier;
+import util.input_verifier.IsNumberVerifier;
+import util.input_verifier.NotEmptyVerifier;
+import util.input_verifier.NotUnselectedVerifier;
+import util.input_verifier.VerifiableField;
 import util.input_verifier.VerifiableFieldChain;
 
 /**
@@ -41,16 +51,16 @@ public class SaleForm extends Form<SaleRecord> {
     
     protected void setupComboBoxes() throws SQLException, ClassNotFoundException, Exception {
         try {
-        LinkedList<PrimaryKey> clientPrimaryKeys = Controller.getPrimaryKeysForDisplay(DatabaseEntity.CLIENT);
-        LinkedList<PrimaryKey> productPrimaryKeys = Controller.getPrimaryKeysForDisplay(DatabaseEntity.PRODUCT);
-        
-        System.out.println("The length of the clients is: " + productPrimaryKeys.size());
-        
-        clientComboBox.getComboBox().setModel(new DefaultComboBoxModel(new Vector<>(clientPrimaryKeys)));
-        productComboBox.getComboBox().setModel(new DefaultComboBoxModel(new Vector<>(productPrimaryKeys)));
-        
-        clientComboBox.getComboBox().setSelectedItem(currentRecord.map((SaleRecord record) -> record.getCliente()).orElse(null));
-        productComboBox.getComboBox().setSelectedItem(currentRecord.map((SaleRecord record) -> record.getProducto()).orElse(null));
+            LinkedList<PrimaryKey> clientPrimaryKeys = Controller.getPrimaryKeysForDisplay(DatabaseEntity.CLIENT);
+            LinkedList<PrimaryKey> productPrimaryKeys = Controller.getPrimaryKeysForDisplay(DatabaseEntity.PRODUCT);
+
+            System.out.println("The length of the clients is: " + productPrimaryKeys.size());
+
+            clientComboBox.getComboBox().setModel(new DefaultComboBoxModel(new Vector<>(clientPrimaryKeys)));
+            productComboBox.getComboBox().setModel(new DefaultComboBoxModel(new Vector<>(productPrimaryKeys)));
+
+            clientComboBox.getComboBox().setSelectedItem(currentRecord.map((SaleRecord record) -> record.getCliente()).orElse(null));
+            productComboBox.getComboBox().setSelectedItem(currentRecord.map((SaleRecord record) -> record.getProducto()).orElse(null));
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
@@ -64,7 +74,14 @@ public class SaleForm extends Form<SaleRecord> {
         productComboBox.getComboBox().setSelectedItem(currentRecord.map((SaleRecord record) -> record.getProducto()).orElse(null));
         
         folioTextField.getTextField().setText(currentRecord.map((SaleRecord record) -> String.valueOf(record.getFolio())).orElse(""));
-        dateTextField.getTextField().setText(currentRecord.map((SaleRecord record) -> record.getFecha().toString()).orElse(""));
+        
+        if (currentRecord.isPresent()) {
+            dateTextField.getTextField().setText(currentRecord.get().getFecha().toString());
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            dateTextField.getTextField().setText(LocalDate.now().format(formatter));
+        }
+        
         amountTextField.getTextField().setText(currentRecord.map((SaleRecord record) -> String.valueOf(record.getCantidadDeProducto())).orElse(""));
     }
 
@@ -110,7 +127,22 @@ public class SaleForm extends Form<SaleRecord> {
 
     @Override
     public VerifiableFieldChain getVerifiableFieldChain() {
-        return VerifiableFieldChain.of();
+        return VerifiableFieldChain.of(
+                new VerifiableField<JTextField>("fecha", dateTextField.getTextField())
+                    .add(new NotEmptyVerifier())
+                    .add(new IsDateVerifier())
+                ,
+                new VerifiableField<JTextField>("cantidad de producto", amountTextField.getTextField())
+                    .add(new NotEmptyVerifier())
+                    .add(IsNumberVerifier.INTEGER_VERIFIER)
+                    .add(ComparisonValueVerifier.minIntegerValue(1))
+                ,
+                new VerifiableField<JComboBox>("cliente", clientComboBox.getComboBox())
+                    .add(new NotUnselectedVerifier())
+                ,
+                new VerifiableField<JComboBox>("producto", productComboBox.getComboBox())
+                    .add(new NotUnselectedVerifier())
+        );
     }
 
     @Override

@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import record.CategoryRecord;
 import util.UpdateResult;
 import util.input_verifier.LengthVerifier;
+import util.input_verifier.MaxLengthVerifier;
 import util.input_verifier.NotEmptyVerifier;
 import util.input_verifier.VerifiableField;
 import util.input_verifier.VerifiableFieldChain;
@@ -97,7 +98,7 @@ public class CategoryForm extends Form<CategoryRecord> {
         return VerifiableFieldChain.of(
                 new VerifiableField<JTextField>("nombre", nameTextField.getTextField())
                     .add(new NotEmptyVerifier())
-                    .add(new LengthVerifier(0, 20))
+                    .add(new MaxLengthVerifier(20))
         );
     }
 

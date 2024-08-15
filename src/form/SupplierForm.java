@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import record.SupplierRecord;
 import util.UpdateResult;
 import util.input_verifier.LengthVerifier;
+import util.input_verifier.MaxLengthVerifier;
 import util.input_verifier.NotEmptyVerifier;
 import util.input_verifier.VerifiableField;
 import util.input_verifier.VerifiableFieldChain;
@@ -200,18 +201,23 @@ public class SupplierForm extends Form<SupplierRecord> {
         return VerifiableFieldChain.of(
             new VerifiableField<JTextField>("nombre", fullNameTextField.getTextField())
                     .add(new NotEmptyVerifier())
+                    .add(new MaxLengthVerifier(40))
             ,
             new VerifiableField<JTextField>("rfc", rfcTextField.getTextField())
                     .add(new NotEmptyVerifier())
+                    .add(new MaxLengthVerifier(20))
             ,
             new VerifiableField<JTextField>("dirección", addressTextField.getTextField())
                     .add(new NotEmptyVerifier())
+                    .add(new MaxLengthVerifier(80))
             ,
             new VerifiableField<JTextField>("teléfono", phoneNumberTextField.getTextField())
                     .add(new NotEmptyVerifier())
+                    .add(new MaxLengthVerifier(20))
             ,
             new VerifiableField<JTextField>("celular", cellphoneTextField.getTextField())
                     .add(new NotEmptyVerifier())
+                    .add(new MaxLengthVerifier(20))
         );
     }
 

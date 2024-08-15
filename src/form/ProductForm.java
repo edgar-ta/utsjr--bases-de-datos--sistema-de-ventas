@@ -19,6 +19,9 @@ import record.ProductRecord;
 import util.DatabaseEntity;
 import util.PrimaryKey;
 import util.UpdateResult;
+import util.input_verifier.IsNumberVerifier;
+import util.input_verifier.MaxLengthVerifier;
+import util.input_verifier.ComparisonValueVerifier;
 import util.input_verifier.NotEmptyVerifier;
 import util.input_verifier.NotUnselectedVerifier;
 import util.input_verifier.VerifiableField;
@@ -214,7 +217,7 @@ public class ProductForm extends Form<ProductRecord> {
         record.setId(currentRecord.map((ProductRecord previousRecord) -> previousRecord.getId()).orElse(-1));
         record.setCategoria((PrimaryKey) categoryComboBox.getComboBox().getSelectedItem());
         record.setCodigo(codeTextField.getText());
-        record.setDescuento(Double.parseDouble(discountTextField.getText()));
+        record.setDescuento(Double.parseDouble(discountTextField.getText()) / 100.0);
         record.setNombre(nameTextField.getText());
         record.setPrecio(Double.parseDouble(priceTextField.getText()));
         record.setProveedor((PrimaryKey) supplierComboBox.getComboBox().getSelectedItem());
@@ -250,18 +253,27 @@ public class ProductForm extends Form<ProductRecord> {
         return VerifiableFieldChain.of(
                 new VerifiableField<JTextField>("código", codeTextField.getTextField())
                     .add(new NotEmptyVerifier())
+                    .add(new MaxLengthVerifier(20))
                 ,
                 new VerifiableField<JTextField>("nombre", nameTextField.getTextField())
                     .add(new NotEmptyVerifier())
+                    .add(new MaxLengthVerifier(40))
                 ,
                 new VerifiableField<JTextField>("precio", priceTextField.getTextField())
                     .add(new NotEmptyVerifier())
+                    .add(IsNumberVerifier.DOUBLE_VERIFIER)
+                    .add(ComparisonValueVerifier.minDoubleValue(0.0))
                 ,
                 new VerifiableField<JTextField>("descuento", discountTextField.getTextField())
                     .add(new NotEmptyVerifier())
+                    .add(IsNumberVerifier.DOUBLE_VERIFIER)
+                    .add(ComparisonValueVerifier.minDoubleValue(0.0))
+                    .add(ComparisonValueVerifier.maxDoubleValue(100.0))
                 ,
                 new VerifiableField<JTextField>("stock", stockTextField.getTextField())
                     .add(new NotEmptyVerifier())
+                    .add(IsNumberVerifier.INTEGER_VERIFIER)
+                    .add(ComparisonValueVerifier.minIntegerValue(0))
                 ,
                 new VerifiableField<JComboBox>("categoría", categoryComboBox.getComboBox())
                     .add(new NotUnselectedVerifier())

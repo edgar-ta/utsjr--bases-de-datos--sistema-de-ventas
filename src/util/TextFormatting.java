@@ -4,6 +4,10 @@
  */
 package util;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 /**
  *
  * @author Edgar
@@ -60,11 +64,28 @@ public class TextFormatting {
         return String.valueOf(numberOfUnits) + " " + descriptor;
     }
     
+    public static String getTwoDigitRepresentation(int digit) {
+        String representation = String.valueOf(digit);
+        if (digit < 10) {
+            representation = "0" + representation;
+        }
+        return representation;
+    }
+    
+    public static String formatDate(Date date) {
+        return  date.getYear() + "-" + 
+                getTwoDigitRepresentation(date.getMonth()) + "-" + 
+                getTwoDigitRepresentation(date.getDate());
+    }
+    
     public static void main(String[] args) {
         System.out.println(formatCurrency(0));
         System.out.println(formatCurrency(500.98));
         System.out.println(formatCurrency(1200.03));
         
         System.out.println(formatUnits(5, "unidad", "unidades"));
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        System.out.println(LocalDate.now().format(formatter));
     }
 }
