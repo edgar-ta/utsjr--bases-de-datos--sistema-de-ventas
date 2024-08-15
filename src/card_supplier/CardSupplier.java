@@ -132,12 +132,12 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
         
         if (search.isPresent()) {
             String searchField = search.get().getFirst().getInternalValue();
-            queryString += " WHERE " + surroundWithBackticks(searchField) + " = ?";
+            queryString += " WHERE " + searchField + " = ? OR " + searchField + " LIKE ?";
         }
         
         if (orderBy.isPresent()) {
             String orderByField = orderBy.get().getInternalValue();
-            queryString += " ORDER BY " + surroundWithBackticks(orderByField);
+            queryString += " ORDER BY " + orderByField;
         }
         
         if (queryLimit.isPresent()) {
@@ -154,7 +154,8 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
         if (search.isPresent()) {
             String searchValue = search.get().getSecond();
             statement.setString(indexOfLastArgument, searchValue);
-            indexOfLastArgument++;
+            statement.setString(indexOfLastArgument + 1, searchValue);
+            indexOfLastArgument += 2;
         }
         
         if (queryLimit.isPresent()) {

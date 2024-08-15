@@ -139,25 +139,24 @@ public abstract class Controller<RecordType extends Record> {
         ) {
             throw new IllegalArgumentException("There is no agreed upon way to represent the passed entity");
         }
+        
         String internalName = entity.getEntityName().getInternalValue();
         
-        System.out.println("SELECT id, nombre FROM " + internalName);
-        
         try (SmartQuery query = ConnectionManager
-                .create("SELECT * FROM " + internalName + " WHERE 1 = 1;")
+                .create("SELECT id, nombre FROM " + internalName)
                 .query()
                 ) {
-            System.out.println("here 1");
             
             LinkedList<PrimaryKey> primaryKeys = new LinkedList<>();
-            while (query.next()) {
-                System.out.println("here 2");
-                
-                int internalValue = query.getInt("id");
-                String externalValue = query.getString("nombre");
-                
-                PrimaryKey primaryKey = new PrimaryKey(internalValue, externalValue);
-                primaryKeys.add(primaryKey);
+            if (query.isPopulated()) {
+                do {
+
+                    int internalValue = query.getInt("id");
+                    String externalValue = query.getString("nombre");
+
+                    PrimaryKey primaryKey = new PrimaryKey(internalValue, externalValue);
+                    primaryKeys.add(primaryKey);
+                } while (query.next());
             }
             
             return primaryKeys;

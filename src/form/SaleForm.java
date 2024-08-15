@@ -98,7 +98,7 @@ public class SaleForm extends Form<SaleRecord> {
         
         record.setCantidadDeProducto(Integer.parseInt(amountTextField.getText()));
         record.setFecha(Date.valueOf(dateTextField.getText()));
-        record.setFolio(Integer.parseInt(folioTextField.getText()));
+        record.setFolio(-1);
         
         return record;
     }
@@ -160,6 +160,8 @@ public class SaleForm extends Form<SaleRecord> {
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
 
+        setBackground(util.ProjectColor.WHITE.getColor()
+        );
         setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -190,6 +192,7 @@ public class SaleForm extends Form<SaleRecord> {
         gridBagConstraints.weightx = 1.0;
         add(productComboBox, gridBagConstraints);
 
+        folioTextField.setEnabled(false);
         folioTextField.setLabelText("Folio");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;

@@ -174,7 +174,7 @@ public class SupplierForm extends Form<SupplierRecord> {
         SupplierRecord record = new SupplierRecord();
         
         record.setNombre(fullNameTextField.getTextField().getText());
-        record.setRfc(fullNameTextField.getTextField().getText());
+        record.setRfc(rfcTextField.getTextField().getText());
         record.setDireccion(addressTextField.getTextField().getText());
         record.setTelefono(phoneNumberTextField.getTextField().getText());
         record.setCelular(cellphoneTextField.getTextField().getText());

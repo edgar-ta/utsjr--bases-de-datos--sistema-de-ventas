@@ -81,7 +81,6 @@ public abstract class Card<RecordType extends Record> extends JPanel {
         this.currentRecord = currentRecord;
         
         initializeComponents();
-        
         setCurrentRecord(currentRecord);
     }
     

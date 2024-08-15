@@ -77,6 +77,16 @@ public class LabeledTextField extends javax.swing.JPanel {
         return textField.getText();
     }
     
+    @Override
+    public void setEnabled(boolean enabled) {
+        textField.setEnabled(enabled);
+    }
+    
+    @Override
+    public boolean isEnabled() {
+        return textField.isEnabled();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel labelElement;
     private javax.swing.JTextField textField;

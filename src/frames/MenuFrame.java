@@ -361,13 +361,17 @@ public class MenuFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void categoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryButtonActionPerformed
+        // id, nombre
         showEntityQueryFrame(
                 EntityHeaderData.CATEGORY, 
                 (Optional<CategoryRecord> value) -> new CategoryForm(value), 
                 (DatabaseErrorProneSupplier<CategoryForm> callback) -> 
                         new GenericAddFrame(EntityHeaderData.CATEGORY, callback),
                 (DatabaseErrorProneFunction<Optional<CategoryRecord>, GenericAddFrame> callback) -> 
-                        new CategoryCardSupplier(EntityField.of("id", "nombre", "rfc"), callback)
+                        new CategoryCardSupplier(new LinkedList<EntityField>(Arrays.asList(
+                                new EntityField("categoria.id", "Id"),
+                                new EntityField("categoria.nombre", "Nombre")
+                        )), callback)
         );
     }//GEN-LAST:event_categoryButtonActionPerformed
 
@@ -377,6 +381,7 @@ public class MenuFrame extends javax.swing.JFrame {
 
     private void userButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userButtonActionPerformed
         // id, nombre y tipo
+        // id
         showEntityQueryFrame(
                 EntityHeaderData.USER, 
                 (Optional<UserRecord> value) -> new UserForm(value), 
@@ -409,10 +414,11 @@ public class MenuFrame extends javax.swing.JFrame {
                 (DatabaseErrorProneFunction<Optional<ProductRecord>, GenericAddFrame> callback) -> 
                         new ProductCardSupplier(new LinkedList<EntityField>(Arrays.asList(
                                 new EntityField("id"),
-                                new EntityField("categoriaId", "Categoría (id)"),
-                                new EntityField("categoriaNombre", "Categoría (nombre)"),
-                                new EntityField("proveedorId", "Proveedor (id)"),
-                                new EntityField("proveedorNombre", "Proveedor (nombre)"),
+                                new EntityField("producto.nombre", "Nombre"),
+                                new EntityField("categoria.id", "Categoría (id)"),
+                                new EntityField("categoria.nombre", "Categoría (nombre)"),
+                                new EntityField("proveedor.id", "Proveedor (id)"),
+                                new EntityField("proveedor.nombre", "Proveedor (nombre)"),
                                 new EntityField("codigo", "Código"),
                                 new EntityField("precio"),
                                 new EntityField("stock")

@@ -6,7 +6,9 @@ package controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 import record.SaleRecord;
+import util.ConnectionManager;
 import util.DatabaseEntity;
 import util.PrimaryKey;
 import util.SmartConnection;
@@ -46,24 +48,51 @@ public class SaleController extends Controller<SaleRecord> {
 
     @Override
     public UpdateChain insert(SmartConnection connection, SaleRecord record) throws SQLException, ClassNotFoundException, Exception {
+        Optional<Integer> optionalId = Controller.SERIABILITY_CONTROLLER.getNexIdOfTable(DatabaseEntity.SALE);
+        if (optionalId.isEmpty()) {
+            throw new Exception("The sale table doesn't exist");
+        }
+        int saleId = optionalId.get();
+        int randomFolio = (int)(Math.random() * 50000);
+        
+        int stockAmount = ConnectionManager
+                .create("SELECT stock FROM producto WHERE id = ?")
+                .setInteger(1, record.getProducto().getInternalValue())
+                .query()
+                .getResultSet()
+                .getInt("stock")
+                ;
+        
+        if (stockAmount < record.getCantidadDeProducto()) {
+            throw new Exception("There aren't enough products to do the sale");
+        }
+        
         return createChain(
                 "INSERT INTO venta VALUES(?, ?, ?, ?)", 
                 (UpdateChain chain) -> chain
-                    .setInteger(1, record.getId())
+                    .setInteger(1, saleId)
                     .setInteger(2, record.getCliente().getInternalValue())
-                    .setInteger(3, record.getFolio())
+                    .setInteger(3, randomFolio)
                     .setDate(4, record.getFecha())
                 , 
                 connection
         ).chain(createChain(
                 "INSERT INTO detalle VALUES (?, ?, ?)",
                 (UpdateChain chain) -> chain
-                    .setInteger(1, record.getId())
+                    .setInteger(1, saleId)
                     .setInteger(2, record.getProducto().getInternalValue())
                     .setInteger(3, record.getCantidadDeProducto())
                 ,
                 connection
-        ));
+        )).chain(createChain(
+                "UPDATE producto SET stock = stock - " + String.valueOf(record.getCantidadDeProducto()) + " WHERE id = ?",
+                (UpdateChain chain) -> chain
+                    .setInteger(1, record.getProducto().getInternalValue())
+                ,
+                connection
+        )).chain(Controller.SERIABILITY_CONTROLLER.increaseNextIdOfTable(connection, DatabaseEntity.SALE))
+                
+                ;
     }
 
     @Override

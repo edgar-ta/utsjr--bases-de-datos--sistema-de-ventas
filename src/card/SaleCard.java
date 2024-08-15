@@ -16,6 +16,7 @@ import util.functional.DatabaseErrorProneFunction;
 public class SaleCard extends Card<SaleRecord> {
 
     public SaleCard() {
+        super();
     }
 
     public SaleCard(Optional<SaleRecord> currentRecord, DatabaseErrorProneFunction<Optional<SaleRecord>, GenericAddFrame> addFrameFunction) {
@@ -37,9 +38,10 @@ public class SaleCard extends Card<SaleRecord> {
         clientText = new component.LabeledText();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         folioLabel = new typography.TypographyLabelRegular();
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         dateLabel = new typography.TypographyLabelRegular();
 
+        setBackground(util.ProjectColor.WHITE.getColor()
+        );
         setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -65,9 +67,6 @@ public class SaleCard extends Card<SaleRecord> {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(folioLabel, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        add(filler2, gridBagConstraints);
 
         dateLabel.setText("typographyLabelRegular1");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -82,7 +81,6 @@ public class SaleCard extends Card<SaleRecord> {
     private component.LabeledText clientText;
     private typography.TypographyLabelRegular dateLabel;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private typography.TypographyLabelRegular folioLabel;
     // End of variables declaration//GEN-END:variables
@@ -90,6 +88,7 @@ public class SaleCard extends Card<SaleRecord> {
     @Override
     public void initializeComponents() {
         initComponents();
+        System.out.println("The current id is: " + currentRecord.get().getId());
     }
 
     @Override

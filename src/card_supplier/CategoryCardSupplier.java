@@ -27,19 +27,19 @@ public class CategoryCardSupplier extends CardSupplier<CategoryRecord, CategoryC
 
     @Override
     protected String getQueryString() {
-        return  "SELECT \n" +
-                "	categoria.nombre AS nombre, \n" +
-                "    categoria.id AS id,\n" +
-                "    productos_por_categoria.numero_de_productos AS numeroDeProductos\n" +
-                "FROM categoria\n" +
-                "INNER JOIN (\n" +
-                "	SELECT \n" +
-                "		categoria.id AS id,\n" +
-                "		COUNT(*) AS numero_de_productos\n" +
-                "	FROM categoria \n" +
-                "    INNER JOIN producto ON producto.id = categoria.id\n" +
-                "    GROUP BY categoria.id\n" +
-                ") AS productos_por_categoria ON productos_por_categoria.id = categoria.id"
+        return  "SELECT\n" +
+"	categoria.nombre AS nombre,\n" +
+"	categoria.id AS id,\n" +
+"	productos_por_categoria.numero_de_productos AS numeroDeProductos\n" +
+"FROM categoria \n" +
+"INNER JOIN (\n" +
+"	SELECT \n" +
+"		categoria.id AS id,\n" +
+"		COUNT(*) AS numero_de_productos\n" +
+"	FROM categoria\n" +
+"	LEFT JOIN producto ON producto.id = categoria.id \n" +
+"	GROUP BY categoria.id\n" +
+") AS productos_por_categoria ON productos_por_categoria.id = categoria.id"
                 ;
     }
 
