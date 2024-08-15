@@ -65,6 +65,7 @@ public class SupplierController extends Controller<SupplierRecord> {
         record.setDireccion(query.getString("direccion"));
         record.setTelefono(query.getString("telefono"));
         record.setCelular(query.getString("celular"));
+        record.setProductosOfrecidos(query.getInt("productosOfrecidos"));
         
         return record;
     }

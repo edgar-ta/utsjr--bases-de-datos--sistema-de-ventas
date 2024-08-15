@@ -110,6 +110,8 @@ public class SaleForm extends Form<SaleRecord> {
     public SaleRecord buildRecord() {
         SaleRecord record = new SaleRecord();
         
+        record.setId(currentRecord.map((SaleRecord __) -> __.getId()).orElse(-1));
+        
         record.setProducto((PrimaryKey) productComboBox.getComboBox().getSelectedItem());
         record.setCliente((PrimaryKey) clientComboBox.getComboBox().getSelectedItem());
         

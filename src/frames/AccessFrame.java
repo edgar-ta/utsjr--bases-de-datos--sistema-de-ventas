@@ -370,12 +370,12 @@ public class AccessFrame extends javax.swing.JFrame {
                     case ADMINISTRATOR -> {
                     }
                     case CASHIER -> {
-                        menuFrame.getCategoryButton().setVisible(false);
-                        menuFrame.getClientButton().setVisible(false);
-                        menuFrame.getProductButton().setVisible(false);
-                        menuFrame.getSaleButton().setVisible(true);
-                        menuFrame.getSupplierButton().setVisible(false);
-                        menuFrame.getUserButton().setVisible(false);
+                        menuFrame.getCategoryButton().setEnabled(false);
+                        menuFrame.getClientButton().setEnabled(false);
+                        menuFrame.getProductButton().setEnabled(false);
+                        menuFrame.getSaleButton().setEnabled(true);
+                        menuFrame.getSupplierButton().setEnabled(false);
+                        menuFrame.getUserButton().setEnabled(false);
                         // venta es el único visible
                     }
                 }

@@ -19,6 +19,8 @@ public class ClientRecord extends Record {
     String estado;
     String telefono;
     String celular;
+    
+    int ventasRealizadas;
 
     public int getId() {
         return id;
@@ -103,7 +105,7 @@ public class ClientRecord extends Record {
     public ClientRecord() {
     }
 
-    public ClientRecord(int id, String nombre, String rfc, String calle, String numero_de_casa, String colonia, String municipio, String estado, String telefono, String celular) {
+    public ClientRecord(int id, String nombre, String rfc, String calle, String numero_de_casa, String colonia, String municipio, String estado, String telefono, String celular, int ventasRealizadas) {
         this.id = id;
         this.nombre = nombre;
         this.rfc = rfc;
@@ -114,6 +116,14 @@ public class ClientRecord extends Record {
         this.estado = estado;
         this.telefono = telefono;
         this.celular = celular;
+        this.ventasRealizadas = ventasRealizadas;
     }
-    
+
+    public int getVentasRealizadas() {
+        return ventasRealizadas;
+    }
+
+    public void setVentasRealizadas(int ventasRealizadas) {
+        this.ventasRealizadas = ventasRealizadas;
+    }
 }

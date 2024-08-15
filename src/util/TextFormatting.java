@@ -55,13 +55,35 @@ public class TextFormatting {
     }
     
     public static String formatPercentage(double percentage) {
-        return "%" + formatNumber(percentage * 100);
+        return formatNumber(percentage * 100) + "%";
     }
     
     public static String formatUnits(int numberOfUnits, String unitName, String pluralUnitForm) {
         String descriptor = numberOfUnits == 1? unitName: pluralUnitForm;
         
         return String.valueOf(numberOfUnits) + " " + descriptor;
+    }
+    
+    public static String formatPhoneNumber(String number) {
+        if (number.length() < 10) return number;
+        
+        String separator = " ";
+        
+        String firstComponent   = number.substring(0, 3);
+        String secondComponent  = number.substring(3, 6);
+        String thirdComponent   = number.substring(6, 10);
+        
+        return firstComponent + separator + secondComponent + separator + thirdComponent;
+    }
+    
+    public static String formatAddress(
+            String street,
+            String houseNumber,
+            String neighborhood,
+            String county,
+            String state
+            ) {
+        return street + " " + houseNumber + ", Col. " + neighborhood + ", " + county + ", " + state;
     }
     
     public static String getTwoDigitRepresentation(int digit) {

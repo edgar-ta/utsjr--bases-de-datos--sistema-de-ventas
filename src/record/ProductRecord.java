@@ -19,11 +19,13 @@ public class ProductRecord extends Record {
     double descuento;
     double precio;
     int stock;
+    
+    int productosVendidos;
 
     public ProductRecord() {
     }
 
-    public ProductRecord(int id, PrimaryKey categoria, PrimaryKey proveedor, String codigo, String nombre, double descuento, double precio, int stock) {
+    public ProductRecord(int id, PrimaryKey categoria, PrimaryKey proveedor, String codigo, String nombre, double descuento, double precio, int stock, int productosVendidos) {
         this.id = id;
         this.categoria = categoria;
         this.proveedor = proveedor;
@@ -32,6 +34,7 @@ public class ProductRecord extends Record {
         this.descuento = descuento;
         this.precio = precio;
         this.stock = stock;
+        this.productosVendidos = productosVendidos;
     }
 
     public int getId() {
@@ -97,6 +100,12 @@ public class ProductRecord extends Record {
     public void setStock(int stock) {
         this.stock = stock;
     }
-    
-    
+
+    public int getProductosVendidos() {
+        return productosVendidos;
+    }
+
+    public void setProductosVendidos(int productosVendidos) {
+        this.productosVendidos = productosVendidos;
+    }
 }

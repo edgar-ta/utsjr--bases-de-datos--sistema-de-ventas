@@ -13,6 +13,8 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import record.SupplierRecord;
 import util.UpdateResult;
+import util.input_verifier.ContainsDigitsOnlyVerifier;
+import util.input_verifier.ExactLengthVerifier;
 import util.input_verifier.LengthVerifier;
 import util.input_verifier.MaxLengthVerifier;
 import util.input_verifier.NotEmptyVerifier;
@@ -174,6 +176,7 @@ public class SupplierForm extends Form<SupplierRecord> {
     public SupplierRecord buildRecord() {
         SupplierRecord record = new SupplierRecord();
         
+        record.setId(currentRecord.map((SupplierRecord __) -> __.getId()).orElse(-1));
         record.setNombre(fullNameTextField.getTextField().getText());
         record.setRfc(rfcTextField.getTextField().getText());
         record.setDireccion(addressTextField.getTextField().getText());
@@ -213,11 +216,13 @@ public class SupplierForm extends Form<SupplierRecord> {
             ,
             new VerifiableField<JTextField>("teléfono", phoneNumberTextField.getTextField())
                     .add(new NotEmptyVerifier())
-                    .add(new MaxLengthVerifier(20))
+                    .add(new ExactLengthVerifier(10))
+                    .add(new ContainsDigitsOnlyVerifier())
             ,
             new VerifiableField<JTextField>("celular", cellphoneTextField.getTextField())
                     .add(new NotEmptyVerifier())
-                    .add(new MaxLengthVerifier(20))
+                    .add(new ExactLengthVerifier(10))
+                    .add(new ContainsDigitsOnlyVerifier())
         );
     }
 

@@ -83,6 +83,8 @@ public class CategoryForm extends Form<CategoryRecord> {
     @Override
     public CategoryRecord buildRecord() {
         CategoryRecord record = new CategoryRecord();
+        
+        record.setId(currentRecord.map((CategoryRecord __) -> __.getId()).orElse(-1));
         record.setNombre(nameTextField.getText());
         
         return record;

@@ -5,11 +5,8 @@
 package card;
 
 import component.GenericAddFrame;
-import form.Form;
-import form.SupplierForm;
 import java.util.Optional;
-import record.SupplierRecord;
-import util.EntityHeaderData;
+import record.ClientRecord;
 import util.TextFormatting;
 import util.functional.DatabaseErrorProneFunction;
 
@@ -17,15 +14,15 @@ import util.functional.DatabaseErrorProneFunction;
  *
  * @author Edgar
  */
-public class SupplierCard extends Card<SupplierRecord> {
-
-    public SupplierCard() {
+public class ClientCard extends Card<ClientRecord> {
+    public ClientCard() {
         super();
     }
 
-    public SupplierCard(Optional<SupplierRecord> currentRecord, DatabaseErrorProneFunction<Optional<SupplierRecord>, GenericAddFrame> addFrameFunction) {
+    public ClientCard(Optional<ClientRecord> currentRecord, DatabaseErrorProneFunction<Optional<ClientRecord>, GenericAddFrame> addFrameFunction) {
         super(currentRecord, addFrameFunction);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,96 +34,89 @@ public class SupplierCard extends Card<SupplierRecord> {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         cardHeader = new component.CardHeader();
         addressLabel = new typography.TypographyLabelRegular();
         rfcLabel = new typography.TypographyLabelRegular();
         telephoneNumberLabel = new typography.TypographyLabelRegular();
         cellphoneLabel = new typography.TypographyLabelRegular();
-        offeredProductsLabel = new typography.TypographyLabelRegular();
+        salesCountLabel = new typography.TypographyLabelRegular();
 
         setBackground(util.ProjectColor.WHITE.getColor());
         setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        add(filler2, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         add(cardHeader, gridBagConstraints);
 
         addressLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/12-home.png"))); // NOI18N
-        addressLabel.setText("stylizedLabel1");
+        addressLabel.setText("typographyLabelRegular1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
         add(addressLabel, gridBagConstraints);
 
         rfcLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/12-barcode.png"))); // NOI18N
-        rfcLabel.setText("stylizedLabel1");
+        rfcLabel.setText("typographyLabelRegular2");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
         add(rfcLabel, gridBagConstraints);
 
         telephoneNumberLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/12-call.png"))); // NOI18N
-        telephoneNumberLabel.setText("stylizedLabel1");
+        telephoneNumberLabel.setText("typographyLabelRegular2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(telephoneNumberLabel, gridBagConstraints);
 
         cellphoneLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/12-ad-units.png"))); // NOI18N
-        cellphoneLabel.setText("stylizedLabel1");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        add(cellphoneLabel, gridBagConstraints);
-
-        offeredProductsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/12-functions.png"))); // NOI18N
-        offeredProductsLabel.setText("stylizedLabel1");
+        cellphoneLabel.setText("typographyLabelRegular2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        add(offeredProductsLabel, gridBagConstraints);
+        add(cellphoneLabel, gridBagConstraints);
+
+        salesCountLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/12-functions.png"))); // NOI18N
+        salesCountLabel.setText("typographyLabelRegular2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        add(salesCountLabel, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
-
-    @Override
-    public void updateInterfaceForCurrentRecord() {
-        if (currentRecord.isPresent()) {
-            cardHeader.setData(currentRecord.get().getNombre(), currentRecord.get().getId());
-            addressLabel.setText(currentRecord.get().getDireccion());
-            rfcLabel.setText(currentRecord.get().getRfc());
-            telephoneNumberLabel.setText(TextFormatting.formatPhoneNumber(currentRecord.get().getTelefono()));
-            cellphoneLabel.setText(TextFormatting.formatPhoneNumber(currentRecord.get().getCelular()));
-            offeredProductsLabel.setText(TextFormatting.formatUnits(currentRecord.get().getProductosOfrecidos(), "producto", "productos"));
-        }
-    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private typography.TypographyLabelRegular addressLabel;
-    private component.CardHeader cardHeader;
-    private typography.TypographyLabelRegular cellphoneLabel;
-    private javax.swing.Box.Filler filler2;
-    private typography.TypographyLabelRegular offeredProductsLabel;
-    private typography.TypographyLabelRegular rfcLabel;
-    private typography.TypographyLabelRegular telephoneNumberLabel;
-    // End of variables declaration//GEN-END:variables
 
     @Override
     public void initializeComponents() {
         initComponents();
     }
+
+    @Override
+    public void updateInterfaceForCurrentRecord() {
+        ClientRecord record = currentRecord.get();
+        
+        addressLabel.setText(TextFormatting.formatAddress(
+                record.getCalle(), 
+                record.getNumero_de_casa(), 
+                record.getColonia(), 
+                record.getMunicipio(), 
+                record.getEstado()
+        ));
+        rfcLabel.setText(record.getRfc());
+        
+        telephoneNumberLabel.setText(TextFormatting.formatPhoneNumber(record.getTelefono()));
+        cellphoneLabel.setText(TextFormatting.formatPhoneNumber(record.getCelular()));
+        
+        cardHeader.setData(record.getNombre(), record.getId());
+        
+        salesCountLabel.setText(TextFormatting.formatUnits(record.getVentasRealizadas(), "venta", "ventas"));
+    }
+    
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private typography.TypographyLabelRegular addressLabel;
+    private component.CardHeader cardHeader;
+    private typography.TypographyLabelRegular cellphoneLabel;
+    private typography.TypographyLabelRegular rfcLabel;
+    private typography.TypographyLabelRegular salesCountLabel;
+    private typography.TypographyLabelRegular telephoneNumberLabel;
+    // End of variables declaration//GEN-END:variables
 }

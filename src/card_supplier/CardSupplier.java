@@ -248,7 +248,6 @@ public abstract class CardSupplier<RecordType extends Record, CardType extends C
                 this.resetListener.get().call(queryLimit, orderBy, search);
             }
         } catch (SQLException ex) {
-            System.out.println("Couldn't reset the query");
             Logger.getLogger(GenericQueryFrame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(CardSupplier.class.getName()).log(Level.SEVERE, null, ex);

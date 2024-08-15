@@ -15,6 +15,21 @@ public class SupplierRecord extends Record {
     String telefono;
     String celular;
     String rfc;
+    
+    int productosOfrecidos;
+
+    public SupplierRecord() {
+    }
+    
+    public SupplierRecord(int id, String nombre, String direccion, String telefono, String celular, String rfc, int productosOfrecidos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.celular = celular;
+        this.rfc = rfc;
+        this.productosOfrecidos = productosOfrecidos;
+    }
 
     public int getId() {
         return id;
@@ -62,5 +77,13 @@ public class SupplierRecord extends Record {
 
     public void setRfc(String rfc) {
         this.rfc = rfc;
+    }
+
+    public int getProductosOfrecidos() {
+        return productosOfrecidos;
+    }
+
+    public void setProductosOfrecidos(int productosOfrecidos) {
+        this.productosOfrecidos = productosOfrecidos;
     }
 }

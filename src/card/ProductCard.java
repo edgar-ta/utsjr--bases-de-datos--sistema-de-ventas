@@ -46,6 +46,7 @@ public class ProductCard extends Card<ProductRecord> {
         discountLabel = new typography.TypographyLabelRegular();
         stockLabel = new typography.TypographyLabelRegular();
         codeLabel = new typography.TypographyLabelRegular();
+        soldProductsLabel = new typography.TypographyLabelRegular();
 
         setBackground(util.ProjectColor.WHITE.getColor());
         setLayout(new java.awt.GridBagLayout());
@@ -117,6 +118,14 @@ public class ProductCard extends Card<ProductRecord> {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(codeLabel, gridBagConstraints);
+
+        soldProductsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/12-functions.png"))); // NOI18N
+        soldProductsLabel.setText("50 vendidos");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        add(soldProductsLabel, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     @Override
@@ -130,11 +139,12 @@ public class ProductCard extends Card<ProductRecord> {
             cardHeader.setData(currentRecord.get().getNombre(), currentRecord.get().getId());
             priceLabel.setText(TextFormatting.formatCurrency(currentRecord.get().getPrecio()));
             discountLabel.setText(TextFormatting.formatPercentage(currentRecord.get().getDescuento()));
-            stockLabel.setText(TextFormatting.formatUnits(currentRecord.get().getStock(), "unidad", "unidades"));
+            stockLabel.setText(TextFormatting.formatUnits(currentRecord.get().getStock(), "existente", "existentes"));
             codeLabel.setText(currentRecord.get().getCodigo());
             
             categoryText.setContent(currentRecord.get().getCategoria().getPrettyName());
             supplierText.setContent(currentRecord.get().getProveedor().getPrettyName());
+            soldProductsLabel.setText(TextFormatting.formatUnits(currentRecord.get().getProductosVendidos(), "vendido", "vendidos"));
         }
     }
 
@@ -148,6 +158,7 @@ public class ProductCard extends Card<ProductRecord> {
     private javax.swing.Box.Filler filler4;
     private javax.swing.Box.Filler filler5;
     private typography.TypographyLabelRegular priceLabel;
+    private typography.TypographyLabelRegular soldProductsLabel;
     private typography.TypographyLabelRegular stockLabel;
     private component.LabeledText supplierText;
     // End of variables declaration//GEN-END:variables

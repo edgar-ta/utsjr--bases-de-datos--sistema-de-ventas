@@ -7,6 +7,7 @@ package frames;
 import card.Card;
 import card_supplier.CardSupplier;
 import card_supplier.CategoryCardSupplier;
+import card_supplier.ClientCardSupplier;
 import card_supplier.ProductCardSupplier;
 import card_supplier.SaleCardSupplier;
 import card_supplier.SupplierCardSupplier;
@@ -14,6 +15,7 @@ import card_supplier.UserCardSupplier;
 import component.GenericAddFrame;
 import component.GenericQueryFrame;
 import form.CategoryForm;
+import form.ClientForm;
 import form.Form;
 import form.ProductForm;
 import form.SaleForm;
@@ -38,6 +40,7 @@ import record.UserRecord;
 import util.functional.DatabaseErrorProneFunction;
 import java.util.Arrays;
 import record.CategoryRecord;
+import record.ClientRecord;
 import record.SaleRecord;
 
 /**
@@ -376,7 +379,20 @@ public class MenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_categoryButtonActionPerformed
 
     private void clientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientButtonActionPerformed
-        // TODO add your handling code here:
+        showEntityQueryFrame(
+                EntityHeaderData.CLIENT, 
+                (Optional<ClientRecord> value) -> new ClientForm(value), 
+                (DatabaseErrorProneSupplier<ClientForm> callback) -> 
+                        new GenericAddFrame(EntityHeaderData.CLIENT, callback),
+                (DatabaseErrorProneFunction<Optional<ClientRecord>, GenericAddFrame> callback) -> 
+                        new ClientCardSupplier(new LinkedList<EntityField>(Arrays.asList(
+                                new EntityField("cliente.id", "Id"),
+                                new EntityField("cliente.nombre", "Nombre"),
+                                new EntityField("cliente.estado", "Estado"),
+                                new EntityField("cliente.municipio", "Municipio"),
+                                new EntityField("ventas_por_cliente.ventas_por_cliente", "Ventas")
+                        )), callback)
+        );
     }//GEN-LAST:event_clientButtonActionPerformed
 
     private void userButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userButtonActionPerformed
@@ -415,10 +431,8 @@ public class MenuFrame extends javax.swing.JFrame {
                         new ProductCardSupplier(new LinkedList<EntityField>(Arrays.asList(
                                 new EntityField("id"),
                                 new EntityField("producto.nombre", "Nombre"),
-                                new EntityField("categoria.id", "Categoría (id)"),
-                                new EntityField("categoria.nombre", "Categoría (nombre)"),
-                                new EntityField("proveedor.id", "Proveedor (id)"),
-                                new EntityField("proveedor.nombre", "Proveedor (nombre)"),
+                                new EntityField("categoria.nombre", "Categoría"),
+                                new EntityField("proveedor.nombre", "Proveedor"),
                                 new EntityField("codigo", "Código"),
                                 new EntityField("precio"),
                                 new EntityField("stock")
@@ -434,7 +448,13 @@ public class MenuFrame extends javax.swing.JFrame {
                 (DatabaseErrorProneSupplier<SaleForm> callback) -> 
                         new GenericAddFrame(EntityHeaderData.SALE, callback),
                 (DatabaseErrorProneFunction<Optional<SaleRecord>, GenericAddFrame> callback) -> 
-                        new SaleCardSupplier(EntityField.of("id", "nombre", "rfc"), callback)
+                        new SaleCardSupplier(new LinkedList<EntityField>(Arrays.asList(
+                            new EntityField("venta.id", "Id"),
+                            new EntityField("cliente.nombre", "Cliente"),
+                            new EntityField("producto.nombre", "Producto"),
+                            new EntityField("detalle.cantidad_de_producto", "Cantidad de Producto"),
+                            new EntityField("venta.fecha", "Fecha")
+                        )), callback)
         );
     }//GEN-LAST:event_saleButtonActionPerformed
     

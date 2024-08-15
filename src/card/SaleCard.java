@@ -7,6 +7,7 @@ package card;
 import component.GenericAddFrame;
 import java.util.Optional;
 import record.SaleRecord;
+import util.TextFormatting;
 import util.functional.DatabaseErrorProneFunction;
 
 /**
@@ -33,18 +34,27 @@ public class SaleCard extends Card<SaleRecord> {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         cardHeader = new component.CardHeader();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         clientText = new component.LabeledText();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         folioLabel = new typography.TypographyLabelRegular();
         dateLabel = new typography.TypographyLabelRegular();
+        productText = new component.LabeledText();
+        numberOfProductsLabel = new typography.TypographyLabelRegular();
 
         setBackground(util.ProjectColor.WHITE.getColor()
         );
         setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        add(filler2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(cardHeader, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -55,6 +65,7 @@ public class SaleCard extends Card<SaleRecord> {
         clientText.setLabel("Cliente");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         add(clientText, gridBagConstraints);
@@ -62,17 +73,38 @@ public class SaleCard extends Card<SaleRecord> {
         gridBagConstraints.gridx = 0;
         add(filler1, gridBagConstraints);
 
+        folioLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/12-barcode.png"))); // NOI18N
         folioLabel.setText("typographyLabelRegular1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(folioLabel, gridBagConstraints);
 
+        dateLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/12-calendar-month.png"))); // NOI18N
         dateLabel.setText("typographyLabelRegular1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(dateLabel, gridBagConstraints);
+
+        productText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/24-product.png"))); // NOI18N
+        productText.setLabel("Producto");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        add(productText, gridBagConstraints);
+
+        numberOfProductsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/12-functions.png"))); // NOI18N
+        numberOfProductsLabel.setText("typographyLabelRegular1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        add(numberOfProductsLabel, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -81,22 +113,28 @@ public class SaleCard extends Card<SaleRecord> {
     private component.LabeledText clientText;
     private typography.TypographyLabelRegular dateLabel;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private typography.TypographyLabelRegular folioLabel;
+    private typography.TypographyLabelRegular numberOfProductsLabel;
+    private component.LabeledText productText;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void initializeComponents() {
         initComponents();
-        System.out.println("The current id is: " + currentRecord.get().getId());
     }
 
     @Override
     public void updateInterfaceForCurrentRecord() {
         SaleRecord record = currentRecord.get();
         cardHeader.setData(record.getFecha().toString(), record.getId());
+        
         clientText.setContent(record.getCliente().getPrettyName());
+        productText.setContent(record.getProducto().getPrettyName());
+        
         folioLabel.setText(String.valueOf(record.getFolio()));
         dateLabel.setText(record.getFecha().toString());
+        numberOfProductsLabel.setText(TextFormatting.formatUnits(record.getCantidadDeProducto(), "producto", "productos"));
     }
 }

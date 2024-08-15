@@ -69,6 +69,7 @@ public class ProductController extends Controller<ProductRecord> {
         record.setDescuento(query.getDouble("descuento"));
         record.setPrecio(query.getDouble("precio"));
         record.setStock(query.getInt("stock"));
+        record.setProductosVendidos(query.getInt("productosVendidos"));
         
         record.setCategoria(new PrimaryKey(query.getInt("categoriaId"), query.getString("categoriaNombre")));
         record.setProveedor(new PrimaryKey(query.getInt("proveedorId"), query.getString("proveedorNombre")));

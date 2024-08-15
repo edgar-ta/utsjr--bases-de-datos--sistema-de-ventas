@@ -26,7 +26,23 @@ public class SupplierCardSupplier extends CardSupplier<SupplierRecord, SupplierC
 
     @Override
     protected String getQueryString() {
-        return "SELECT * FROM proveedor";
+        return "SELECT\n" +
+"	proveedor.id AS id,\n" +
+"    proveedor.nombre AS nombre,\n" +
+"    proveedor.rfc AS rfc,\n" +
+"    proveedor.direccion AS direccion,\n" +
+"    proveedor.telefono AS telefono,\n" +
+"    proveedor.celular AS celular,\n" +
+"    COALESCE(productos_ofrecidos.productos_ofrecidos, 0) AS productosOfrecidos\n" +
+"FROM proveedor\n" +
+"LEFT JOIN (\n" +
+"	SELECT\n" +
+"		proveedor.id AS proveedor,\n" +
+"        COUNT(*) AS productos_ofrecidos\n" +
+"	FROM proveedor\n" +
+"    INNER JOIN producto ON proveedor.id = producto.proveedor\n" +
+"    GROUP BY proveedor.id\n" +
+") AS productos_ofrecidos ON proveedor.id = productos_ofrecidos.proveedor";
     }
 
     @Override

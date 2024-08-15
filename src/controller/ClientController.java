@@ -85,6 +85,7 @@ public class ClientController extends Controller<ClientRecord> {
         record.setEstado(query.getString("estado"));
         record.setTelefono(query.getString("telefono"));
         record.setCelular(query.getString("celular"));
+        record.setVentasRealizadas(query.getInt("ventasRealizadas"));
         
         return record;
     }

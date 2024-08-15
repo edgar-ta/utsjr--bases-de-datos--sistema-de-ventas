@@ -186,6 +186,7 @@ public abstract class Controller<RecordType extends Record> {
     public static final ProductController PRODUCT_CONTROLLER = new ProductController();
     public static final CategoryController CATEGORY_CONTROLLER = new CategoryController();
     public static final SaleController SALE_CONTROLLER = new SaleController();
+    public static final ClientController CLIENT_CONTROLLER = new ClientController();
     
     public static final SeriabilityController SERIABILITY_CONTROLLER = new SeriabilityController();
 }

@@ -36,20 +36,29 @@ public class ProductCardSupplier extends CardSupplier<ProductRecord, ProductCard
 
     @Override
     protected String getQueryString() {
-        return "SELECT \n" +
-        "	producto.id AS id,\n" +
-        "    categoria.nombre AS categoriaNombre,\n" +
-        "    producto.categoria AS categoriaId,\n" +
-        "    proveedor.nombre AS proveedorNombre,\n" +
-        "    producto.proveedor AS proveedorId,\n" +
-        "    producto.codigo AS codigo,\n" +
-        "    producto.nombre AS nombre,\n" +
-        "    producto.descuento AS descuento,\n" +
-        "    producto.precio AS precio,\n" +
-        "    producto.stock AS stock\n" +
-        "FROM producto\n" +
-        "INNER JOIN categoria ON producto.categoria = categoria.id\n" +
-        "INNER JOIN proveedor ON producto.proveedor = proveedor.id";
+        return "SELECT  \n" +
+"	producto.id AS id,\n" +
+"	categoria.nombre AS categoriaNombre,\n" +
+"	producto.categoria AS categoriaId,\n" +
+"	proveedor.nombre AS proveedorNombre,\n" +
+"	producto.proveedor AS proveedorId,\n" +
+"	producto.codigo AS codigo,\n" +
+"	producto.nombre AS nombre,\n" +
+"	producto.descuento AS descuento,\n" +
+"	producto.precio AS precio,\n" +
+"	producto.stock AS stock,\n" +
+"    COALESCE(productos_vendidos.productos_vendidos, 0) AS productosVendidos\n" +
+"FROM producto\n" +
+"INNER JOIN categoria ON producto.categoria = categoria.id\n" +
+"INNER JOIN proveedor ON producto.proveedor = proveedor.id\n" +
+"LEFT JOIN (\n" +
+"	SELECT \n" +
+"		producto.id AS producto,\n" +
+"		SUM(detalle.cantidad_de_producto) AS productos_vendidos\n" +
+"    FROM producto\n" +
+"    INNER JOIN detalle ON producto.id = detalle.producto\n" +
+"    GROUP BY producto.id\n" +
+") AS productos_vendidos ON producto.id = productos_vendidos.producto";
     }
 
     @Override
