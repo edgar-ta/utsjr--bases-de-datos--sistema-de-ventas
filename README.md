@@ -1,5 +1,7 @@
 # Sistema de Ventas
 
+![Pantalla de Inicio de la App](./readme-assets/dashboard.png)
+
 Este proyecto consiste en un Sistema Gestor de Base de Datos para una empresa hipotética que debe registrar las ventas que realizan sus clientes, y así también los proveedores, productos, categorías y otras entidades involucradas en la transacción.
 
 La realización del proyecto fue dirigida por Edgar Trejo Avila, bajo la mentoría de la profesora Luz María Feregrino Martínez, profesora de la clase de Bases de Datos para Aplicaciones de la Universidad Tecnológica de San Juan del Río, en el periodo comprendido entre mayo y agosto del 2024.
@@ -48,9 +50,5 @@ La realización del proyecto fue dirigida por Edgar Trejo Avila, bajo la mentor�
 
 ## Demostración de Uso
 
-El siguiente video muestra el uso esperado para la aplicación:
+El video en `readme-assets/usage-demonstration.mp4` muestra cuál es el uso esperado para la aplicación
 
-<video width="600" controls>
-  <source src="./readme-assets/usage-demonstration-2.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
